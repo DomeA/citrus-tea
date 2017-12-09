@@ -1,0 +1,100 @@
+spring:
+  http:
+    multipart:
+      enabled: true
+      max-request-size: 40960MB
+      max-file-size: 4096MB
+  profiles:
+    #选择使用下面哪个配置项
+    active: devProfile
+    #服务配置信息
+  cloud:
+    config:
+      #此处的config.profile会根据生效的active设置对应的值
+      profile: ${config.profile}
+      name: application
+      uri: http://localhost:8888
+      label: master
+      discovery:
+        service-id: configServer
+        enabled: true
+      enabled: true
+#  jpa:
+#    show-sql: true
+#    database: postgresql
+#    hibernate:
+#      ddl-auto: update
+#    database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
+  datasource:
+#    fourth:
+#      uri: mongodb://root:root@localhost:27017/test
+#      database:
+#      host: loaclhost
+#      port: 27017
+#      username: root
+#      password: root
+    third:
+      url: jdbc:postgresql://localhost:5432/postgisdb?searchpath=public
+      username: postgres
+      password: domea
+      driver-class-name: org.postgresql.Driver
+    primary:
+      Url: jdbc:postgresql://localhost:5432/postgres?searchpath=public
+      username: postgres
+      password: domea
+      driver-class-name: org.postgresql.Driver
+      c3p0:
+        jdbcUrl: ${spring.datasource.primary.Url}
+        user: ${spring.datasource.primary.username}
+        password: ${spring.datasource.primary.password}
+        driverClass: ${spring.datasource.primary.driver-class-name}
+        minPoolSize: 2
+        maxPoolSize: 10
+        maxIdleTime: 1800000
+        acquireIncrement: 3
+        maxStatements: 1000
+        initialPoolSize: 3
+        idleConnectionTestPeriod: 60
+        acquireRetryAttempts: 30
+        acquireRetryDelay: 1000
+        breakAfterAcquireFailure: false
+        testConnectionOnCheckout: false
+    secondary:
+      url: jdbc:mysql://localhost:3306/test?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: domea
+      driver-class-name: com.mysql.jdbc.Driver
+  white-list:
+    service-filter: /manager/*
+  audience:
+    name: restapiuser
+    expiresSecond: 172800
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: mappingosys
+      username: mappingo
+      password: mappingo
+server:
+  port: 8050
+flowable:
+  check-process-definitions: false
+#将不同的配置组以---分割，并通过spring.profiles定义每组的名字，方便后续引用
+#---
+#spring:
+#  profiles: testProfile
+#config:
+#  profile: test
+#
+#---
+#spring:
+#  profiles: devProfile
+#config:
+#  profile: dev
+#
+#---
+#spring:
+#  profiles: prodProfile
+#config:
+#  profile: prod
