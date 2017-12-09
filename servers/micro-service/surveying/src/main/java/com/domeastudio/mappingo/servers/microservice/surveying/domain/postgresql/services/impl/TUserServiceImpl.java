@@ -119,8 +119,8 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public Boolean createUser(String name, String pwd, String email, String phone, Integer term) {
-        if (tUserRepository.findByName(name) != null ||
+    public Boolean createUser(String loginName, String pwd, String email, String phone, Integer term) {
+        if (tUserRepository.findByName(loginName) != null ||
                 tUserRepository.findByEmail(email) != null ||
                 tUserRepository.findByPhone(phone) != null) {
             return false;
@@ -128,7 +128,7 @@ public class TUserServiceImpl implements TUserService {
         String salt = UUID.randomUUID().toString().replace("-", "");
         TuserEntity tuserEntity = new TuserEntity();
         tuserEntity.setEmail(email);
-        tuserEntity.setName(name);
+        tuserEntity.setName(loginName);
         String pwdstr = MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5((pwd + salt).getBytes()));
         tuserEntity.setPwd(pwdstr);
         tuserEntity.setPhone(phone);
