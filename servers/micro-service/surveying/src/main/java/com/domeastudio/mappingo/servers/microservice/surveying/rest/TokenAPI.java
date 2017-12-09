@@ -30,7 +30,7 @@ public class TokenAPI {
     @Autowired
     private Audience audienceEntity;
 
-    @RequestMapping(value = "/token", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/token", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ClientMessage getAccessToken(@RequestBody Login loginPara, HttpServletRequest httpServletRequest) {
         ClientMessage clientMessage;
         String browserDetails=httpServletRequest.getHeader("User-Agent").toLowerCase();
