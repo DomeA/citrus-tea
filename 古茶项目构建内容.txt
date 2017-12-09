@@ -1,0 +1,34 @@
+1、spring boot 主体框架
+2、hibernate jpa持久化框架
+3、集成postgresql+postgis+mysql+mongodb
+4、集成flowable工作流成
+5、集成基于jwt的REST安全认证过滤器
+6、集成mongodb数据库安全登陆配置（初始化部署mongodb使用--auth参数启动，然后use admin/db.createUser({user:"root",pwd:"root",role:["root"]})/db.auth("root","root")/use mydatabase/db.createUser({user:"example",pwd:"example",roles:[role:"dbOwner",db:"mydatabase"]})）
+7、集成文件上传和下载的REST接口
+8、缺失Netcdf文件的读取生成
+9、缺失报表生成和下载
+10、集成geotools空间计算
+11、缺失rabbitmq消息通讯服务
+12、缺失websocket服务接口
+13、集成自定义用户模型
+14、缺失flowable用户模型与自定义用户模型集成
+15、修改自定义用户模型，适应消息通信
+16、缺失图像处理服务
+17、缺失matlab模型处理服务
+18、缺失spring cloud云框架
+19、缺失服务发现服务
+20、缺失服务监控服务
+21、缺失客户端应用程序
+22、缺失手机端应用程序
+23、缺失领域模型设计
+24、缺失flowable表单设计器
+25、集成api开发文档
+26、缺失flowable工作流程设计器
+27、缺失大文件断点续传
+
+测试
+1、jwt令牌测试
+2、spring boot jpa 测试
+3、mongodb小文件上传测试
+4、mongodb大文件上传测试
+5、缺失flowable工作服务测试
