@@ -17,6 +17,10 @@ public class JwtUtil {
             Claims claims = Jwts.parser()
                     .setSigningKey(DatatypeConverter.parseBase64Binary(clientId))
                     .parseClaimsJws(jsonWebToken).getBody();
+            System.out.println("ID: " + claims.getId());
+            System.out.println("Subject: " + claims.getSubject());
+            System.out.println("Issuer: " + claims.getIssuer());
+            System.out.println("Expiration: " + claims.getExpiration());
             return claims;
         } catch (Exception ex) {
             return null;
