@@ -11,9 +11,8 @@ public class JsonStringUtil {
      * json字符串转java List
      * @param jsonStr
      * @return
-     * @throws Exception
      */
-    public static Map<String, String> toMap(String jsonStr) throws Exception {
+    public static Map<String, String> toMap(String jsonStr) {
         JSONObject jsonObject = new JSONObject(jsonStr);
         Map<String, String> result = new HashMap<>();
         Iterator iterator = jsonObject.keys();
