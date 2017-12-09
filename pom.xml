@@ -17,6 +17,7 @@
     <modules>
         <module>servers/micro-service/surveying</module>
         <module>website/mp-manager</module>
+        <module>website/portal</module>
     </modules>
 
     <dependencyManagement>
