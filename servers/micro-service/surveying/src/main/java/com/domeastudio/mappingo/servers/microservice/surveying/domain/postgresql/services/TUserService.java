@@ -34,7 +34,7 @@ public interface TUserService {
 
     Boolean createUser(String name, String pwd, String email, String phone, Integer term);
 
-    Boolean createRole(String name, String describe);
+    Boolean createRole(String name, String text,String describe);
 
     Boolean createResource(String name);
 
