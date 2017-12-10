@@ -143,12 +143,13 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public Boolean createRole(String name, String describe) {
+    public Boolean createRole(String name,String text, String describe) {
         if (tRoleRepository.findByName(name) != null) {
             return false;
         }
         TroleEntity troleEntity = new TroleEntity();
         troleEntity.setName(name);
+        troleEntity.setText(text);
         troleEntity.setDescribe(describe);
         save(troleEntity);
         return true;

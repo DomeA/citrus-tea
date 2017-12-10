@@ -11,6 +11,14 @@ import java.util.Set;
 public class TresourceEntity {
     private String reid;
     private String name;
+    /**
+     * 0000-0000-0000-0000-0000-0000-00000-0000-0000-0000
+     * 十级菜单
+     */
+    private String code;
+    private String icon;
+    private String type;
+    private Boolean selected;
     private Set<RroleresourceEntity> rroleresourcesByReid;
     private Set<RuserresourceEntity> ruserresourcesByReid;
 
@@ -72,5 +80,44 @@ public class TresourceEntity {
 
     public void setRuserresourcesByReid(Set<RuserresourceEntity> ruserresourcesByReid) {
         this.ruserresourcesByReid = ruserresourcesByReid;
+    }
+    @Basic
+    @Column(name = "code")
+    public String getCode() {
+        if(code.length()>49){
+            return code.substring(0,48);
+        }
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+    @Basic
+    @Column(name = "icon")
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+    @Basic
+    @Column(name = "type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    @Basic
+    @Column(name = "selected")
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
 }

@@ -11,6 +11,7 @@ import java.util.Set;
 public class TroleEntity {
     private String rid;
     private String name;
+    private String text;
     private String describe;
     private Set<RroleresourceEntity> rroleresourcesByRid;
     private Set<RuserroleEntity> ruserrolesByRid;
@@ -85,5 +86,15 @@ public class TroleEntity {
 
     public void setDescribe(String describe) {
         this.describe = describe;
+    }
+
+    @Basic
+    @Column(name = "text")
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
