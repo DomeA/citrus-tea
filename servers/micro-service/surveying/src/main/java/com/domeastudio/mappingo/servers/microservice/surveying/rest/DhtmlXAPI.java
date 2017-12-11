@@ -6,10 +6,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.Dhtm
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ResultStatusCode;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @Api()
@@ -20,7 +17,7 @@ public class DhtmlXAPI {
     @Autowired
     DhtmlxService dhtmlxService;
 
-    @RequestMapping(value = "sildebar/{roleName}")
+    @RequestMapping(value = "sildebar/{roleName}",method = RequestMethod.GET)
     public ClientMessage getSidebarData(@PathVariable("roleName") String roleName){
         DhtmlxData dhtmlxData = dhtmlxService.getDhtmlxSidebarData(roleName);
         ClientMessage clientMessage;

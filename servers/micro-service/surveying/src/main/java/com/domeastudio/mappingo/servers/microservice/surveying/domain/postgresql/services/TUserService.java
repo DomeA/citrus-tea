@@ -30,7 +30,7 @@ public interface TUserService {
 
     TuserEntity findByNameOrEmailOrPhone(String param);
 
-    List<String> findRoleByName(TuserEntity entity);
+    List<String> findRoleByUser(TuserEntity entity);
 
     Boolean createUser(String name, String pwd, String email, String phone, Integer term);
 

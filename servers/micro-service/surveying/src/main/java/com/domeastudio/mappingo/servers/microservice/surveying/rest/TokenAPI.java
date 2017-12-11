@@ -57,7 +57,7 @@ public class TokenAPI {
                         ResultStatusCode.INVALID_TIME.getMsg(), null);
                 return clientMessage;
             }
-            List<String> roleByName = tUserService.findRoleByName(user);
+            List<String> roleByName = tUserService.findRoleByUser(user);
             StringBuilder stringBuilder = new StringBuilder();
             if (roleByName.size() > 0) {
                 for (String role : roleByName) {

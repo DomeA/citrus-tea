@@ -3,9 +3,11 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.s
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.BpmnFileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.FileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.ProjectEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.SmallFileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.BpmnFileRepository;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.FileRepository;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.ProjectRepository;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.SmallFileRepository;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.services.FileService;
 import com.mongodb.DB;
 import com.mongodb.client.MongoDatabase;
@@ -36,6 +38,9 @@ import java.util.UUID;
 public class FileServiceImpl implements FileService {
     @Autowired
     BpmnFileRepository bpmnFileRepository;
+
+    @Autowired
+    SmallFileRepository smallFileRepository;
     @Autowired
     MongoOperations mongoOperations;
 
@@ -53,6 +58,11 @@ public class FileServiceImpl implements FileService {
     @Override
     public ProjectEntity saveProject(ProjectEntity projectEntity) {
         return projectRepository.save(projectEntity);
+    }
+
+    @Override
+    public SmallFileEntity saveSmallFile(SmallFileEntity smallFileEntity) {
+        return smallFileRepository.save(smallFileEntity);
     }
 
     @Override

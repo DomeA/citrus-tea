@@ -3,6 +3,7 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.s
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.BpmnFileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.FileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.ProjectEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.SmallFileEntity;
 import org.bson.types.ObjectId;
 
 import java.io.File;
@@ -15,6 +16,8 @@ public interface FileService {
     FileEntity saveFile(FileEntity fileEntity);
 
     ProjectEntity saveProject(ProjectEntity projectEntity);
+
+    SmallFileEntity saveSmallFile(SmallFileEntity smallFileEntity);
 
     void removeProject(String id);
 

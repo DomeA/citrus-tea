@@ -16,7 +16,7 @@ public class TresourceEntity {
      * 十级菜单
      */
     private String code;
-    private String icon;
+    private String iconId;
     private String type;
     private Boolean selected;
     private Set<RroleresourceEntity> rroleresourcesByReid;
@@ -94,15 +94,6 @@ public class TresourceEntity {
         this.code = code;
     }
     @Basic
-    @Column(name = "icon")
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-    @Basic
     @Column(name = "type")
     public String getType() {
         return type;
@@ -119,5 +110,14 @@ public class TresourceEntity {
 
     public void setSelected(Boolean selected) {
         this.selected = selected;
+    }
+    @Basic
+    @Column(name = "iconId")
+    public String getIconId() {
+        return iconId;
+    }
+
+    public void setIconId(String iconId) {
+        this.iconId = iconId;
     }
 }

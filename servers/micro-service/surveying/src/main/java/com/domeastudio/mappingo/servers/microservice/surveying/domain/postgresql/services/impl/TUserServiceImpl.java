@@ -108,7 +108,7 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public List<String> findRoleByName(TuserEntity entity) {
+    public List<String> findRoleByUser(TuserEntity entity) {
         List<String> names = new ArrayList<>();
         List<RuserroleEntity> ruserroleEntities = rUserRoleRepository.findByTuserByUid(entity);
         for (RuserroleEntity rr : ruserroleEntities) {

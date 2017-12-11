@@ -1,6 +1,7 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.impl;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.RRoleResourceRepository;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.TResourceRepository;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxData;
@@ -15,6 +16,8 @@ import java.util.List;
 public class DhtmlxServiceImpl implements DhtmlxService {
     @Autowired
     TResourceRepository tResourceRepository;
+    @Autowired
+    RRoleResourceRepository rRoleResourceRepository;
     @Override
     public DhtmlxData getDhtmlxSidebarData() {
 
@@ -25,9 +28,6 @@ public class DhtmlxServiceImpl implements DhtmlxService {
     public DhtmlxData getDhtmlxSidebarData(String code) {
         DhtmlxData dhtmlxData=new DhtmlxData();
         List<DhtmlxSiderbarObject> dhtmlxSiderbarObjects=new ArrayList<>();
-
-
-
         List<TresourceEntity> tresourceEntities = tResourceRepository.findByCodeContains(code);
         for(TresourceEntity tresourceEntity:tresourceEntities){
             DhtmlxSiderbarObject dhtmlxSiderbarObject=new DhtmlxSiderbarObject();
