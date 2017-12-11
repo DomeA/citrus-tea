@@ -38,7 +38,7 @@ public class SurveyingApplication {
 
             TresourceEntity tresourceEntity=new TresourceEntity();
             tresourceEntity.setCode("0000-0000-0000-0000-0000-0000-0000-0000-0000-0000");
-            tresourceEntity.setIcon("");
+            tresourceEntity.setIconId("");
             tresourceEntity.setName("菜单注册");
             tresourceEntity.setSelected(true);
             Boolean trf = dhtmlxService.createTresource(tresourceEntity);
