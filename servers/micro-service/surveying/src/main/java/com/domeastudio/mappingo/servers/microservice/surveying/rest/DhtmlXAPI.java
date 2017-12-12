@@ -17,9 +17,9 @@ public class DhtmlXAPI {
     @Autowired
     DhtmlxService dhtmlxService;
 
-    @RequestMapping(value = "sildebar/{roleName}",method = RequestMethod.GET)
-    public ClientMessage getSidebarData(@PathVariable("roleName") String roleName){
-        DhtmlxData dhtmlxData = dhtmlxService.getDhtmlxSidebarData(roleName);
+    @RequestMapping(value = "/sildebar/{userid}",method = RequestMethod.GET)
+    public ClientMessage getSidebarData(@PathVariable("userid") String userid){
+        DhtmlxData dhtmlxData = dhtmlxService.getDhtmlxSidebarData(userid);
         ClientMessage clientMessage;
         if(dhtmlxData.getItems().size()>0){
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),

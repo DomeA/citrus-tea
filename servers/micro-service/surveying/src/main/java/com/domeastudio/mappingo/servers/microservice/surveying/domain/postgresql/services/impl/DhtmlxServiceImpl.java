@@ -1,8 +1,12 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.impl;
 
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.SmallFileEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.SmallFileRepository;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RroleresourceEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RuserroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity;
-import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.RRoleResourceRepository;
-import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.TResourceRepository;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.*;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxData;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxSiderbarObject;
@@ -18,6 +22,15 @@ public class DhtmlxServiceImpl implements DhtmlxService {
     TResourceRepository tResourceRepository;
     @Autowired
     RRoleResourceRepository rRoleResourceRepository;
+    @Autowired
+    RUserResourceRepository rUserResourceRepository;
+    @Autowired
+    RUserRoleRepository rUserRoleRepository;
+    @Autowired
+    SmallFileRepository smallFileRepository;
+    @Autowired
+    TUserRepository tUserRepository;
+
     @Override
     public DhtmlxData getDhtmlxSidebarData() {
 
@@ -25,13 +38,26 @@ public class DhtmlxServiceImpl implements DhtmlxService {
     }
 
     @Override
-    public DhtmlxData getDhtmlxSidebarData(String code) {
+    public DhtmlxData getDhtmlxSidebarData(String useid) {
+        TuserEntity tuserEntity = tUserRepository.findOne(useid);
+        if(null==tuserEntity){
+            return null;
+        }
+        List<RuserroleEntity> ruserroleEntities=rUserRoleRepository.findByTuserByUid(tuserEntity);
+        List<TresourceEntity> tresourceEntities=new ArrayList<>();
+        for(RuserroleEntity ruserroleEntity:ruserroleEntities){
+            List<RroleresourceEntity> rroleresourceEntities =rRoleResourceRepository.findByTroleByRid(ruserroleEntity.getTroleByRid());
+            for(RroleresourceEntity rroleresourceEntity:rroleresourceEntities){
+                tresourceEntities.add(rroleresourceEntity.getTresourceByReid());
+            }
+        }
+
         DhtmlxData dhtmlxData=new DhtmlxData();
         List<DhtmlxSiderbarObject> dhtmlxSiderbarObjects=new ArrayList<>();
-        List<TresourceEntity> tresourceEntities = tResourceRepository.findByCodeContains(code);
         for(TresourceEntity tresourceEntity:tresourceEntities){
             DhtmlxSiderbarObject dhtmlxSiderbarObject=new DhtmlxSiderbarObject();
-            dhtmlxSiderbarObject.setIcon(tresourceEntity.getIcon());
+            SmallFileEntity smallFileEntity=smallFileRepository.findOne(tresourceEntity.getIconId());
+            dhtmlxSiderbarObject.setIcon(smallFileEntity.getContent());
             dhtmlxSiderbarObject.setId(tresourceEntity.getCode());
             dhtmlxSiderbarObject.setText(tresourceEntity.getName());
             dhtmlxSiderbarObject.setType(tresourceEntity.getType());

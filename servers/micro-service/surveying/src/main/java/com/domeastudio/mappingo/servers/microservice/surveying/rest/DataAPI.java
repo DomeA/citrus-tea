@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api("测绘数据管理服务")
 @RestController
+@CrossOrigin
 @RequestMapping("/manager")
 public class DataAPI {
 

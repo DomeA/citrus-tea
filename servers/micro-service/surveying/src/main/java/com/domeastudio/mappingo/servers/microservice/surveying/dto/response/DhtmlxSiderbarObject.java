@@ -3,7 +3,7 @@ package com.domeastudio.mappingo.servers.microservice.surveying.dto.response;
 public class DhtmlxSiderbarObject {
     private String id;
     private String type;
-    private String icon;
+    private byte[] icon;
     private String text;
     private Boolean selected;
 
@@ -23,11 +23,11 @@ public class DhtmlxSiderbarObject {
         this.type = type;
     }
 
-    public String getIcon() {
+    public byte[] getIcon() {
         return icon;
     }
 
-    public void setIcon(String icon) {
+    public void setIcon(byte[] icon) {
         this.icon = icon;
     }
 

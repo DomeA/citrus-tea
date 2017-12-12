@@ -12,15 +12,13 @@ import com.domeastudio.mappingo.servers.microservice.surveying.util.DateUtil;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/oauth")
 public class TokenAPI {
@@ -30,7 +28,12 @@ public class TokenAPI {
     @Autowired
     private Audience audienceEntity;
 
-    @RequestMapping(value = "/token", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/form/token", method = RequestMethod.POST)
+    public ClientMessage getAccessToken4Form(Login loginPara, HttpServletRequest httpServletRequest) {
+        return getAccessToken(loginPara,httpServletRequest);
+    }
+
+    @RequestMapping(value = "/token", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientMessage getAccessToken(@RequestBody Login loginPara, HttpServletRequest httpServletRequest) {
         ClientMessage clientMessage;
         String browserDetails=httpServletRequest.getHeader("User-Agent").toLowerCase();

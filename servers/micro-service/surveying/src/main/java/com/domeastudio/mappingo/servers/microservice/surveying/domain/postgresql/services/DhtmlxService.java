@@ -5,7 +5,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.Dhtm
 
 public interface DhtmlxService {
     DhtmlxData getDhtmlxSidebarData();
-    DhtmlxData getDhtmlxSidebarData(String code);
+    DhtmlxData getDhtmlxSidebarData(String useid);
     Boolean createTresource(TresourceEntity tresourceEntity);
     TresourceEntity findByCode(String code);
 }

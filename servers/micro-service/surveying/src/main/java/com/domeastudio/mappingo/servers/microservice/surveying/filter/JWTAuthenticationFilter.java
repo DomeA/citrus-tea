@@ -10,6 +10,8 @@ import com.domeastudio.mappingo.servers.microservice.surveying.util.JwtUtil;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.security.BASE64Helper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.*;
@@ -18,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
-
 
 public class JWTAuthenticationFilter implements Filter {
     @Autowired
@@ -35,6 +36,14 @@ public class JWTAuthenticationFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         ClientMessage clientMessage;
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
+        HttpServletResponse httpResponse =(HttpServletResponse) servletResponse;
+
+        //跨域 预请求 Options 必须先放过 经跟后面是正式请求
+        if(httpRequest.getMethod().equals(RequestMethod.OPTIONS.name())) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
+
         String auth = httpRequest.getHeader("Authorization");
         TuserEntity tuserEntity = null;
         if ((auth != null) && (auth.length() > 7)) {
@@ -58,7 +67,6 @@ public class JWTAuthenticationFilter implements Filter {
             }
         }
 
-        HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
         httpResponse.setCharacterEncoding("UTF-8");
         httpResponse.setContentType("application/json; charset=utf-8");
         httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
