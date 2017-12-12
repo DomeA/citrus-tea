@@ -10,20 +10,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebFilter(filterName="pageFilter",urlPatterns="/*"
-        ,initParams={@WebInitParam(name ="EXCLUDED_PAGES" ,
-        value = "index.html;registor.html;.do;.js;.css;.json;.png;.jpg;.gif;.woff;.woff2;.tff"),
+        ,initParams={@WebInitParam(name ="INCLUDED_PAGES" ,
+        value = "manager.jsp"),
         @WebInitParam(name="HOMEPAGE",value = "/index.html")})
 
 public class SessionCheckFilter implements Filter {
-    private String excludedPages;
-    private String[] excludedPageArray;
+    private String includedPages;
+    private String[] includedPageArray;
     private String homePage;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        excludedPages = filterConfig.getInitParameter("EXCLUDED_PAGES");
-        if (null!=excludedPages && excludedPages.length()!=0) { // 例外页面不为空
-            excludedPageArray = excludedPages.split(String.valueOf(';'));
+    public void init(FilterConfig filterConfig) {
+        includedPages = filterConfig.getInitParameter("INCLUDED_PAGES");
+        if (null!=includedPages && includedPages.length()!=0) { // 例外页面不为空
+            includedPageArray = includedPages.split(String.valueOf(';'));
         }
         homePage=filterConfig.getInitParameter("HOMEPAGE");
     }
@@ -35,8 +35,6 @@ public class SessionCheckFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        String path=request.getContextPath();
-        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
         String userId = (String) session.getAttribute("userid");
         String token = (String) session.getAttribute("token");
@@ -46,28 +44,25 @@ public class SessionCheckFilter implements Filter {
         System.out.println("token:"+token);
         System.out.println("role:"+role);
 
-        Boolean f=false;
-        for (String page:excludedPageArray) {
-            if (request.getServletPath().substring(1).contains(page)
-                    ||(userId != null&&!userId.equals("null")
-                    &&token!=null&&!token.equals("null")&&
-                    role!=null&&!role.equals("null"))){
-                f=true;
+        for (String page:includedPageArray) {
+            if (request.getServletPath().substring(1).equals(page)){
+                if(null!=userId&&null!=token&&null!=role){
+                    filterChain.doFilter(request,response);
+                }else{
+                    String path=request.getContextPath();
+                    response.sendRedirect(path+homePage);
+                }
+            }else{
+                filterChain.doFilter(request,response);
             }
         }
-        if(!f){
-            //request.getRequestDispatcher(path+homePage).forward(request,response);
-            PrintWriter out =servletResponse.getWriter();
-            //out.write(homePage);
-            out.write("<a href='"+basePath+"index.html'>没有登录吧？请点我</a>");
-        }else {
-            filterChain.doFilter(request,response);
-        }
+
+
     }
 
     @Override
     public void destroy() {
-        this.excludedPages = null;
-        this.excludedPageArray = null;
+        this.includedPages = null;
+        this.includedPageArray = null;
     }
 }
