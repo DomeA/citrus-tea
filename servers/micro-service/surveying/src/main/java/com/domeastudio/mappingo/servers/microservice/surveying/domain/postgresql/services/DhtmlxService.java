@@ -8,4 +8,5 @@ public interface DhtmlxService {
     DhtmlxData getDhtmlxSidebarData(String useid);
     Boolean createTresource(TresourceEntity tresourceEntity);
     TresourceEntity findByCode(String code);
+    DhtmlxData getDhtmlxTreeviewData(String useid);
 }

@@ -1,13 +1,23 @@
 package com.domeastudio.mappingo.servers.microservice.surveying;
 
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.SmallFileEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.SmallFileRepository;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.TUserService;
+import com.domeastudio.mappingo.servers.microservice.surveying.util.security.MD5SHAHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.util.ResourceUtils;
+
+import javax.imageio.stream.FileImageInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @SpringBootApplication
 public class SurveyingApplication {
@@ -26,6 +36,9 @@ public class SurveyingApplication {
     DhtmlxService dhtmlxService;
 
     @Autowired
+    SmallFileRepository smallFileRepository;
+
+    @Autowired
     public void init() {
         try {
             Boolean uf = tUserService.createUser("system", "domea", "domeastudio@hotmail.com", "18182669306", 999999);
@@ -36,9 +49,17 @@ public class SurveyingApplication {
             TroleEntity troleEntity = tUserService.findRoleByName("ROLE_SYSADMIN");
             Boolean urf = tUserService.allocationUserRole(tuserEntity, troleEntity);
 
+            File iconFile= ResourceUtils.getFile("classpath:img/menu32.png");
+            SmallFileEntity smallFileEntity=new SmallFileEntity();
+            smallFileEntity.setName("菜单注册图标");
+            smallFileEntity.setContentType("image/png");
+            smallFileEntity.setContent(GetPictureData(iconFile));
+            smallFileEntity.setMd5(MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5(GetPictureData(iconFile))));
+            smallFileEntity = smallFileRepository.save(smallFileEntity);
+
             TresourceEntity tresourceEntity=new TresourceEntity();
             tresourceEntity.setCode("0000-0000-0000-0000-0000-0000-0000-0000-0000-0000");
-            tresourceEntity.setIconId("");
+            tresourceEntity.setIconId(smallFileEntity.getId());
             tresourceEntity.setName("菜单注册");
             tresourceEntity.setSelected(true);
             Boolean trf = dhtmlxService.createTresource(tresourceEntity);
@@ -79,5 +100,30 @@ public class SurveyingApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //参数是图片的路径
+    private byte[] GetPictureData(File imageFile) {
+        byte[] data = null;
+        FileImageInputStream input = null;
+        try {
+            input = new FileImageInputStream(imageFile);
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            int numBytesRead = 0;
+            while ((numBytesRead = input.read(buf)) != -1) {
+                output.write(buf, 0, numBytesRead);
+            }
+            data = output.toByteArray();
+            output.close();
+            input.close();
+        }
+        catch (FileNotFoundException ex1) {
+            ex1.printStackTrace();
+        }
+        catch (IOException ex1) {
+            ex1.printStackTrace();
+        }
+        return data;
     }
 }

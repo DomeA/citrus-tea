@@ -3,13 +3,23 @@ package com.domeastudio.mappingo.servers.microservice.surveying.dto.response;
 import java.util.List;
 
 public class DhtmlxData {
-    private List<DhtmlxSiderbarObject> items;
+    private DhtmlxSidebarData sidebarItem;
+    private List<DhtmlxTreeViewObject> treeItems;
 
-    public List<DhtmlxSiderbarObject> getItems() {
-        return items;
+
+    public List<DhtmlxTreeViewObject> getTreeItems() {
+        return treeItems;
     }
 
-    public void setItems(List<DhtmlxSiderbarObject> items) {
-        this.items = items;
+    public void setTreeItems(List<DhtmlxTreeViewObject> treeItems) {
+        this.treeItems = treeItems;
+    }
+
+    public DhtmlxSidebarData getSidebarItem() {
+        return sidebarItem;
+    }
+
+    public void setSidebarItem(DhtmlxSidebarData sidebarItem) {
+        this.sidebarItem = sidebarItem;
     }
 }

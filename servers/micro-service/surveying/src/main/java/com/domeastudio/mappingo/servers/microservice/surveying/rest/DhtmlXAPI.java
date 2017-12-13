@@ -30,4 +30,18 @@ public class DhtmlXAPI {
                 ResultStatusCode.INVALID_PARAM.getMsg(), null);
         return clientMessage;
     }
+
+    @RequestMapping(value = "/treeview/{userid}",method = RequestMethod.GET)
+    public ClientMessage getTreeviewData(@PathVariable("userid") String userid){
+        DhtmlxData dhtmlxData = dhtmlxService.getDhtmlxSidebarData(userid);
+        ClientMessage clientMessage;
+        if(dhtmlxData.getItems().size()>0){
+            clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
+                    ResultStatusCode.OK.getMsg(), dhtmlxData);
+            return clientMessage;
+        }
+        clientMessage = new ClientMessage(ResultStatusCode.INVALID_PARAM.getCode(),
+                ResultStatusCode.INVALID_PARAM.getMsg(), null);
+        return clientMessage;
+    }
 }

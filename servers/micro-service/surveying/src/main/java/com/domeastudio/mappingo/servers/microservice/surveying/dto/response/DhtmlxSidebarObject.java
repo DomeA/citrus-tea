@@ -1,11 +1,12 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.dto.response;
 
-public class DhtmlxSiderbarObject {
+public class DhtmlxSidebarObject {
     private String id;
     private String type;
     private byte[] icon;
     private String text;
     private Boolean selected;
+    private Object userdata;
 
     public String getId() {
         return id;
@@ -45,5 +46,13 @@ public class DhtmlxSiderbarObject {
 
     public void setSelected(Boolean selected) {
         this.selected = selected;
+    }
+
+    public Object getUserdata() {
+        return userdata;
+    }
+
+    public void setUserdata(Object userdata) {
+        this.userdata = userdata;
     }
 }

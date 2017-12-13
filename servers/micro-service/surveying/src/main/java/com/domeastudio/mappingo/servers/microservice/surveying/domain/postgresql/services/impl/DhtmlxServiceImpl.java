@@ -9,7 +9,9 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.*;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxData;
-import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxSiderbarObject;
+import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxSidebarData;
+import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxSidebarObject;
+import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxTreeViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,20 +55,24 @@ public class DhtmlxServiceImpl implements DhtmlxService {
         }
 
         DhtmlxData dhtmlxData=new DhtmlxData();
-        List<DhtmlxSiderbarObject> dhtmlxSiderbarObjects=new ArrayList<>();
+        List<DhtmlxSidebarObject> dhtmlxSidebarObjects =new ArrayList<>();
         for(TresourceEntity tresourceEntity:tresourceEntities){
-            DhtmlxSiderbarObject dhtmlxSiderbarObject=new DhtmlxSiderbarObject();
-            SmallFileEntity smallFileEntity=smallFileRepository.findOne(tresourceEntity.getIconId());
-            dhtmlxSiderbarObject.setIcon(smallFileEntity.getContent());
-            dhtmlxSiderbarObject.setId(tresourceEntity.getCode());
-            dhtmlxSiderbarObject.setText(tresourceEntity.getName());
-            dhtmlxSiderbarObject.setType(tresourceEntity.getType());
-            if(null==tresourceEntity.getType()){
-                dhtmlxSiderbarObject.setSelected(tresourceEntity.getSelected());
+            if(tresourceEntity.getCode().substring(5,tresourceEntity.getCode().length()).equals("0000-0000-0000-0000-0000-0000-0000-0000-0000")){
+                DhtmlxSidebarObject dhtmlxSidebarObject =new DhtmlxSidebarObject();
+                SmallFileEntity smallFileEntity=smallFileRepository.findOne(tresourceEntity.getIconId());
+                dhtmlxSidebarObject.setIcon(smallFileEntity.getContent());
+                dhtmlxSidebarObject.setId(tresourceEntity.getCode());
+                dhtmlxSidebarObject.setText(tresourceEntity.getName());
+                dhtmlxSidebarObject.setType(tresourceEntity.getType());
+                if(null==tresourceEntity.getType()){
+                    dhtmlxSidebarObject.setSelected(tresourceEntity.getSelected());
+                }
+                dhtmlxSidebarObjects.add(dhtmlxSidebarObject);
             }
-            dhtmlxSiderbarObjects.add(dhtmlxSiderbarObject);
         }
-        dhtmlxData.setItems(dhtmlxSiderbarObjects);
+        DhtmlxSidebarData dhtmlxSidebarData=new DhtmlxSidebarData();
+        dhtmlxSidebarData.setItems(dhtmlxSidebarObjects);
+        dhtmlxData.setSidebarItem(dhtmlxSidebarData);
         return dhtmlxData;
     }
 
@@ -82,5 +88,40 @@ public class DhtmlxServiceImpl implements DhtmlxService {
     @Override
     public TresourceEntity findByCode(String code) {
         return tResourceRepository.findByCode(code);
+    }
+
+    @Override
+    public DhtmlxData getDhtmlxTreeviewData(String useid) {
+        TuserEntity tuserEntity = tUserRepository.findOne(useid);
+        if(null==tuserEntity){
+            return null;
+        }
+        List<RuserroleEntity> ruserroleEntities=rUserRoleRepository.findByTuserByUid(tuserEntity);
+        List<TresourceEntity> tresourceEntities=new ArrayList<>();
+        for(RuserroleEntity ruserroleEntity:ruserroleEntities){
+            List<RroleresourceEntity> rroleresourceEntities =rRoleResourceRepository.findByTroleByRid(ruserroleEntity.getTroleByRid());
+            for(RroleresourceEntity rroleresourceEntity:rroleresourceEntities){
+                tresourceEntities.add(rroleresourceEntity.getTresourceByReid());
+            }
+        }
+
+        DhtmlxData dhtmlxData=new DhtmlxData();
+        List<DhtmlxTreeViewObject> dhtmlxTreeViewObjects=new ArrayList<>();
+        for(TresourceEntity tresourceEntity:tresourceEntities){
+            if(tresourceEntity.getCode().substring(5,tresourceEntity.getCode().length()).equals("0000-0000-0000-0000-0000-0000-0000-0000-0000")){
+                DhtmlxTreeViewObject dhtmlxTreeViewObject =new DhtmlxTreeViewObject();
+                //SmallFileEntity smallFileEntity=smallFileRepository.findOne(tresourceEntity.getIconId());
+                //dhtmlxTreeViewObject.setIcon(smallFileEntity.getContent());
+                dhtmlxTreeViewObject.setId(tresourceEntity.getCode());
+                dhtmlxTreeViewObject.setText(tresourceEntity.getName());
+                dhtmlxTreeViewObject.setType(tresourceEntity.getType());
+                if(null==tresourceEntity.getType()){
+                    dhtmlxTreeViewObject.setSelected(tresourceEntity.getSelected());
+                }
+                dhtmlxTreeViewObjects.add(dhtmlxTreeViewObject);
+            }
+        }
+        dhtmlxData.setTreeItems(dhtmlxTreeViewObjects);
+        return dhtmlxData;
     }
 }
