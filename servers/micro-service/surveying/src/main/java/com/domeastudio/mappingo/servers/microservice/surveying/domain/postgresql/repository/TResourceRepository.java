@@ -11,5 +11,6 @@ public interface TResourceRepository extends JpaRepository<TresourceEntity, Stri
     TresourceEntity findByName(String name);
     TresourceEntity findByCode(String code);
     List<TresourceEntity> findByCodeContains(String code);
+    List<TresourceEntity> findByParenId(String pid);
     //List<TresourceEntity> findByCodeMatchesRegex(String regex);
 }
