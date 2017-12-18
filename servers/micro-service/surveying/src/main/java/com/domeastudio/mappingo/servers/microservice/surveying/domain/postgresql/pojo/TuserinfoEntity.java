@@ -54,7 +54,7 @@ public class TuserinfoEntity {
         return result;
     }
 
-    @OneToOne(mappedBy = "tuserinfoByUiid")
+    @OneToOne(mappedBy = "tuserinfoByUiid",fetch = FetchType.LAZY)
     public TuserEntity getTusersByUiid() {
         return tusersByUid;
     }

@@ -45,7 +45,7 @@ public class RuserroleEntity {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rid", referencedColumnName = "rid")
     public TroleEntity getTroleByRid() {
         return troleByRid;
@@ -55,7 +55,7 @@ public class RuserroleEntity {
         this.troleByRid = troleByRid;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid", referencedColumnName = "uid")
     public TuserEntity getTuserByUid() {
         return tuserByUid;

@@ -60,7 +60,7 @@ public class TroleEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "troleByRid")
+    @OneToMany(mappedBy = "troleByRid" ,cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RroleresourceEntity> getRroleresourcesByRid() {
         return rroleresourcesByRid;
     }
@@ -69,7 +69,7 @@ public class TroleEntity {
         this.rroleresourcesByRid = rroleresourcesByRid;
     }
 
-    @OneToMany(mappedBy = "troleByRid")
+    @OneToMany(mappedBy = "troleByRid" ,cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RuserroleEntity> getRuserrolesByRid() {
         return ruserrolesByRid;
     }

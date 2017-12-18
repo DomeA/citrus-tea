@@ -46,7 +46,7 @@ public class RuserresourceEntity {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reid", referencedColumnName = "reid")
     public TresourceEntity getTresourceByReid() {
         return tresourceByReid;
@@ -56,7 +56,7 @@ public class RuserresourceEntity {
         this.tresourceByReid = tresourceByReid;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid", referencedColumnName = "uid")
     public TuserEntity getTuserByUid() {
         return tuserByUid;

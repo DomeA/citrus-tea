@@ -19,6 +19,7 @@ public class TresourceEntity {
     private String iconId;
     private String type;
     private Boolean selected;
+    private TresourceEntity tresourceByParenId;
     private Set<RroleresourceEntity> rroleresourcesByReid;
     private Set<RuserresourceEntity> ruserresourcesByReid;
 
@@ -64,7 +65,7 @@ public class TresourceEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "tresourceByReid")
+    @OneToMany(mappedBy = "tresourceByReid" ,cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RroleresourceEntity> getRroleresourcesByReid() {
         return rroleresourcesByReid;
     }
@@ -73,7 +74,7 @@ public class TresourceEntity {
         this.rroleresourcesByReid = rroleresourcesByReid;
     }
 
-    @OneToMany(mappedBy = "tresourceByReid")
+    @OneToMany(mappedBy = "tresourceByReid" ,cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RuserresourceEntity> getRuserresourcesByReid() {
         return ruserresourcesByReid;
     }
@@ -119,5 +120,15 @@ public class TresourceEntity {
 
     public void setIconId(String iconId) {
         this.iconId = iconId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "parentid", referencedColumnName = "reid")
+    public TresourceEntity getTresourceByParenId() {
+        return tresourceByParenId;
+    }
+
+    public void setTresourceByParenId(TresourceEntity tresourceByParenId) {
+        this.tresourceByParenId = tresourceByParenId;
     }
 }
