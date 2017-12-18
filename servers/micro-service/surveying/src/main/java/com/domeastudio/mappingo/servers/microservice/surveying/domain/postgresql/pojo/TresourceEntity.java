@@ -19,7 +19,7 @@ public class TresourceEntity {
     private String iconId;
     private String type;
     private Boolean selected;
-    private TresourceEntity tresourceByParenId;
+    private String parenId;
     private Set<RroleresourceEntity> rroleresourcesByReid;
     private Set<RuserresourceEntity> ruserresourcesByReid;
 
@@ -121,14 +121,13 @@ public class TresourceEntity {
     public void setIconId(String iconId) {
         this.iconId = iconId;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "parentid", referencedColumnName = "reid")
-    public TresourceEntity getTresourceByParenId() {
-        return tresourceByParenId;
+    @Basic
+    @Column(name = "parenId")
+    public String getParenId() {
+        return parenId;
     }
 
-    public void setTresourceByParenId(TresourceEntity tresourceByParenId) {
-        this.tresourceByParenId = tresourceByParenId;
+    public void setParenId(String parenId) {
+        this.parenId = parenId;
     }
 }

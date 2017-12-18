@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "rroleresource", schema = "public", catalog = "postgres")
 public class RroleresourceEntity {
     private String id;
-    private String parentId;
+    private TresourceEntity tresourceByReid;
     private TroleEntity troleByRid;
 
     @Id
@@ -31,7 +31,7 @@ public class RroleresourceEntity {
         RroleresourceEntity that = (RroleresourceEntity) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (parentId != null ? !parentId.equals(that.parentId) : that.parentId != null)
+        if (tresourceByReid != null ? !tresourceByReid.equals(that.tresourceByReid) : that.tresourceByReid != null)
             return false;
         if (troleByRid != null ? !troleByRid.equals(that.troleByRid) : that.troleByRid != null) return false;
 
@@ -41,9 +41,19 @@ public class RroleresourceEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
+        result = 31 * result + (tresourceByReid != null ? tresourceByReid.hashCode() : 0);
         result = 31 * result + (troleByRid != null ? troleByRid.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reid", referencedColumnName = "reid")
+    public TresourceEntity getTresourceByReid() {
+        return tresourceByReid;
+    }
+
+    public void setTresourceByReid(TresourceEntity tresourceByReid) {
+        this.tresourceByReid = tresourceByReid;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,15 +64,5 @@ public class RroleresourceEntity {
 
     public void setTroleByRid(TroleEntity troleByRid) {
         this.troleByRid = troleByRid;
-    }
-
-    @Basic
-    @Column(name = "parentId")
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
     }
 }
