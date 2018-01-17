@@ -2,20 +2,19 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresq
 
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.SmallFileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.SmallFileRepository;
-import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RroleresourceEntity;
-import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RuserroleEntity;
-import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity;
-import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.*;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.*;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
-import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxData;
-import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxSidebarData;
-import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxSidebarObject;
-import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.DhtmlxTreeViewObject;
+import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.*;
+import com.domeastudio.mappingo.servers.microservice.surveying.util.FileUtils;
+import com.domeastudio.mappingo.servers.microservice.surveying.util.security.MD5SHAHelper;
+import com.domeastudio.mappingo.servers.microservice.surveying.util.tree.TreeParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -32,6 +31,8 @@ public class DhtmlxServiceImpl implements DhtmlxService {
     SmallFileRepository smallFileRepository;
     @Autowired
     TUserRepository tUserRepository;
+    @Autowired
+    TRoleRepository tRoleRepository;
 
     @Override
     public DhtmlxData getDhtmlxSidebarData() {
@@ -39,46 +40,76 @@ public class DhtmlxServiceImpl implements DhtmlxService {
         return null;
     }
 
-    @Override
-    public DhtmlxData getDhtmlxSidebarData(String useid) {
+    private List<TresourceEntity> getResourceEntitiesByUseid(String useid){
         TuserEntity tuserEntity = tUserRepository.findOne(useid);
-        if(null==tuserEntity){
+        if (null == tuserEntity) {
             return null;
         }
-        List<RuserroleEntity> ruserroleEntities=rUserRoleRepository.findByTuserByUid(tuserEntity);
-        List<TresourceEntity> tresourceEntities=new ArrayList<>();
-        for(RuserroleEntity ruserroleEntity:ruserroleEntities){
-            List<RroleresourceEntity> rroleresourceEntities =rRoleResourceRepository.findByTroleByRid(ruserroleEntity.getTroleByRid());
-            for(RroleresourceEntity rroleresourceEntity:rroleresourceEntities){
-                tresourceEntities.add(rroleresourceEntity.getTresourceByReid());
+        List<TresourceEntity> tresourceEntitiesRoot = new ArrayList<>();
+        for (RuserroleEntity ruserroleEntity : tuserEntity.getRuserrolesByUid()) {
+            Iterator<RroleresourceEntity> rroleresourceEntityIterable = ruserroleEntity.getTroleByRid().getRroleresourcesByRid().iterator();
+            while (rroleresourceEntityIterable.hasNext()) {
+                RroleresourceEntity rroleresourceEntity = rroleresourceEntityIterable.next();
+                tresourceEntitiesRoot.add(rroleresourceEntity.getTresourceByReid());
             }
         }
+        return tresourceEntitiesRoot;
+    }
 
-        DhtmlxData dhtmlxData=new DhtmlxData();
-        List<DhtmlxSidebarObject> dhtmlxSidebarObjects =new ArrayList<>();
-        for(TresourceEntity tresourceEntity:tresourceEntities){
-            if(tresourceEntity.getCode().substring(5,tresourceEntity.getCode().length()).equals("0000-0000-0000-0000-0000-0000-0000-0000-0000")){
-                DhtmlxSidebarObject dhtmlxSidebarObject =new DhtmlxSidebarObject();
-                SmallFileEntity smallFileEntity=smallFileRepository.findOne(tresourceEntity.getIconId());
+    @Override
+    public DhtmlxData getDhtmlxSidebarData(String useid) {
+        List<TresourceEntity> tresourceEntitiesRoot = getResourceEntitiesByUseid(useid);
+
+        DhtmlxData dhtmlxData = new DhtmlxData();
+        List<DhtmlxSidebarObject> dhtmlxSidebarObjects = new ArrayList<>();
+        for (TresourceEntity tresourceEntity : tresourceEntitiesRoot) {
+            if (tresourceEntity.getCode().substring(5, tresourceEntity.getCode().length()).equals("0000-0000-0000-0000-0000-0000-0000-0000-0000")) {
+                DhtmlxSidebarObject dhtmlxSidebarObject = new DhtmlxSidebarObject();
+                SmallFileEntity smallFileEntity = smallFileRepository.findOne(tresourceEntity.getIconId());
                 dhtmlxSidebarObject.setIcon(smallFileEntity.getContent());
                 dhtmlxSidebarObject.setId(tresourceEntity.getCode());
                 dhtmlxSidebarObject.setText(tresourceEntity.getName());
                 dhtmlxSidebarObject.setType(tresourceEntity.getType());
-                if(null==tresourceEntity.getType()){
+                if (null == tresourceEntity.getType()) {
                     dhtmlxSidebarObject.setSelected(tresourceEntity.getSelected());
                 }
                 dhtmlxSidebarObjects.add(dhtmlxSidebarObject);
             }
         }
-        DhtmlxSidebarData dhtmlxSidebarData=new DhtmlxSidebarData();
+        DhtmlxSidebarData dhtmlxSidebarData = new DhtmlxSidebarData();
         dhtmlxSidebarData.setItems(dhtmlxSidebarObjects);
         dhtmlxData.setSidebarItem(dhtmlxSidebarData);
         return dhtmlxData;
     }
 
     @Override
+    public Boolean createTresource(String roleName,TresourceEntity tresourceEntity,byte[] file) {
+        if (null == findByCode(tresourceEntity.getCode())) {
+            TresourceEntity tresource = tResourceRepository.save(tresourceEntity);
+            TroleEntity troleEntity = tRoleRepository.findByName(roleName);
+            if(troleEntity==null){
+                return false;
+            }
+            SmallFileEntity smallFileEntity=new SmallFileEntity();
+            smallFileEntity.setName("菜单注册图标");
+            smallFileEntity.setContentType("image/png");
+            smallFileEntity.setContent(file);
+            smallFileEntity.setMd5(MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5(file)));
+            smallFileEntity = smallFileRepository.save(smallFileEntity);
+
+            tresourceEntity.setIconId(smallFileEntity.getId());
+            RroleresourceEntity rroleresourceEntity=new RroleresourceEntity();
+            rroleresourceEntity.setTresourceByReid(tresource);
+            rroleresourceEntity.setTroleByRid(troleEntity);
+            rRoleResourceRepository.save(rroleresourceEntity);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public Boolean createTresource(TresourceEntity tresourceEntity) {
-        if(null==findByCode(tresourceEntity.getCode())){
+        if (null == findByCode(tresourceEntity.getCode())) {
             tResourceRepository.save(tresourceEntity);
             return true;
         }
@@ -92,36 +123,92 @@ public class DhtmlxServiceImpl implements DhtmlxService {
 
     @Override
     public DhtmlxData getDhtmlxTreeviewData(String useid) {
-        TuserEntity tuserEntity = tUserRepository.findOne(useid);
-        if(null==tuserEntity){
+        List<TresourceEntity> tresourceEntitiesRoot = getResourceEntitiesByUseid(useid);
+        DhtmlxData dhtmlxData = new DhtmlxData();
+        List<DhtmlxTreeViewObject> dhtmlxTreeViewObjects = new ArrayList<>();
+        //没有根
+        if (tresourceEntitiesRoot.size() < 1) {
             return null;
         }
-        List<RuserroleEntity> ruserroleEntities=rUserRoleRepository.findByTuserByUid(tuserEntity);
-        List<TresourceEntity> tresourceEntities=new ArrayList<>();
-        for(RuserroleEntity ruserroleEntity:ruserroleEntities){
-            List<RroleresourceEntity> rroleresourceEntities =rRoleResourceRepository.findByTroleByRid(ruserroleEntity.getTroleByRid());
-            for(RroleresourceEntity rroleresourceEntity:rroleresourceEntities){
-                tresourceEntities.add(rroleresourceEntity.getTresourceByReid());
-            }
+        for (TresourceEntity tresourceEntity : tresourceEntitiesRoot) {
+            DhtmlxTreeViewObject dhtmlxTreeViewObject = new DhtmlxTreeViewObject();
+            dhtmlxTreeViewObject.setCode(tresourceEntity.getCode());
+            dhtmlxTreeViewObject.setParentId(tresourceEntity.getParenId());
+            dhtmlxTreeViewObject.setId(tresourceEntity.getReid());
+            dhtmlxTreeViewObject.setText(tresourceEntity.getName());
+            dhtmlxTreeViewObject.setType(tresourceEntity.getType());
+            dhtmlxTreeViewObjects.add(dhtmlxTreeViewObject);
         }
+        dhtmlxData.setTreeItems(TreeParser.getTreeList("0",dhtmlxTreeViewObjects));
+        return dhtmlxData;
+    }
+
+    @Override
+    public DhtmlxData getDhtmlxGridData(String useid) {
+        TuserEntity tuserEntity = tUserRepository.findOne(useid);
+
+        if (null == tuserEntity) {
+            return null;
+        }
+        //1c
+        DhtmlxGridHeadObject dhtmlxGridHeadObject=new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject=new DhtmlxGridRowObject();
+
+        dhtmlxGridHeadObject.setValue("序号");
+        dhtmlxGridHeadObject.setAlign("right");
+        dhtmlxGridHeadObject.setWidth(70);
+        //2c
+        DhtmlxGridHeadObject dhtmlxGridHeadObject1=new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject1=new DhtmlxGridRowObject();
+
+        dhtmlxGridHeadObject1.setValue("用户名");
+        dhtmlxGridHeadObject1.setAlign("right");
+        dhtmlxGridHeadObject1.setWidth(70);
+
+        //3c
+        DhtmlxGridHeadObject dhtmlxGridHeadObject2=new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject2=new DhtmlxGridRowObject();
+
+        dhtmlxGridHeadObject2.setValue("菜单名称");
+        dhtmlxGridHeadObject2.setAlign("right");
+        dhtmlxGridHeadObject2.setWidth(70);
+
+
+        //4c
+        DhtmlxGridHeadObject dhtmlxGridHeadObject3=new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject3=new DhtmlxGridRowObject();
+
+        dhtmlxGridHeadObject3.setValue("菜单级数");
+        dhtmlxGridHeadObject3.setAlign("left");
+        dhtmlxGridHeadObject3.setWidth(70);
+
+        //5c
+        DhtmlxGridHeadObject dhtmlxGridHeadObject4=new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject4=new DhtmlxGridRowObject();
+
+        dhtmlxGridHeadObject4.setValue("图标");
+        dhtmlxGridHeadObject4.setAlign("left");
+        dhtmlxGridHeadObject4.setWidth(70);
+        dhtmlxGridHeadObject4.setType("img");
+        //6c
+        DhtmlxGridHeadObject dhtmlxGridHeadObject5=new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject5=new DhtmlxGridRowObject();
+
+        dhtmlxGridHeadObject5.setValue("用户名");
+        dhtmlxGridHeadObject5.setAlign("left");
+        dhtmlxGridHeadObject5.setWidth(70);
+        //7c
+        DhtmlxGridHeadObject dhtmlxGridHeadObject6=new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject6=new DhtmlxGridRowObject();
+
+        dhtmlxGridHeadObject6.setValue("用户名");
+        dhtmlxGridHeadObject6.setAlign("left");
+        dhtmlxGridHeadObject6.setWidth(70);
 
         DhtmlxData dhtmlxData=new DhtmlxData();
-        List<DhtmlxTreeViewObject> dhtmlxTreeViewObjects=new ArrayList<>();
-        for(TresourceEntity tresourceEntity:tresourceEntities){
-            if(tresourceEntity.getCode().substring(5,tresourceEntity.getCode().length()).equals("0000-0000-0000-0000-0000-0000-0000-0000-0000")){
-                DhtmlxTreeViewObject dhtmlxTreeViewObject =new DhtmlxTreeViewObject();
-                //SmallFileEntity smallFileEntity=smallFileRepository.findOne(tresourceEntity.getIconId());
-                //dhtmlxTreeViewObject.setIcon(smallFileEntity.getContent());
-                dhtmlxTreeViewObject.setId(tresourceEntity.getCode());
-                dhtmlxTreeViewObject.setText(tresourceEntity.getName());
-                dhtmlxTreeViewObject.setType(tresourceEntity.getType());
-                if(null==tresourceEntity.getType()){
-                    dhtmlxTreeViewObject.setSelected(tresourceEntity.getSelected());
-                }
-                dhtmlxTreeViewObjects.add(dhtmlxTreeViewObject);
-            }
-        }
-        dhtmlxData.setTreeItems(dhtmlxTreeViewObjects);
-        return dhtmlxData;
+        List<DhtmlxGridHeadObject> dhtmlxGridHeadObjects=new ArrayList<>();
+
+        List<TresourceEntity> tresourceEntitiesRoot = getResourceEntitiesByUseid(useid);
+        return null;
     }
 }

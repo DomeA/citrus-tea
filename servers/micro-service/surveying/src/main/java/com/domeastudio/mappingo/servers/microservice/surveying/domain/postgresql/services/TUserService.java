@@ -1,5 +1,6 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services;
 
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TgroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
@@ -11,6 +12,10 @@ public interface TUserService {
     TuserEntity login(String param, String pwd);
 
     TuserEntity findUserOne(String id);
+
+    TgroupEntity findGroupOne(String id);
+
+    TgroupEntity findGroupByName(String name);
 
     TroleEntity findRoleOne(String id);
 
@@ -27,6 +32,7 @@ public interface TUserService {
     void save(TroleEntity troleEntity);
 
     void save(TresourceEntity tresourceEntity);
+    void save(TgroupEntity tgroupEntity);
 
     TuserEntity findByNameOrEmailOrPhone(String param);
 
@@ -37,6 +43,10 @@ public interface TUserService {
     Boolean createRole(String name, String text,String describe);
 
     Boolean createResource(String name);
+
+    Boolean createGroup(String name,String id);
+
+    Boolean allocationUserGroup(TuserEntity tuserEntity, TgroupEntity tgroupEntity);
 
     Boolean allocationUserRole(TuserEntity tuserEntity, TroleEntity troleEntity);
 

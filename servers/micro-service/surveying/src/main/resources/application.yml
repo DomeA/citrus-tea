@@ -76,6 +76,8 @@ spring:
       database: mappingosys
       username: mappingo
       password: mappingo
+  jpa:
+    open-in-view: true
 server:
   port: 8050
 flowable:

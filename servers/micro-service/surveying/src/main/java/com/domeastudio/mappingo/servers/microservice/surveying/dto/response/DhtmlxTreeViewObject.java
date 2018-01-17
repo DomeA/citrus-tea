@@ -1,9 +1,13 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.dto.response;
 
+import com.domeastudio.mappingo.servers.microservice.surveying.util.tree.TreeEntity;
+
 import java.util.List;
 
-public class DhtmlxTreeViewObject {
+public class DhtmlxTreeViewObject implements TreeEntity<DhtmlxTreeViewObject> {
     private String id;
+    private String parentId;
+    private String code;
     private String type;
     private String icons;
     private String open;
@@ -92,5 +96,22 @@ public class DhtmlxTreeViewObject {
 
     public void setItems(List<DhtmlxTreeViewObject> items) {
         this.items = items;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    @Override
+    public String getParentId() {
+        return parentId;
     }
 }

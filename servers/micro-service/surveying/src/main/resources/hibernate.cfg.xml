@@ -6,18 +6,22 @@
     <session-factory>
         <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <mapping
-                class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RroleresourceEntity"/>
-        <mapping
-                class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RuserresourceEntity"/>
-        <mapping
-                class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RuserroleEntity"/>
-        <mapping
-                class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity"/>
-        <mapping class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity"/>
-        <mapping class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity"/>
-        <mapping
-                class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserinfoEntity"/>
+        <!--<mapping-->
+                <!--class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RroleresourceEntity"/>-->
+        <!--<mapping-->
+                <!--class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RuserresourceEntity"/>-->
+        <!--<mapping-->
+                <!--class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RuserroleEntity"/>-->
+        <!--<mapping-->
+                <!--class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity"/>-->
+        <!--<mapping class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity"/>-->
+        <!--<mapping class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity"/>-->
+        <!--<mapping-->
+                <!--class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserinfoEntity"/>-->
+        <!--<mapping-->
+                <!--class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TgroupEntity"/>-->
+        <!--<mapping-->
+                <!--class="com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RusergroupEntity"/>-->
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

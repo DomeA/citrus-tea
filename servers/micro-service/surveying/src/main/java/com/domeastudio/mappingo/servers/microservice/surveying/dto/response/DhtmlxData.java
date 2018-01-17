@@ -5,6 +5,7 @@ import java.util.List;
 public class DhtmlxData {
     private DhtmlxSidebarData sidebarItem;
     private List<DhtmlxTreeViewObject> treeItems;
+    private DhtmlxGridObject gridItems;
 
 
     public List<DhtmlxTreeViewObject> getTreeItems() {
@@ -21,5 +22,13 @@ public class DhtmlxData {
 
     public void setSidebarItem(DhtmlxSidebarData sidebarItem) {
         this.sidebarItem = sidebarItem;
+    }
+
+    public DhtmlxGridObject getGridItems() {
+        return gridItems;
+    }
+
+    public void setGridItems(DhtmlxGridObject gridItems) {
+        this.gridItems = gridItems;
     }
 }

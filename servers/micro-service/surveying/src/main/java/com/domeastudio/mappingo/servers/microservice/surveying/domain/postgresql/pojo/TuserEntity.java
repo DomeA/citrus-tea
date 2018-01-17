@@ -3,7 +3,6 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresq
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -20,6 +19,7 @@ public class TuserEntity {
     private String registTime;
     private Set<RuserresourceEntity> ruserresourcesByUid;
     private Set<RuserroleEntity> ruserrolesByUid;
+    private Set<RusergroupEntity> rusergroupsByUid;
     private TuserinfoEntity tuserinfoByUiid;
 
     @Id
@@ -177,5 +177,14 @@ public class TuserEntity {
 
     public void setRegistTime(String registTime) {
         this.registTime = registTime;
+    }
+
+    @OneToMany(mappedBy = "tuserByUid",cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    public Set<RusergroupEntity> getRusergroupsByUid() {
+        return rusergroupsByUid;
+    }
+
+    public void setRusergroupsByUid(Set<RusergroupEntity> rusergroupsByUid) {
+        this.rusergroupsByUid = rusergroupsByUid;
     }
 }

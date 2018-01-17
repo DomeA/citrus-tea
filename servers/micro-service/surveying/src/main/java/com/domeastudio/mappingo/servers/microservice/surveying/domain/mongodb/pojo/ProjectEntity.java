@@ -11,6 +11,8 @@ public class ProjectEntity {
     @Id
     private String id;
     private List<FileEntity> fileEntity;
+    private List<FileEntity> receiptFile;
+    private List<FileEntity> otherFile;
     private String name;
     private String props;
     private Date createTime;

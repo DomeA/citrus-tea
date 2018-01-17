@@ -2,11 +2,13 @@ package com.domeastudio.mappingo.servers.microservice.surveying;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.SmallFileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.SmallFileRepository;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TgroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.TUserService;
+import com.domeastudio.mappingo.servers.microservice.surveying.util.FileUtils;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.security.MD5SHAHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -44,17 +46,20 @@ public class SurveyingApplication {
             Boolean uf = tUserService.createUser("system", "domea", "domeastudio@hotmail.com", "18182669306", 999999);
             Boolean rf1 = tUserService.createRole("ROLE_SYSADMIN", "系统管理员","系统管理员角色");
             Boolean rf2 = tUserService.createRole("ROLE_SIGHTSEER", "系统游客","默认角色,游客角色");
+            Boolean rf3=tUserService.createGroup("GROUP_SYSADMIN","0");
 
+            TgroupEntity tgroupEntity=tUserService.findGroupByName("GROUP_SYSADMIN");
             TuserEntity tuserEntity = tUserService.findUserByName("system");
             TroleEntity troleEntity = tUserService.findRoleByName("ROLE_SYSADMIN");
             Boolean urf = tUserService.allocationUserRole(tuserEntity, troleEntity);
+            Boolean uug=tUserService.allocationUserGroup(tuserEntity,tgroupEntity);
 
             File iconFile= ResourceUtils.getFile("classpath:img/menu32.png");
             SmallFileEntity smallFileEntity=new SmallFileEntity();
             smallFileEntity.setName("菜单注册图标");
             smallFileEntity.setContentType("image/png");
-            smallFileEntity.setContent(GetPictureData(iconFile));
-            smallFileEntity.setMd5(MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5(GetPictureData(iconFile))));
+            smallFileEntity.setContent(FileUtils.File2Byte(iconFile));
+            smallFileEntity.setMd5(MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5(FileUtils.File2Byte(iconFile))));
             smallFileEntity = smallFileRepository.save(smallFileEntity);
 
             TresourceEntity tresourceEntity=new TresourceEntity();
@@ -79,10 +84,16 @@ public class SurveyingApplication {
                 System.out.println("系统管理员角色：ROLE_SYSADMIN 已经存在");
             }
             if (rf2) {
-                System.out.println("系统管理员角色：ROLE_SIGHTSEER 创建成功");
+                System.out.println("系统游客角色：ROLE_SIGHTSEER 创建成功");
             } else {
-                System.out.println("系统管理员角色：ROLE_SIGHTSEER 已经存在");
+                System.out.println("系统游客角色：ROLE_SIGHTSEER 已经存在");
             }
+            if (rf3) {
+                System.out.println("系统管理员组：GROUP_SYSADMIN 创建成功");
+            } else {
+                System.out.println("系统管理员组：GROUP_SYSADMIN 已经存在");
+            }
+
             if (urf) {
                 System.out.println("管理员账户：[system] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 成功");
             } else {
@@ -101,30 +112,5 @@ public class SurveyingApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    //参数是图片的路径
-    private byte[] GetPictureData(File imageFile) {
-        byte[] data = null;
-        FileImageInputStream input = null;
-        try {
-            input = new FileImageInputStream(imageFile);
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            int numBytesRead = 0;
-            while ((numBytesRead = input.read(buf)) != -1) {
-                output.write(buf, 0, numBytesRead);
-            }
-            data = output.toByteArray();
-            output.close();
-            input.close();
-        }
-        catch (FileNotFoundException ex1) {
-            ex1.printStackTrace();
-        }
-        catch (IOException ex1) {
-            ex1.printStackTrace();
-        }
-        return data;
     }
 }

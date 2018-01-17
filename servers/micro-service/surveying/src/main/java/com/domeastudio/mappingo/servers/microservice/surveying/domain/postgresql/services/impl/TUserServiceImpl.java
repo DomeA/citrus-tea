@@ -24,6 +24,10 @@ public class TUserServiceImpl implements TUserService {
     @Autowired
     RUserRoleRepository rUserRoleRepository;
     @Autowired
+    TGroupRepository tGroupRepository;
+    @Autowired
+    RUserGroupRepository rUserGroupRepository;
+    @Autowired
     RUserResourceRepository rUserResourceRepository;
     @Autowired
     RRoleResourceRepository rRoleResourceRepository;
@@ -49,6 +53,16 @@ public class TUserServiceImpl implements TUserService {
     @Override
     public TuserEntity findUserOne(String id) {
         return tUserRepository.findOne(id);
+    }
+
+    @Override
+    public TgroupEntity findGroupOne(String id) {
+        return tGroupRepository.findOne(id);
+    }
+
+    @Override
+    public TgroupEntity findGroupByName(String name) {
+        return tGroupRepository.findByName(name);
     }
 
     @Override
@@ -89,6 +103,11 @@ public class TUserServiceImpl implements TUserService {
     @Override
     public void save(TresourceEntity tresourceEntity) {
         tResourceRepository.save(tresourceEntity);
+    }
+
+    @Override
+    public void save(TgroupEntity tgroupEntity) {
+        tGroupRepository.save(tgroupEntity);
     }
 
     @Override
@@ -165,6 +184,30 @@ public class TUserServiceImpl implements TUserService {
 
         save(tresourceEntity);
         return true;
+    }
+
+    @Override
+    public Boolean createGroup(String name,String id) {
+        if(tGroupRepository.findByName(name)!=null){
+            return false;
+        }
+        TgroupEntity tgroupEntity =new TgroupEntity();
+        tgroupEntity.setName(name);
+        tgroupEntity.setParentId(id);
+        save(tgroupEntity);
+        return true;
+    }
+
+    @Override
+    public Boolean allocationUserGroup(TuserEntity tuserEntity, TgroupEntity tgroupEntity) {
+        if (rUserGroupRepository.findByTuserByUidAndAndTgroupByGid(tuserEntity, tgroupEntity) == null) {
+            RusergroupEntity rusergroupEntity = new RusergroupEntity();
+            rusergroupEntity.setTuserByUid(tuserEntity);
+            rusergroupEntity.setTgroupByGid(tgroupEntity);
+            rUserGroupRepository.save(rusergroupEntity);
+            return true;
+        }
+        return false;
     }
 
     @Override

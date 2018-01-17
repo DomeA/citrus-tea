@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -27,6 +29,14 @@ public class TokenAPI {
 
     @Autowired
     private Audience audienceEntity;
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public Map<String,String> test() {
+        Map<String,String> stringStringMap=new HashMap<>();
+        stringStringMap.put("id","100");
+        stringStringMap.put("name","domea");
+        return stringStringMap;
+    }
 
     @RequestMapping(value = "/form/token", method = RequestMethod.POST)
     public ClientMessage getAccessToken4Form(Login loginPara, HttpServletRequest httpServletRequest) {
