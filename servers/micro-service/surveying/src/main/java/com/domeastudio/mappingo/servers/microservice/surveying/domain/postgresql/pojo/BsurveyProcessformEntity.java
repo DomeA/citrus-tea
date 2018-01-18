@@ -1,7 +1,8 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "bsurveyProcessform", schema = "public", catalog = "postgres")
@@ -22,6 +23,10 @@ public class BsurveyProcessformEntity {
     //接件情况
     private String receive;
 
+    @Id
+    @GeneratedValue(generator = "autoid")
+    @GenericGenerator(name = "autoid", strategy = "uuid")
+    @Column(name = "sid")
     public String getSid() {
         return sid;
     }
