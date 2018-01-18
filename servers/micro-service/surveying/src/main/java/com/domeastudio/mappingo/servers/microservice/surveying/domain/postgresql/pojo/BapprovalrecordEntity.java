@@ -10,7 +10,8 @@ public class BapprovalrecordEntity {
     private String aid;
     private String record;
     private TuserEntity tuserByUid;
-    private BprocessformEntity bprocessformByPid;
+    private BbuildingProcessformEntity bbuildingProcessformByBid;
+    private BcadastralProcessformEntity bcadastralProcessformByCid;
 
     @Id
     @GeneratedValue(generator = "autoid")
@@ -41,14 +42,7 @@ public class BapprovalrecordEntity {
         this.tuserByUid = tuserByUid;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pid", referencedColumnName = "pid")
-    public BprocessformEntity getBprocessformByPid() {
-        return bprocessformByPid;
-    }
-    public void setBprocessformByPid(BprocessformEntity bprocessformByPid) {
-        this.bprocessformByPid = bprocessformByPid;
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -60,7 +54,7 @@ public class BapprovalrecordEntity {
         if (aid != null ? !aid.equals(that.aid) : that.aid != null) return false;
         if (tuserByUid != null ? !tuserByUid.equals(that.tuserByUid) : that.tuserByUid != null)
             return false;
-        if (bprocessformByPid != null ? !bprocessformByPid.equals(that.bprocessformByPid) : that.bprocessformByPid != null) return false;
+        if (bbuildingProcessformByBid != null ? !bbuildingProcessformByBid.equals(that.bbuildingProcessformByBid) : that.bbuildingProcessformByBid != null) return false;
 
         return true;
     }
@@ -69,7 +63,27 @@ public class BapprovalrecordEntity {
     public int hashCode() {
         int result = aid != null ? aid.hashCode() : 0;
         result = 31 * result + (tuserByUid != null ? tuserByUid.hashCode() : 0);
-        result = 31 * result + (bprocessformByPid != null ? bprocessformByPid.hashCode() : 0);
+        result = 31 * result + (bbuildingProcessformByBid != null ? bbuildingProcessformByBid.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bid", referencedColumnName = "bid")
+    public BbuildingProcessformEntity getBbuildingProcessformByBid() {
+        return bbuildingProcessformByBid;
+    }
+
+    public void setBbuildingProcessformByBid(BbuildingProcessformEntity bbuildingProcessformByBid) {
+        this.bbuildingProcessformByBid = bbuildingProcessformByBid;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cid", referencedColumnName = "cid")
+    public BcadastralProcessformEntity getBcadastralProcessformByCid() {
+        return bcadastralProcessformByCid;
+    }
+
+    public void setBcadastralProcessformByCid(BcadastralProcessformEntity bcadastralProcessformByCid) {
+        this.bcadastralProcessformByCid = bcadastralProcessformByCid;
     }
 }
