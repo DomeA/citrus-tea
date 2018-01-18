@@ -4,9 +4,10 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.BbuildingProcessformEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.BcadastralProcessformEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.BsurveyProcessformEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.BbuildingProcessformRepository;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.BcadastralProcessformRepository;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.BsurveyProcessformRepository;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.ProcessFormService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -15,20 +16,24 @@ public class ProcessFormServiceImpl implements ProcessFormService {
     @Autowired
     BcadastralProcessformRepository bcadastralProcessformRepository;
     @Autowired
+    BbuildingProcessformRepository bbuildingProcessformRepository;
+
+    @Autowired
+    BsurveyProcessformRepository bsurveyProcessformRepository;
 
     @Override
     public BcadastralProcessformEntity findCadastralProcessFormByCid(String cid) {
-        return null;
+        return bcadastralProcessformRepository.findOne(cid);
     }
 
     @Override
     public BbuildingProcessformEntity findBuildingProcessFormByBid(String bid) {
-        return null;
+        return bbuildingProcessformRepository.findOne(bid);
     }
 
     @Override
     public BsurveyProcessformEntity findSurveyProcessFormBySid(String sid) {
-        return null;
+        return bsurveyProcessformRepository.findOne(sid);
     }
 
     @Override
