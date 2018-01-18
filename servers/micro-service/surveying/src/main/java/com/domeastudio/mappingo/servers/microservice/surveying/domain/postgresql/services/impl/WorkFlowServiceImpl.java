@@ -1,6 +1,6 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.impl;
 
-import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.WorkFlow;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.WorkFlowService;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.ProcessDefType;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.engine.HistoryService;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.zip.ZipInputStream;
 
 @Service
-public class WorkFlowImpl implements WorkFlow {
+public class WorkFlowServiceImpl implements WorkFlowService {
 
     @Autowired
     private TaskService taskService;

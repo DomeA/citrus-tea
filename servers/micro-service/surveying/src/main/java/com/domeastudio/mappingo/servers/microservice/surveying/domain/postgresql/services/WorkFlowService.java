@@ -11,7 +11,7 @@ import org.flowable.task.api.history.HistoricTaskInstance;
 import java.util.List;
 import java.util.zip.ZipInputStream;
 
-public interface WorkFlow {
+public interface WorkFlowService {
     Deployment deploymentProcessDefinition(String name, String resourceName, ZipInputStream zipInputStream, byte[] bytes, String text, BpmnModel bpmnModel, String path, ProcessDefType processDefType);
 
     ProcessInstance startProcessInstanceById(String id);
