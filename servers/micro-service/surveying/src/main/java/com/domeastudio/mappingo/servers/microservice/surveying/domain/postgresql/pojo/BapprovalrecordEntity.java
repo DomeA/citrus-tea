@@ -12,6 +12,7 @@ public class BapprovalrecordEntity {
     private TuserEntity tuserByUid;
     private BbuildingProcessformEntity bbuildingProcessformByBid;
     private BcadastralProcessformEntity bcadastralProcessformByCid;
+    private BsurveyProcessformEntity bsurveyProcessformBySid;
 
     @Id
     @GeneratedValue(generator = "autoid")
@@ -85,5 +86,15 @@ public class BapprovalrecordEntity {
 
     public void setBcadastralProcessformByCid(BcadastralProcessformEntity bcadastralProcessformByCid) {
         this.bcadastralProcessformByCid = bcadastralProcessformByCid;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sid", referencedColumnName = "sid")
+    public BsurveyProcessformEntity getBsurveyProcessformBySid() {
+        return bsurveyProcessformBySid;
+    }
+
+    public void setBsurveyProcessformBySid(BsurveyProcessformEntity bsurveyProcessformBySid) {
+        this.bsurveyProcessformBySid = bsurveyProcessformBySid;
     }
 }

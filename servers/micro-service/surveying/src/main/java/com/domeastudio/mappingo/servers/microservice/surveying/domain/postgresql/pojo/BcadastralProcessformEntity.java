@@ -3,6 +3,7 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresq
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "bcadastralProcessform", schema = "public", catalog = "postgres")
@@ -22,7 +23,7 @@ public class BcadastralProcessformEntity {
     private String surveyType;
     //接件情况
     private String receive;
-
+    private Set<BapprovalrecordEntity> bapprovalrecordsByBid;
     @Id
     @GeneratedValue(generator = "autoid")
     @GenericGenerator(name = "autoid", strategy = "uuid")
@@ -89,5 +90,14 @@ public class BcadastralProcessformEntity {
 
     public void setReceive(String receive) {
         this.receive = receive;
+    }
+
+    @OneToMany(mappedBy = "bbuildingProcessformByBid",cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    public Set<BapprovalrecordEntity> getBapprovalrecordsByBid() {
+        return bapprovalrecordsByBid;
+    }
+
+    public void setBapprovalrecordsByBid(Set<BapprovalrecordEntity> bapprovalrecordsByBid) {
+        this.bapprovalrecordsByBid = bapprovalrecordsByBid;
     }
 }
