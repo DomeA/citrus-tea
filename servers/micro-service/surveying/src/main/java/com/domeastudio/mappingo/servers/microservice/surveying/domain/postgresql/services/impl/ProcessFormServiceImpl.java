@@ -32,6 +32,36 @@ public class ProcessFormServiceImpl implements ProcessFormService {
     }
 
     @Override
+    public Boolean createCadastralProcessForm() {
+        return null;
+    }
+
+    @Override
+    public Boolean createBuildingProcessForm() {
+        return null;
+    }
+
+    @Override
+    public Boolean createSurveyProcessForm() {
+        return null;
+    }
+
+    @Override
+    public void updateCadastralProcessForm() {
+
+    }
+
+    @Override
+    public void updateBuildingProcessForm() {
+
+    }
+
+    @Override
+    public void updateSurveyProcessForm() {
+
+    }
+
+    @Override
     public List<BapprovalrecordEntity> findApprovalRecordByUid(String uid) {
         return null;
     }
