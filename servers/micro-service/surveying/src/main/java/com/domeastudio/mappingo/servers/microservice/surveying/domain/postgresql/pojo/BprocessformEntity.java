@@ -6,11 +6,36 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "bprocessform", schema = "public", catalog = "postgres")
+@Table(name = "bbuildingprocessform", schema = "public", catalog = "postgres")
 public class BprocessformEntity {
     private String pid;
+    //项目名称
     private String projectName;
+    //项目时间
     private String projectTime;
+    //项目编码
+    private String projectCode;
+    //项目坐落地址
+    private String projectAddress;
+    //委托单位
+    private String entrustmentUnit;
+    //测绘类型
+    private String surveyType;
+    //接件情况
+    private String receive;
+    //实测情况
+    //计算方法
+    //经办人意见
+    //互检意见
+    //部门质检意见
+    //部门意见
+    //质检部门意见
+    //审批意见
+    //财务意见
+    //档案意见
+
+
+
     private Set<BapprovalrecordEntity> bapprovalrecordsByPid;
 
     @Id
