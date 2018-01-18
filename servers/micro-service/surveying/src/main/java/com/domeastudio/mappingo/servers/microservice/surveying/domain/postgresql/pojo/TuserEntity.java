@@ -20,6 +20,7 @@ public class TuserEntity {
     private Set<RuserresourceEntity> ruserresourcesByUid;
     private Set<RuserroleEntity> ruserrolesByUid;
     private Set<RusergroupEntity> rusergroupsByUid;
+    private Set<BapprovalrecordEntity> bapprovalrecordsByUid;
     private TuserinfoEntity tuserinfoByUiid;
 
     @Id
@@ -186,5 +187,14 @@ public class TuserEntity {
 
     public void setRusergroupsByUid(Set<RusergroupEntity> rusergroupsByUid) {
         this.rusergroupsByUid = rusergroupsByUid;
+    }
+
+    @OneToMany(mappedBy = "tuserByUid" ,cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    public Set<BapprovalrecordEntity> getBapprovalrecordsByUid() {
+        return bapprovalrecordsByUid;
+    }
+
+    public void setBapprovalrecordsByUid(Set<BapprovalrecordEntity> bapprovalrecordsByUid) {
+        this.bapprovalrecordsByUid = bapprovalrecordsByUid;
     }
 }
