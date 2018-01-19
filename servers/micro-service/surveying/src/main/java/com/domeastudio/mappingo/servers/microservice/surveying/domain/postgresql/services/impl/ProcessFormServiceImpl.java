@@ -43,117 +43,125 @@ public class ProcessFormServiceImpl implements ProcessFormService {
         bcadastralProcessformEntity.setProjectCode(projectCode);
         bcadastralProcessformEntity.setProjectName(projectName);
         bcadastralProcessformEntity.setProjectTime(projectTime);
-
         bcadastralProcessformRepository.save(bcadastralProcessformEntity);
     }
 
     @Override
-    public void createBuildingProcessForm() {
-
+    public void createBuildingProcessForm(String projectName, String projectCode, String projectAddress, String projectTime) {
+        BbuildingProcessformEntity bbuildingProcessformEntity=new BbuildingProcessformEntity();
+        bbuildingProcessformEntity.setProjectAddress(projectAddress);
+        bbuildingProcessformEntity.setProjectCode(projectCode);
+        bbuildingProcessformEntity.setProjectName(projectName);
+        bbuildingProcessformEntity.setProjectTime(projectTime);
+        bbuildingProcessformRepository.save(bbuildingProcessformEntity);
     }
 
     @Override
     public void createSurveyProcessForm() {
+        BsurveyProcessformEntity bsurveyProcessformEntity=new BsurveyProcessformEntity();
+
+        bsurveyProcessformRepository.save(bsurveyProcessformEntity);
+    }
+
+    @Override
+    public void updateCadastralProcessForm1(String cid,String receive) {
+        BcadastralProcessformEntity bcadastralProcessformEntity= findCadastralProcessFormByCid(cid);
+        bcadastralProcessformEntity.setReceive(receive);
+        bcadastralProcessformRepository.save(bcadastralProcessformEntity);
+    }
+
+    @Override
+    public void updateCadastralProcessForm2(String cid) {
 
     }
 
     @Override
-    public void updateCadastralProcessForm1() {
+    public void updateCadastralProcessForm3(String cid) {
 
     }
 
     @Override
-    public void updateCadastralProcessForm2() {
+    public void updateCadastralProcessForm4(String cid) {
 
     }
 
     @Override
-    public void updateCadastralProcessForm3() {
+    public void updateCadastralProcessForm5(String cid) {
 
     }
 
     @Override
-    public void updateCadastralProcessForm4() {
+    public void updateCadastralProcessForm6(String cid) {
 
     }
 
     @Override
-    public void updateCadastralProcessForm5() {
+    public void updateCadastralProcessForm7(String cid) {
 
     }
 
     @Override
-    public void updateCadastralProcessForm6() {
+    public void updateBuildingProcessForm1(String bid) {
 
     }
 
     @Override
-    public void updateCadastralProcessForm7() {
+    public void updateBuildingProcessForm2(String bid) {
 
     }
 
     @Override
-    public void updateBuildingProcessForm1() {
+    public void updateBuildingProcessForm3(String bid) {
 
     }
 
     @Override
-    public void updateBuildingProcessForm2() {
+    public void updateBuildingProcessForm4(String bid) {
 
     }
 
     @Override
-    public void updateBuildingProcessForm3() {
+    public void updateBuildingProcessForm5(String bid) {
 
     }
 
     @Override
-    public void updateBuildingProcessForm4() {
+    public void updateBuildingProcessForm6(String bid) {
 
     }
 
     @Override
-    public void updateBuildingProcessForm5() {
+    public void updateBuildingProcessForm7(String bid) {
 
     }
 
     @Override
-    public void updateBuildingProcessForm6() {
+    public void updateSurveyProcessForm1(String sid) {
 
     }
 
     @Override
-    public void updateBuildingProcessForm7() {
+    public void updateSurveyProcessForm2(String sid) {
 
     }
 
     @Override
-    public void updateSurveyProcessForm1() {
+    public void updateSurveyProcessForm3(String sid) {
 
     }
 
     @Override
-    public void updateSurveyProcessForm2() {
+    public void updateSurveyProcessForm4(String sid) {
 
     }
 
     @Override
-    public void updateSurveyProcessForm3() {
+    public void updateSurveyProcessForm5(String sid) {
 
     }
 
     @Override
-    public void updateSurveyProcessForm4() {
-
-    }
-
-    @Override
-    public void updateSurveyProcessForm5() {
-
-    }
-
-    @Override
-    public void updateSurveyProcessForm6() {
+    public void updateSurveyProcessForm6(String sid) {
 
     }
 

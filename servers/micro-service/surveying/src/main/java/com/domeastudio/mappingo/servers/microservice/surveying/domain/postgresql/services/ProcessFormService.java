@@ -17,50 +17,50 @@ public interface ProcessFormService {
     //创建表单
     void createCadastralProcessForm(String projectName, String projectCode, String projectAddress, String projectTime);
 
-    void createBuildingProcessForm();
+    void createBuildingProcessForm(String projectName, String projectCode, String projectAddress, String projectTime);
 
     void createSurveyProcessForm();
 
     //分步更新表单
-    void updateCadastralProcessForm1();
+    void updateCadastralProcessForm1(String cid,String receive);
 
-    void updateCadastralProcessForm2();
+    void updateCadastralProcessForm2(String cid);
 
-    void updateCadastralProcessForm3();
+    void updateCadastralProcessForm3(String cid);
 
-    void updateCadastralProcessForm4();
+    void updateCadastralProcessForm4(String cid);
 
-    void updateCadastralProcessForm5();
+    void updateCadastralProcessForm5(String cid);
 
-    void updateCadastralProcessForm6();
+    void updateCadastralProcessForm6(String cid);
 
-    void updateCadastralProcessForm7();
+    void updateCadastralProcessForm7(String cid);
 
-    void updateBuildingProcessForm1();
+    void updateBuildingProcessForm1(String bid);
 
-    void updateBuildingProcessForm2();
+    void updateBuildingProcessForm2(String bid);
 
-    void updateBuildingProcessForm3();
+    void updateBuildingProcessForm3(String bid);
 
-    void updateBuildingProcessForm4();
+    void updateBuildingProcessForm4(String bid);
 
-    void updateBuildingProcessForm5();
+    void updateBuildingProcessForm5(String bid);
 
-    void updateBuildingProcessForm6();
+    void updateBuildingProcessForm6(String bid);
 
-    void updateBuildingProcessForm7();
+    void updateBuildingProcessForm7(String bid);
 
-    void updateSurveyProcessForm1();
+    void updateSurveyProcessForm1(String sid);
 
-    void updateSurveyProcessForm2();
+    void updateSurveyProcessForm2(String sid);
 
-    void updateSurveyProcessForm3();
+    void updateSurveyProcessForm3(String sid);
 
-    void updateSurveyProcessForm4();
+    void updateSurveyProcessForm4(String sid);
 
-    void updateSurveyProcessForm5();
+    void updateSurveyProcessForm5(String sid);
 
-    void updateSurveyProcessForm6();
+    void updateSurveyProcessForm6(String sid);
 
 
     List<BapprovalrecordEntity> findApprovalRecordByUid(String uid);
