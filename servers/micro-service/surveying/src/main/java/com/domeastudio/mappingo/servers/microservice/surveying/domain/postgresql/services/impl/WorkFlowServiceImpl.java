@@ -15,6 +15,7 @@ import org.flowable.task.api.history.HistoricTaskInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.zip.ZipInputStream;
 
@@ -33,10 +34,17 @@ public class WorkFlowServiceImpl implements WorkFlowService {
     private HistoryService historyService;
 
     @Override
-    public Deployment deploymentProcessDefinition(String name, String resourceName, ZipInputStream zipInputStream, byte[] bytes, String text, BpmnModel bpmnModel, String path, ProcessDefType processDefType) {
+    public Deployment deploymentProcessDefinition(String name, String resourceName, InputStream inputStream, ZipInputStream zipInputStream, byte[] bytes, String text, BpmnModel bpmnModel, String path, ProcessDefType processDefType) {
         Deployment deployment = null;
         //创建核心引擎对象
         switch (processDefType) {
+            case INPUTSTREAM:
+                deployment=repositoryService.
+                        createDeployment().
+                        name(name).
+                        addInputStream(resourceName,inputStream).
+                        deploy();
+                break;
             case ZIP:
                 deployment = repositoryService
                         .createDeployment()

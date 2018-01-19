@@ -8,11 +8,12 @@ import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.history.HistoricTaskInstance;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.zip.ZipInputStream;
 
 public interface WorkFlowService {
-    Deployment deploymentProcessDefinition(String name, String resourceName, ZipInputStream zipInputStream, byte[] bytes, String text, BpmnModel bpmnModel, String path, ProcessDefType processDefType);
+    Deployment deploymentProcessDefinition(String name, String resourceName, InputStream inputStream, ZipInputStream zipInputStream, byte[] bytes, String text, BpmnModel bpmnModel, String path, ProcessDefType processDefType);
 
     ProcessInstance startProcessInstanceById(String id);
 
