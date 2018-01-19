@@ -41,7 +41,7 @@ public class FlowWorkAPI {
         ZipInputStream zipIn = new ZipInputStream( ByteAndInputStreamUtil.byte2Input(bpmnFileEntity.getContent()));
         //todo:修改定义参数
         deployment = workFlow.deploymentProcessDefinition(
-                processDef.getName(), null,
+                processDef.getName(), null,null,
                 zipIn, null,
                 null, null, null, processDef.getFileType());
         if (deployment == null) {

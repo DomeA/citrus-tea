@@ -24,8 +24,6 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
     @Autowired
     private TaskService taskService;
-    //    @Autowired
-//    private ProcessEngine processEngine;
     @Autowired
     private RepositoryService repositoryService;
     @Autowired
