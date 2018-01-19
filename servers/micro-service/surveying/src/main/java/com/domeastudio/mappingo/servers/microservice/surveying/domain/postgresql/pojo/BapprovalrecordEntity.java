@@ -39,10 +39,10 @@ public class BapprovalrecordEntity {
     public TuserEntity getTuserByUid() {
         return tuserByUid;
     }
+
     public void setTuserByUid(TuserEntity tuserByUid) {
         this.tuserByUid = tuserByUid;
     }
-
 
 
     @Override
@@ -55,7 +55,8 @@ public class BapprovalrecordEntity {
         if (aid != null ? !aid.equals(that.aid) : that.aid != null) return false;
         if (tuserByUid != null ? !tuserByUid.equals(that.tuserByUid) : that.tuserByUid != null)
             return false;
-        if (bbuildingProcessformByBid != null ? !bbuildingProcessformByBid.equals(that.bbuildingProcessformByBid) : that.bbuildingProcessformByBid != null) return false;
+        if (bbuildingProcessformByBid != null ? !bbuildingProcessformByBid.equals(that.bbuildingProcessformByBid) : that.bbuildingProcessformByBid != null)
+            return false;
 
         return true;
     }

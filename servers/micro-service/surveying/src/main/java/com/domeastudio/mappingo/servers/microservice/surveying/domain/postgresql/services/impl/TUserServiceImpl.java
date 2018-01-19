@@ -162,7 +162,7 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public Boolean createRole(String name,String text, String describe) {
+    public Boolean createRole(String name, String text, String describe) {
         if (tRoleRepository.findByName(name) != null) {
             return false;
         }
@@ -187,11 +187,11 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public Boolean createGroup(String name,String id) {
-        if(tGroupRepository.findByName(name)!=null){
+    public Boolean createGroup(String name, String id) {
+        if (tGroupRepository.findByName(name) != null) {
             return false;
         }
-        TgroupEntity tgroupEntity =new TgroupEntity();
+        TgroupEntity tgroupEntity = new TgroupEntity();
         tgroupEntity.setName(name);
         tgroupEntity.setParentId(id);
         save(tgroupEntity);

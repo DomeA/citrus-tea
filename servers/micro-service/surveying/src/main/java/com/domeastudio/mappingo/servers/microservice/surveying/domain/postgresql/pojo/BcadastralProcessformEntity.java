@@ -24,6 +24,7 @@ public class BcadastralProcessformEntity {
     //接件情况
     private String receive;
     private Set<BapprovalrecordEntity> bapprovalrecordsByBid;
+
     @Id
     @GeneratedValue(generator = "autoid")
     @GenericGenerator(name = "autoid", strategy = "uuid")
@@ -92,7 +93,7 @@ public class BcadastralProcessformEntity {
         this.receive = receive;
     }
 
-    @OneToMany(mappedBy = "bbuildingProcessformByBid",cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bbuildingProcessformByBid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<BapprovalrecordEntity> getBapprovalrecordsByBid() {
         return bapprovalrecordsByBid;
     }

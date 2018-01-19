@@ -40,7 +40,7 @@ public class DhtmlxServiceImpl implements DhtmlxService {
         return null;
     }
 
-    private List<TresourceEntity> getResourceEntitiesByUseid(String useid){
+    private List<TresourceEntity> getResourceEntitiesByUseid(String useid) {
         TuserEntity tuserEntity = tUserRepository.findOne(useid);
         if (null == tuserEntity) {
             return null;
@@ -83,14 +83,14 @@ public class DhtmlxServiceImpl implements DhtmlxService {
     }
 
     @Override
-    public Boolean createTresource(String roleName,TresourceEntity tresourceEntity,byte[] file) {
+    public Boolean createTresource(String roleName, TresourceEntity tresourceEntity, byte[] file) {
         if (null == findByCode(tresourceEntity.getCode())) {
             TresourceEntity tresource = tResourceRepository.save(tresourceEntity);
             TroleEntity troleEntity = tRoleRepository.findByName(roleName);
-            if(troleEntity==null){
+            if (troleEntity == null) {
                 return false;
             }
-            SmallFileEntity smallFileEntity=new SmallFileEntity();
+            SmallFileEntity smallFileEntity = new SmallFileEntity();
             smallFileEntity.setName("菜单注册图标");
             smallFileEntity.setContentType("image/png");
             smallFileEntity.setContent(file);
@@ -98,7 +98,7 @@ public class DhtmlxServiceImpl implements DhtmlxService {
             smallFileEntity = smallFileRepository.save(smallFileEntity);
 
             tresourceEntity.setIconId(smallFileEntity.getId());
-            RroleresourceEntity rroleresourceEntity=new RroleresourceEntity();
+            RroleresourceEntity rroleresourceEntity = new RroleresourceEntity();
             rroleresourceEntity.setTresourceByReid(tresource);
             rroleresourceEntity.setTroleByRid(troleEntity);
             rRoleResourceRepository.save(rroleresourceEntity);
@@ -139,7 +139,7 @@ public class DhtmlxServiceImpl implements DhtmlxService {
             dhtmlxTreeViewObject.setType(tresourceEntity.getType());
             dhtmlxTreeViewObjects.add(dhtmlxTreeViewObject);
         }
-        dhtmlxData.setTreeItems(TreeParser.getTreeList("0",dhtmlxTreeViewObjects));
+        dhtmlxData.setTreeItems(TreeParser.getTreeList("0", dhtmlxTreeViewObjects));
         return dhtmlxData;
     }
 
@@ -151,23 +151,23 @@ public class DhtmlxServiceImpl implements DhtmlxService {
             return null;
         }
         //1c
-        DhtmlxGridHeadObject dhtmlxGridHeadObject=new DhtmlxGridHeadObject();
-        DhtmlxGridRowObject dhtmlxGridRowObject=new DhtmlxGridRowObject();
+        DhtmlxGridHeadObject dhtmlxGridHeadObject = new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject = new DhtmlxGridRowObject();
 
         dhtmlxGridHeadObject.setValue("序号");
         dhtmlxGridHeadObject.setAlign("right");
         dhtmlxGridHeadObject.setWidth(70);
         //2c
-        DhtmlxGridHeadObject dhtmlxGridHeadObject1=new DhtmlxGridHeadObject();
-        DhtmlxGridRowObject dhtmlxGridRowObject1=new DhtmlxGridRowObject();
+        DhtmlxGridHeadObject dhtmlxGridHeadObject1 = new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject1 = new DhtmlxGridRowObject();
 
         dhtmlxGridHeadObject1.setValue("用户名");
         dhtmlxGridHeadObject1.setAlign("right");
         dhtmlxGridHeadObject1.setWidth(70);
 
         //3c
-        DhtmlxGridHeadObject dhtmlxGridHeadObject2=new DhtmlxGridHeadObject();
-        DhtmlxGridRowObject dhtmlxGridRowObject2=new DhtmlxGridRowObject();
+        DhtmlxGridHeadObject dhtmlxGridHeadObject2 = new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject2 = new DhtmlxGridRowObject();
 
         dhtmlxGridHeadObject2.setValue("菜单名称");
         dhtmlxGridHeadObject2.setAlign("right");
@@ -175,38 +175,38 @@ public class DhtmlxServiceImpl implements DhtmlxService {
 
 
         //4c
-        DhtmlxGridHeadObject dhtmlxGridHeadObject3=new DhtmlxGridHeadObject();
-        DhtmlxGridRowObject dhtmlxGridRowObject3=new DhtmlxGridRowObject();
+        DhtmlxGridHeadObject dhtmlxGridHeadObject3 = new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject3 = new DhtmlxGridRowObject();
 
         dhtmlxGridHeadObject3.setValue("菜单级数");
         dhtmlxGridHeadObject3.setAlign("left");
         dhtmlxGridHeadObject3.setWidth(70);
 
         //5c
-        DhtmlxGridHeadObject dhtmlxGridHeadObject4=new DhtmlxGridHeadObject();
-        DhtmlxGridRowObject dhtmlxGridRowObject4=new DhtmlxGridRowObject();
+        DhtmlxGridHeadObject dhtmlxGridHeadObject4 = new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject4 = new DhtmlxGridRowObject();
 
         dhtmlxGridHeadObject4.setValue("图标");
         dhtmlxGridHeadObject4.setAlign("left");
         dhtmlxGridHeadObject4.setWidth(70);
         dhtmlxGridHeadObject4.setType("img");
         //6c
-        DhtmlxGridHeadObject dhtmlxGridHeadObject5=new DhtmlxGridHeadObject();
-        DhtmlxGridRowObject dhtmlxGridRowObject5=new DhtmlxGridRowObject();
+        DhtmlxGridHeadObject dhtmlxGridHeadObject5 = new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject5 = new DhtmlxGridRowObject();
 
         dhtmlxGridHeadObject5.setValue("用户名");
         dhtmlxGridHeadObject5.setAlign("left");
         dhtmlxGridHeadObject5.setWidth(70);
         //7c
-        DhtmlxGridHeadObject dhtmlxGridHeadObject6=new DhtmlxGridHeadObject();
-        DhtmlxGridRowObject dhtmlxGridRowObject6=new DhtmlxGridRowObject();
+        DhtmlxGridHeadObject dhtmlxGridHeadObject6 = new DhtmlxGridHeadObject();
+        DhtmlxGridRowObject dhtmlxGridRowObject6 = new DhtmlxGridRowObject();
 
         dhtmlxGridHeadObject6.setValue("用户名");
         dhtmlxGridHeadObject6.setAlign("left");
         dhtmlxGridHeadObject6.setWidth(70);
 
-        DhtmlxData dhtmlxData=new DhtmlxData();
-        List<DhtmlxGridHeadObject> dhtmlxGridHeadObjects=new ArrayList<>();
+        DhtmlxData dhtmlxData = new DhtmlxData();
+        List<DhtmlxGridHeadObject> dhtmlxGridHeadObjects = new ArrayList<>();
 
         List<TresourceEntity> tresourceEntitiesRoot = getResourceEntitiesByUseid(useid);
         return null;

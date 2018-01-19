@@ -38,7 +38,8 @@ public class RusergroupEntity {
     public TgroupEntity getTgroupByGid() {
         return tgroupByGid;
     }
-//
+
+    //
     public void setTgroupByGid(TgroupEntity tgroupByGid) {
         this.tgroupByGid = tgroupByGid;
     }

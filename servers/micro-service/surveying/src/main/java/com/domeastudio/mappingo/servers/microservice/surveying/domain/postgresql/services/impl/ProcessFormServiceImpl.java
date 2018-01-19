@@ -37,32 +37,123 @@ public class ProcessFormServiceImpl implements ProcessFormService {
     }
 
     @Override
-    public Boolean createCadastralProcessForm() {
-        return null;
+    public void createCadastralProcessForm(String projectName, String projectCode, String projectAddress, String projectTime) {
+        BcadastralProcessformEntity bcadastralProcessformEntity = new BcadastralProcessformEntity();
+        bcadastralProcessformEntity.setProjectAddress(projectAddress);
+        bcadastralProcessformEntity.setProjectCode(projectCode);
+        bcadastralProcessformEntity.setProjectName(projectName);
+        bcadastralProcessformEntity.setProjectTime(projectTime);
+
+        bcadastralProcessformRepository.save(bcadastralProcessformEntity);
     }
 
     @Override
-    public Boolean createBuildingProcessForm() {
-        return null;
-    }
-
-    @Override
-    public Boolean createSurveyProcessForm() {
-        return null;
-    }
-
-    @Override
-    public void updateCadastralProcessForm() {
+    public void createBuildingProcessForm() {
 
     }
 
     @Override
-    public void updateBuildingProcessForm() {
+    public void createSurveyProcessForm() {
 
     }
 
     @Override
-    public void updateSurveyProcessForm() {
+    public void updateCadastralProcessForm1() {
+
+    }
+
+    @Override
+    public void updateCadastralProcessForm2() {
+
+    }
+
+    @Override
+    public void updateCadastralProcessForm3() {
+
+    }
+
+    @Override
+    public void updateCadastralProcessForm4() {
+
+    }
+
+    @Override
+    public void updateCadastralProcessForm5() {
+
+    }
+
+    @Override
+    public void updateCadastralProcessForm6() {
+
+    }
+
+    @Override
+    public void updateCadastralProcessForm7() {
+
+    }
+
+    @Override
+    public void updateBuildingProcessForm1() {
+
+    }
+
+    @Override
+    public void updateBuildingProcessForm2() {
+
+    }
+
+    @Override
+    public void updateBuildingProcessForm3() {
+
+    }
+
+    @Override
+    public void updateBuildingProcessForm4() {
+
+    }
+
+    @Override
+    public void updateBuildingProcessForm5() {
+
+    }
+
+    @Override
+    public void updateBuildingProcessForm6() {
+
+    }
+
+    @Override
+    public void updateBuildingProcessForm7() {
+
+    }
+
+    @Override
+    public void updateSurveyProcessForm1() {
+
+    }
+
+    @Override
+    public void updateSurveyProcessForm2() {
+
+    }
+
+    @Override
+    public void updateSurveyProcessForm3() {
+
+    }
+
+    @Override
+    public void updateSurveyProcessForm4() {
+
+    }
+
+    @Override
+    public void updateSurveyProcessForm5() {
+
+    }
+
+    @Override
+    public void updateSurveyProcessForm6() {
 
     }
 

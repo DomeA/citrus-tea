@@ -32,6 +32,7 @@ public interface TUserService {
     void save(TroleEntity troleEntity);
 
     void save(TresourceEntity tresourceEntity);
+
     void save(TgroupEntity tgroupEntity);
 
     TuserEntity findByNameOrEmailOrPhone(String param);
@@ -40,11 +41,11 @@ public interface TUserService {
 
     Boolean createUser(String name, String pwd, String email, String phone, Integer term);
 
-    Boolean createRole(String name, String text,String describe);
+    Boolean createRole(String name, String text, String describe);
 
     Boolean createResource(String name);
 
-    Boolean createGroup(String name,String id);
+    Boolean createGroup(String name, String id);
 
     Boolean allocationUserGroup(TuserEntity tuserEntity, TgroupEntity tgroupEntity);
 

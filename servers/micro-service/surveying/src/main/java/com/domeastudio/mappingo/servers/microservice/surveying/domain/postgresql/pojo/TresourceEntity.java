@@ -65,7 +65,7 @@ public class TresourceEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "tresourceByReid" ,cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tresourceByReid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RroleresourceEntity> getRroleresourcesByReid() {
         return rroleresourcesByReid;
     }
@@ -74,7 +74,7 @@ public class TresourceEntity {
         this.rroleresourcesByReid = rroleresourcesByReid;
     }
 
-    @OneToMany(mappedBy = "tresourceByReid" ,cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tresourceByReid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RuserresourceEntity> getRuserresourcesByReid() {
         return ruserresourcesByReid;
     }
@@ -82,11 +82,12 @@ public class TresourceEntity {
     public void setRuserresourcesByReid(Set<RuserresourceEntity> ruserresourcesByReid) {
         this.ruserresourcesByReid = ruserresourcesByReid;
     }
+
     @Basic
     @Column(name = "code")
     public String getCode() {
-        if(code.length()>49){
-            return code.substring(0,48);
+        if (code.length() > 49) {
+            return code.substring(0, 48);
         }
         return code;
     }
@@ -94,6 +95,7 @@ public class TresourceEntity {
     public void setCode(String code) {
         this.code = code;
     }
+
     @Basic
     @Column(name = "type")
     public String getType() {
@@ -103,6 +105,7 @@ public class TresourceEntity {
     public void setType(String type) {
         this.type = type;
     }
+
     @Basic
     @Column(name = "selected")
     public Boolean getSelected() {
@@ -112,6 +115,7 @@ public class TresourceEntity {
     public void setSelected(Boolean selected) {
         this.selected = selected;
     }
+
     @Basic
     @Column(name = "iconId")
     public String getIconId() {
@@ -121,6 +125,7 @@ public class TresourceEntity {
     public void setIconId(String iconId) {
         this.iconId = iconId;
     }
+
     @Basic
     @Column(name = "parenId")
     public String getParenId() {

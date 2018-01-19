@@ -35,7 +35,6 @@ public class BbuildingProcessformEntity {
     //档案意见
 
 
-
     private Set<BapprovalrecordEntity> bapprovalrecordsByBid;
 
     @Id
@@ -66,7 +65,7 @@ public class BbuildingProcessformEntity {
         this.projectTime = projectTime;
     }
 
-    @OneToMany(mappedBy = "bbuildingProcessformByBid",cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bbuildingProcessformByBid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<BapprovalrecordEntity> getBapprovalrecordsByBid() {
         return bapprovalrecordsByBid;
     }
@@ -87,8 +86,10 @@ public class BbuildingProcessformEntity {
             return false;
         if (projectTime != null ? !projectTime.equals(that.projectTime) : that.projectTime != null) return false;
         if (projectCode != null ? !projectCode.equals(that.projectCode) : that.projectCode != null) return false;
-        if (projectAddress != null ? !projectAddress.equals(that.projectAddress) : that.projectAddress != null) return false;
-        if (entrustmentUnit != null ? !entrustmentUnit.equals(that.entrustmentUnit) : that.entrustmentUnit != null) return false;
+        if (projectAddress != null ? !projectAddress.equals(that.projectAddress) : that.projectAddress != null)
+            return false;
+        if (entrustmentUnit != null ? !entrustmentUnit.equals(that.entrustmentUnit) : that.entrustmentUnit != null)
+            return false;
         if (surveyType != null ? !surveyType.equals(that.surveyType) : that.surveyType != null) return false;
         if (receive != null ? !receive.equals(that.receive) : that.receive != null) return false;
 

@@ -67,7 +67,7 @@ public class TgroupEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "tgroupByGid",cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tgroupByGid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RusergroupEntity> getRusergroupsByGid() {
         return rusergroupsByGid;
     }

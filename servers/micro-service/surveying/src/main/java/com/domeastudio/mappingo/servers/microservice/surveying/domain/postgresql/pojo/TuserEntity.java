@@ -102,7 +102,7 @@ public class TuserEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "tuserByUid",cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tuserByUid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RuserresourceEntity> getRuserresourcesByUid() {
         return ruserresourcesByUid;
     }
@@ -111,7 +111,7 @@ public class TuserEntity {
         this.ruserresourcesByUid = ruserresourcesByUid;
     }
 
-    @OneToMany(mappedBy = "tuserByUid" ,cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tuserByUid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RuserroleEntity> getRuserrolesByUid() {
         return ruserrolesByUid;
     }
@@ -120,7 +120,7 @@ public class TuserEntity {
         this.ruserrolesByUid = ruserrolesByUid;
     }
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "uiid")
     public TuserinfoEntity getTuserinfoByUiid() {
         return tuserinfoByUiid;
@@ -180,7 +180,7 @@ public class TuserEntity {
         this.registTime = registTime;
     }
 
-    @OneToMany(mappedBy = "tuserByUid",cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tuserByUid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<RusergroupEntity> getRusergroupsByUid() {
         return rusergroupsByUid;
     }
@@ -189,7 +189,7 @@ public class TuserEntity {
         this.rusergroupsByUid = rusergroupsByUid;
     }
 
-    @OneToMany(mappedBy = "tuserByUid" ,cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tuserByUid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     public Set<BapprovalrecordEntity> getBapprovalrecordsByUid() {
         return bapprovalrecordsByUid;
     }
