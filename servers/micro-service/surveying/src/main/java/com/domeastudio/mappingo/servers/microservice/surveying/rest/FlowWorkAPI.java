@@ -2,7 +2,7 @@ package com.domeastudio.mappingo.servers.microservice.surveying.rest;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.BpmnFileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.services.FileService;
-import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.WorkFlow;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.WorkFlowService;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.ProcessDef;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ClientMessage;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ResultStatusCode;
@@ -27,7 +27,7 @@ import java.util.zip.ZipInputStream;
 public class FlowWorkAPI {
 
     @Autowired
-    private WorkFlow workFlow;
+    private WorkFlowService workFlow;
     @Autowired
     private FileService fileService;
 

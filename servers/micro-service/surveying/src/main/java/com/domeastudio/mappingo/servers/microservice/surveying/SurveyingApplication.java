@@ -8,6 +8,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.TUserService;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.WorkFlowService;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.FileUtils;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.security.MD5SHAHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +110,7 @@ public class SurveyingApplication {
             }else {
                 System.out.println("菜单初始化：[菜单注册] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 已经存在");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
