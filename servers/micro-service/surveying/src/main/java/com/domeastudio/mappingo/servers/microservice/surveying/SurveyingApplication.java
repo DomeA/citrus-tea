@@ -9,6 +9,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.TUserService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.WorkFlowService;
+import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.ProcessDefType;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.FileUtils;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.security.MD5SHAHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class SurveyingApplication {
 
     @Autowired
     SmallFileRepository smallFileRepository;
+
+    @Autowired
+    WorkFlowService workFlowService;
 
     @Autowired
     public void init() {
