@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Set;
 
+//房屋测量表单
 @Entity
 @Table(name = "bbuildingprocessform", schema = "public", catalog = "postgres")
 public class BbuildingProcessformEntity {
