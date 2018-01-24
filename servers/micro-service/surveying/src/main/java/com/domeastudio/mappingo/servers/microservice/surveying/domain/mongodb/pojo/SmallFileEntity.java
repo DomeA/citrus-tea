@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
 import java.util.Date;
 
-@Document(collection = "sys_workflow_info")
+@Document(collection = "archives_info")
 public class SmallFileEntity {
     @Id  // 主键
     private String id;
