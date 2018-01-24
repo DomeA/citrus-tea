@@ -125,8 +125,8 @@ public class FlowWorkAPI {
     @RequestMapping(value = "/task/{param}", method = RequestMethod.GET)
     public ClientMessage getTask(@PathVariable String param) {
         ClientMessage clientMessage;
-        if (workFlow.getTask(param) != null) {
-            Task task = workFlow.getTask(param);
+        if (workFlow.currentTaskByKey(param) != null) {
+            Task task = workFlow.currentTaskByKey(param);
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), task);
         } else {

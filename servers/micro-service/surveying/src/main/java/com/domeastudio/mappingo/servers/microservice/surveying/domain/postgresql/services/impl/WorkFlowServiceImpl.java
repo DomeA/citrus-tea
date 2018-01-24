@@ -141,15 +141,42 @@ public class WorkFlowServiceImpl implements WorkFlowService {
     }
 
     @Override
-    public Task getTask(String id) {
+    public ProcessDefinition findProcessDefinitionLastVersionByKey(String key) {
+       return repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).latestVersion().singleResult();
+    }
+
+    @Override
+    public ProcessDefinition findActivitProcessDefinitionByKey(String key) {
+        return repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).active().singleResult();
+    }
+
+    @Override
+    public Task newTask(String tid) {
         // 任务ID
-        Task task = taskService.newTask(id);
+        Task task = taskService.newTask(tid);
         System.out.println(task.getId() + "    " +
                 task.getAssignee() + "    " +
                 task.getName() + "    " +
                 task.getProcessInstanceId());
         System.out.println("################################");
         return task;
+    }
+
+    @Override
+    public Task currentTaskById(String pid) {
+        Task task= taskService.createTaskQuery().processInstanceId(pid).singleResult();
+        return task;
+    }
+
+    @Override
+    public Task currentTaskByKey(String key) {
+        Task task= taskService.createTaskQuery().processInstanceBusinessKey(key).singleResult();
+        return task;
+    }
+
+    @Override
+    public void complete(String tid) {
+        taskService.complete(tid);
     }
 
     @Override

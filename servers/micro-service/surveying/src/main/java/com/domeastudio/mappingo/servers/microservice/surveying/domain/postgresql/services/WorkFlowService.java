@@ -21,8 +21,17 @@ public interface WorkFlowService {
 
     List<ProcessDefinition> findAllProcessDefinition();
 
-    Task getTask(String id);
+    ProcessDefinition findProcessDefinitionLastVersionByKey(String key);
 
+    ProcessDefinition findActivitProcessDefinitionByKey(String key);
+
+    Task newTask(String tid);
+
+    Task currentTaskById(String pid);
+
+    Task currentTaskByKey(String key);
+
+    void complete(String tid);
     /**
      * 删除流程定义(删除key相同的所有不同版本的流程定义)
      */

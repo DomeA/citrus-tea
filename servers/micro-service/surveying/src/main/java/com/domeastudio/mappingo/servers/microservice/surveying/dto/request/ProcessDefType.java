@@ -5,5 +5,6 @@ public enum ProcessDefType {
     ZIP,
     PATH,
     BYTE,
-    BPMNMODEL
+    BPMNMODEL,
+    INPUTSTREAM
 }
