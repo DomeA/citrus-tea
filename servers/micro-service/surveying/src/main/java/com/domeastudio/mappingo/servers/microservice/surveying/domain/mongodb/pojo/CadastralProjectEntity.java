@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 
+//地籍测绘
 @Document(collection = "archives_info")
 public class CadastralProjectEntity {
     @Id
