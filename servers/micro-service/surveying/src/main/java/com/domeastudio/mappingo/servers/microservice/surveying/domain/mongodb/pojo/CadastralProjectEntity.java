@@ -28,7 +28,7 @@ public class CadastralProjectEntity {
 //    代理人证件号	ZJH1	Char	50
 //    代理人电话	DH1	Char	50
 //    备注	BZ	Char	255
-            @Id
+    @Id
     private String id;
     private List<FileEntity> fileEntity;
     private List<FileEntity> receiptFile;

@@ -10,7 +10,7 @@ public class FileEntity {
     @Id
     private String id;
     private String name; // 文件名称
-    private String contentType; // 文件类型
+    private BusinessDataType contentType; // 文件类型
     private Long size;
     private Date uploadDate;
     private String md5;
@@ -32,11 +32,11 @@ public class FileEntity {
         this.name = name;
     }
 
-    public String getContentType() {
+    public BusinessDataType getContentType() {
         return contentType;
     }
 
-    public void setContentType(String contentType) {
+    public void setContentType(BusinessDataType contentType) {
         this.contentType = contentType;
     }
 

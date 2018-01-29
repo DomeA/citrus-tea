@@ -1,7 +1,10 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo;
 
+import java.util.List;
+import javax.persistence.Id;
+
 public class BuildingLayerEntity {
-//    业务号	BDCDYH	Char	255
+//    业务号	YWH	Char	255
 //    幢号	ZH	Char	255
 //    层号	CH	Char	20
 //    坐落	ZL	Char	100
@@ -22,4 +25,27 @@ public class BuildingLayerEntity {
 //    分摊系数K9	FTXSK9	Float
 //    分摊系数K10	FTXSK10	Float
 //    分层图	FCT	Varbin
+    @Id
+    private String id;
+    private String YWH;
+    private String ZH;
+    private String CH;
+    private String ZL;
+    private String TFH1;
+    private String BDCDYH;
+    private String CJZMJ;
+    private String CTNJZMJ;
+    private String CFTMJ;
+    private String FTXSK1;
+    private String FTXSK2;
+    private String FTXSK3;
+    private String FTXSK4;
+    private String FTXSK5;
+    private String FTXSK6;
+    private String FTXSK7;
+    private String FTXSK8;
+    private String FTXSK9;
+    private String FTXSK10;
+    private List<FileEntity> FCTs;
+    private List<BuildingHouseholdEntity> buildingHouseholdEntities;
 }
