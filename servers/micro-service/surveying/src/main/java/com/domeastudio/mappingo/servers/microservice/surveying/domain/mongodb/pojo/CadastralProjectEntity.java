@@ -47,4 +47,5 @@ public class CadastralProjectEntity {
     private String ZJH1;
     private String DH1;
     private String BZ;
+
 }
