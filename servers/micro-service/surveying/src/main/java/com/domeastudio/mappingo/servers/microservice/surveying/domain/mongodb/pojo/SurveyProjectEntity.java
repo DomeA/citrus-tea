@@ -15,6 +15,19 @@ public class SurveyProjectEntity {
 //    批准面积亩	PZMJM	Float
 //    省批文号	SPWH	Char	255
 //    省批时间	SPSJ	DATE
-//    市批文号	SPWH	Char	255
-//    市批时间	SPSJ	DATE
+//    市批文号	CPWH	Char	255
+//    市批时间	CPSJ	DATE
+
+    private String BSM;
+    private String PCBH;
+    private String LSPCBH;
+    private String XMMC;
+    private String QS;
+    private String DKSL;
+    private String PZMJGQ;
+    private String PZMJM;
+    private String SPWH;
+    private String SPSJ;
+    private String CPWH;
+    private String CPSJ;
 }

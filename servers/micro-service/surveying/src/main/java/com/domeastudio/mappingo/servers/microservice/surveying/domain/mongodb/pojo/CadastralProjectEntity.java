@@ -3,7 +3,6 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.p
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
-import java.util.Date;
 import java.util.List;
 
 //地籍测绘
@@ -17,7 +16,7 @@ public class CadastralProjectEntity {
 //    代征道路面积（公顷）	DLMJ	Float
 //    代征道路面积(亩）	DLMJ1	Float
 //    代征绿地面积（公顷）	LDMJ	Float
-//    代征道路面积(亩）	LDMJ1	Float
+//    代征绿地面积(亩）	LDMJ1	Float
 //    权利人名称	QLRMC	char	255
 //    法人代表或户主名称	HZMC
 //    户主证件种类	ZJZL	Char	2
@@ -30,11 +29,22 @@ public class CadastralProjectEntity {
 //    备注	BZ	Char	255
     @Id
     private String id;
-    private List<FileEntity> fileEntity;
-    private List<FileEntity> receiptFile;
-    private List<FileEntity> otherFile;
-    private String name;
-    private String props;
-    private Date createTime;
-    private Date uploadTime;
+    private List<FileEntity> fileEntities;
+    private String ZMJ;
+    private String ZMJ1;
+    private String SYMJ;
+    private String DLMJ;
+    private String DLMJ1;
+    private String LDMJ;
+    private String LDMJ1;
+    private String QLRMC;
+    private String HZMC;
+    private String ZJZL;
+    private String ZJH;
+    private String DH;
+    private String DLRMC;
+    private String ZJZL1;
+    private String ZJH1;
+    private String DH1;
+    private String BZ;
 }
