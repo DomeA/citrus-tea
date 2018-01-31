@@ -13,6 +13,11 @@ public class TuserEntity {
     private String pwd;
     private String email;
     private String phone;
+    private String mac;
+    private Boolean desktop;
+    private Boolean web;
+    private Boolean app;
+    private String equipmentid;
     private String salt;
     private String token;
     private Integer authorTime;
@@ -83,6 +88,11 @@ public class TuserEntity {
         if (salt != null ? !salt.equals(that.salt) : that.salt != null) return false;
         if (authorTime != null ? !authorTime.equals(that.authorTime) : that.authorTime != null) return false;
         if (registTime != null ? !registTime.equals(that.registTime) : that.registTime != null) return false;
+        if (web != null ? !web.equals(that.web) : that.web != null) return false;
+        if (app != null ? !app.equals(that.app) : that.app != null) return false;
+        if (mac != null ? !mac.equals(that.mac) : that.mac != null) return false;
+        if (desktop != null ? !desktop.equals(that.desktop) : that.desktop != null) return false;
+        if (equipmentid != null ? !equipmentid.equals(that.equipmentid) : that.equipmentid != null) return false;
 
         return true;
     }
@@ -99,6 +109,12 @@ public class TuserEntity {
         result = 31 * result + (salt != null ? salt.hashCode() : 0);
         result = 31 * result + (authorTime != null ? authorTime.hashCode() : 0);
         result = 31 * result + (registTime != null ? registTime.hashCode() : 0);
+        result = 31 * result + (web != null ? web.hashCode() : 0);
+        result = 31 * result + (app != null ? app.hashCode() : 0);
+        result = 31 * result + (desktop != null ? desktop.hashCode() : 0);
+        result = 31 * result + (mac != null ? mac.hashCode() : 0);
+        result = 31 * result + (equipmentid != null ? equipmentid.hashCode() : 0);
+
         return result;
     }
 
@@ -196,5 +212,50 @@ public class TuserEntity {
 
     public void setBapprovalrecordsByUid(Set<BapprovalrecordEntity> bapprovalrecordsByUid) {
         this.bapprovalrecordsByUid = bapprovalrecordsByUid;
+    }
+    @Basic
+    @Column(name = "mac")
+    public String getMac() {
+        return mac;
+    }
+
+    public void setMac(String mac) {
+        this.mac = mac;
+    }
+    @Basic
+    @Column(name = "desktop")
+    public Boolean getDesktop() {
+        return desktop;
+    }
+
+    public void setDesktop(Boolean desktop) {
+        this.desktop = desktop;
+    }
+    @Basic
+    @Column(name = "web")
+    public Boolean getWeb() {
+        return web;
+    }
+
+    public void setWeb(Boolean web) {
+        this.web = web;
+    }
+    @Basic
+    @Column(name = "app")
+    public Boolean getApp() {
+        return app;
+    }
+
+    public void setApp(Boolean app) {
+        this.app = app;
+    }
+    @Basic
+    @Column(name = "equipmentid")
+    public String getEquipmentid() {
+        return equipmentid;
+    }
+
+    public void setEquipmentid(String equipmentid) {
+        this.equipmentid = equipmentid;
     }
 }
