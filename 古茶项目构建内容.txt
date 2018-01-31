@@ -26,10 +26,12 @@
 26、缺失flowable工作流程设计器
 27、缺失大文件断点续传
 28、集成c3p0框架
+29、集成用户权限与flowable用户、组权限数据推送
 
 测试
 1、jwt令牌测试
 2、spring boot jpa 测试
 3、mongodb小文件上传测试
 4、mongodb大文件上传测试
-5、缺失flowable工作服务测试
+5、flowable工作服务测试
+6、集成用户权限与flowable用户、组权限数据推送
