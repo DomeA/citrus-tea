@@ -9,6 +9,7 @@ import java.util.Collection;
 @Table(name = "tuserinfo", schema = "public", catalog = "postgres")
 public class TuserinfoEntity {
     private String uiid;
+    private String realName;
     private String etc;
     private TuserEntity tusersByUid;
 
@@ -42,6 +43,7 @@ public class TuserinfoEntity {
         TuserinfoEntity that = (TuserinfoEntity) o;
 
         if (uiid != null ? !uiid.equals(that.uiid) : that.uiid != null) return false;
+        if (realName != null ? !realName.equals(that.realName) : that.realName != null) return false;
         if (etc != null ? !etc.equals(that.etc) : that.etc != null) return false;
 
         return true;
@@ -50,6 +52,7 @@ public class TuserinfoEntity {
     @Override
     public int hashCode() {
         int result = uiid != null ? uiid.hashCode() : 0;
+        result = 31 * result + (realName != null ? realName.hashCode() : 0);
         result = 31 * result + (etc != null ? etc.hashCode() : 0);
         return result;
     }
@@ -61,5 +64,15 @@ public class TuserinfoEntity {
 
     public void setTusersByUiid(TuserEntity tusersByUid) {
         this.tusersByUid = tusersByUid;
+    }
+
+    @Basic
+    @Column(name = "realname")
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }
