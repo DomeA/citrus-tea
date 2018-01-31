@@ -212,7 +212,7 @@ public class AccountServiceImpl implements AccountService {
                 TroleEntity troleEntity = ruserroleEntity.getTroleByRid();
                 identityService.deleteMembership(userId, troleEntity.getRid());
             }
-            // 同步删除Activiti User
+            // 同步删除Flowable User
             identityService.deleteUser(userId);
         }
         // 删除本系统用户
