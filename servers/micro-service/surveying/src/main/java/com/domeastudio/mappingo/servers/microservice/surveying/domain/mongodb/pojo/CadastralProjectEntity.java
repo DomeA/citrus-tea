@@ -30,13 +30,14 @@ public class CadastralProjectEntity {
     @Id
     private String id;
     private List<FileEntity> fileEntities;
-    private String ZMJ;
-    private String ZMJ1;
-    private String SYMJ;
-    private String DLMJ;
-    private String DLMJ1;
-    private String LDMJ;
-    private String LDMJ1;
+    private Float ZMJ;
+    private Float ZMJ1;
+    private Float SYMJ;
+    private Float SYMJ1;
+    private Float DLMJ;
+    private Float DLMJ1;
+    private Float LDMJ;
+    private Float LDMJ1;
     private String QLRMC;
     private String HZMC;
     private String ZJZL;

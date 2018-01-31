@@ -2,6 +2,9 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.p
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Id;
+import java.util.Date;
+
 //堪界项目
 @Document(collection = "archives_info")
 public class SurveyProjectEntity {
@@ -18,16 +21,18 @@ public class SurveyProjectEntity {
 //    市批文号	CPWH	Char	255
 //    市批时间	CPSJ	DATE
 
+    @Id
+    private String id;
     private String BSM;
     private String PCBH;
     private String LSPCBH;
     private String XMMC;
     private String QS;
     private String DKSL;
-    private String PZMJGQ;
-    private String PZMJM;
+    private Float PZMJGQ;
+    private Float PZMJM;
     private String SPWH;
-    private String SPSJ;
+    private Date SPSJ;
     private String CPWH;
-    private String CPSJ;
+    private Date CPSJ;
 }

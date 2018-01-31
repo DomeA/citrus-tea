@@ -5,8 +5,12 @@ public enum BusinessDataType {
     SFZ(2, "身份证"),
     YYZZ(3, "营业执照"),
     JGT(4, "竣工图"),
-    WTH(4, "委托函"),
-    SLQRS(4, "四临确认书");
+    WTH(5, "委托函"),
+    SLQRS(6, "四临确认书"),
+    ZJLX1(7,"身份证"),
+    ZJLX2(8,"驾驶证"),
+    ZJLX3(9,"军官证"),
+    ZJLX4(10,"身份证");
 
     private int code;
     private String msg;

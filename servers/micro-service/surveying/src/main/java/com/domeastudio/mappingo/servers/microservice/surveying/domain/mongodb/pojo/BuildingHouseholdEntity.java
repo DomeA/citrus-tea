@@ -30,10 +30,10 @@ public class BuildingHouseholdEntity {
     private String FWYT1;
     private String FWYT2;
     private String FWYT3;
-    private String SCJZMJ;
-    private String TNJZMJ;
-    private String FTJZMJ;
-    private String QTJZMJ;
-    private String FTXS;
+    private Float SCJZMJ;
+    private Float TNJZMJ;
+    private Float FTJZMJ;
+    private Float QTJZMJ;
+    private Float FTXS;
     private List<FileEntity> FCFHTs;
 }
