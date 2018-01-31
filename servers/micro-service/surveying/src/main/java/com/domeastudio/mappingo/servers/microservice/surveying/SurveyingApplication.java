@@ -6,6 +6,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.AccountService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.TUserService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.WorkFlowService;
@@ -47,6 +48,9 @@ public class SurveyingApplication {
     WorkFlowService workFlowService;
 
     @Autowired
+    AccountService accountService;
+
+    @Autowired
     public void init() {
         try {
             Boolean uf = tUserService.createUser("system", "domea", "domeastudio@hotmail.com", "18182669306", true, false, false, "", "", 999999);
@@ -59,25 +63,26 @@ public class SurveyingApplication {
             TroleEntity troleEntity = tUserService.findRoleByName("ROLE_SYSADMIN");
             Boolean urf = tUserService.allocationUserRole(tuserEntity, troleEntity);
             Boolean uug = tUserService.allocationUserGroup(tuserEntity, tgroupEntity);
+            accountService.synAllUserAndRoleToFlowable();
 
 
-            File iconFile = ResourceUtils.getFile("classpath:img/menu32.png");
-            SmallFileEntity smallFileEntity = new SmallFileEntity();
-            smallFileEntity.setName("菜单注册图标");
-            smallFileEntity.setContentType("image/png");
-            smallFileEntity.setContent(FileUtils.File2Byte(iconFile));
-            smallFileEntity.setMd5(MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5(FileUtils.File2Byte(iconFile))));
-            smallFileEntity = smallFileRepository.save(smallFileEntity);
-
-            TresourceEntity tresourceEntity = new TresourceEntity();
-            tresourceEntity.setCode("0000-0000-0000-0000-0000-0000-0000-0000-0000-0000");
-            tresourceEntity.setIconId(smallFileEntity.getId());
-            tresourceEntity.setName("菜单注册");
-            tresourceEntity.setParenId("0");
-            tresourceEntity.setSelected(true);
-            Boolean trf = dhtmlxService.createTresource(tresourceEntity);
-            TresourceEntity tresource = dhtmlxService.findByCode(tresourceEntity.getCode());
-            Boolean rrf = tUserService.allocationRoleResource(troleEntity, tresource);
+//            File iconFile = ResourceUtils.getFile("classpath:img/menu32.png");
+//            SmallFileEntity smallFileEntity = new SmallFileEntity();
+//            smallFileEntity.setName("菜单注册图标");
+//            smallFileEntity.setContentType("image/png");
+//            smallFileEntity.setContent(FileUtils.File2Byte(iconFile));
+//            smallFileEntity.setMd5(MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5(FileUtils.File2Byte(iconFile))));
+//            smallFileEntity = smallFileRepository.save(smallFileEntity);
+//
+//            TresourceEntity tresourceEntity = new TresourceEntity();
+//            tresourceEntity.setCode("0000-0000-0000-0000-0000-0000-0000-0000-0000-0000");
+//            tresourceEntity.setIconId(smallFileEntity.getId());
+//            tresourceEntity.setName("菜单注册");
+//            tresourceEntity.setParenId("0");
+//            tresourceEntity.setSelected(true);
+//            Boolean trf = dhtmlxService.createTresource(tresourceEntity);
+//            TresourceEntity tresource = dhtmlxService.findByCode(tresourceEntity.getCode());
+//            Boolean rrf = tUserService.allocationRoleResource(troleEntity, tresource);
 
             if (uf) {
                 System.out.println("管理员账户：system 创建成功");
@@ -106,16 +111,16 @@ public class SurveyingApplication {
             } else {
                 System.out.println("管理员账户：[system] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 已经存在");
             }
-            if (trf) {
-                System.out.println("菜单初始化：[菜单注册]创建成功");
-            } else {
-                System.out.println("菜单初始化：[菜单注册]已经存在");
-            }
-            if (rrf) {
-                System.out.println("菜单初始化：[菜单注册] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 成功");
-            } else {
-                System.out.println("菜单初始化：[菜单注册] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 已经存在");
-            }
+//            if (trf) {
+//                System.out.println("菜单初始化：[菜单注册]创建成功");
+//            } else {
+//                System.out.println("菜单初始化：[菜单注册]已经存在");
+//            }
+//            if (rrf) {
+//                System.out.println("菜单初始化：[菜单注册] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 成功");
+//            } else {
+//                System.out.println("菜单初始化：[菜单注册] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 已经存在");
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();

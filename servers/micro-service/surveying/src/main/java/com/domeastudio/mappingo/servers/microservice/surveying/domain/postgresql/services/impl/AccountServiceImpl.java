@@ -10,6 +10,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import org.apache.commons.lang3.StringUtils;
 import org.flowable.engine.IdentityService;
 import org.flowable.idm.api.Group;
+import org.flowable.idm.api.GroupQuery;
 import org.flowable.idm.api.User;
 import org.flowable.idm.api.UserQuery;
 import org.hibernate.service.spi.ServiceException;
@@ -34,8 +35,40 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public void save(TuserEntity user, String gid, List<String> rids, Boolean synToActiviti) throws ServiceException, Exception {
+    public void save(TuserEntity user, TroleEntity role, Boolean synToFlowable) throws ServiceException, Exception {
+        TuserEntity tuserEntity = tUserRepository.save(user);
+        String userId = tuserEntity.getUid();
 
+        TroleEntity troleEntity=tRoleRepository.save(role);
+        String roleId=troleEntity.getRid();
+
+        if(synToFlowable){
+            saveFlowableUser(tuserEntity);
+            synRoleToFlowable(troleEntity);
+            addMembershipToIdentify(userId,roleId);
+        }
+    }
+    /**
+     * 同步角色数据到{@link Group}
+     */
+    private void synRoleToFlowable(TroleEntity troleEntity) {
+        TroleEntity allRole = tRoleRepository.findOne(troleEntity.getRid());
+        GroupQuery groupQuery = identityService.createGroupQuery();
+        List<Group> groupList=groupQuery.groupId(troleEntity.getRid()).list();
+        if(groupList.size()>=1){
+            String errorMsg = "发现重复组：id=" + troleEntity.getRid();
+            //logger.error(errorMsg);
+        }else{
+            newFlowableGroup(troleEntity);
+        }
+    }
+
+    private void newFlowableGroup(TroleEntity troleEntity) {
+        String groupId = troleEntity.getRid();
+        Group group = identityService.newGroup(groupId);
+        group.setName(troleEntity.getName());
+        group.setType(troleEntity.getType());
+        identityService.saveGroup(group);
     }
 
     /**
@@ -64,7 +97,7 @@ public class AccountServiceImpl implements AccountService {
                 //logger.error(errorMsg);
                 throw new RuntimeException(errorMsg);
             } else {
-                newActivitiUser(tuserEntity, rids);
+                newFlowableUser(tuserEntity, rids);
             }
         }
     }
@@ -75,7 +108,7 @@ public class AccountServiceImpl implements AccountService {
      * @param user 用户对象{@link TuserEntity}
      * @param rids 用户拥有的角色ID集合
      */
-    private void newActivitiUser(TuserEntity user, List<String> rids) {
+    private void newFlowableUser(TuserEntity user, List<String> rids) {
         String userId = user.getUid();
         // 添加用户
         saveFlowableUser(user);
@@ -104,10 +137,23 @@ public class AccountServiceImpl implements AccountService {
      */
     private void addMembershipToIdentify(List<String> rids, String userId) {
         for (String rid : rids) {
-            TroleEntity troleEntity = tRoleRepository.findOne(rid);
+            //TroleEntity troleEntity = tRoleRepository.findOne(rid);
             //logger.debug("add role to flowable: {}", role);
-            identityService.createMembership(userId, troleEntity.getRid());
+            identityService.createMembership(userId, rid);
         }
+    }
+
+    /**
+     * 添加Flowable Identify的用户于组关系
+     *
+     * @param rid   角色ID集合
+     * @param userId 用户ID
+     */
+    private void addMembershipToIdentify(String rid, String userId) {
+        //TroleEntity troleEntity = tRoleRepository.findOne(rid);
+        //logger.debug("add role to flowable: {}", role);
+        identityService.createMembership(userId, rid);
+
     }
 
     /**
@@ -210,11 +256,7 @@ public class AccountServiceImpl implements AccountService {
     private void synRoleToFlowable() {
         List<TroleEntity> allRole = tRoleRepository.findAll();
         for (TroleEntity role : allRole) {
-            String groupId = role.getRid();
-            Group group = identityService.newGroup(groupId);
-            group.setName(role.getName());
-            group.setType(role.getType());
-            identityService.saveGroup(group);
+            newFlowableGroup(role);
         }
     }
 

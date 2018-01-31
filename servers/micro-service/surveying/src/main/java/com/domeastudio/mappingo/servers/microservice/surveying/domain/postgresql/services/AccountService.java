@@ -1,5 +1,6 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services;
 
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
 import org.hibernate.service.spi.ServiceException;
 
@@ -14,13 +15,12 @@ public interface AccountService {
      * </ul>
      *
      * @param user          用户对象
-     * @param gid           部门ID
-     * @param rids          角色ID集合
+     * @param role           部门ID
      * @param synToFlowable 是否同步到Activiti数据库，通过配置文件方式设置，使用属性：account.user.add.syntoactiviti
      * @throws ServiceException 关联用户和部门的时候从数据库查询不到哦啊部门对象
      * @throws Exception        其他未知异常
      */
-    void save(TuserEntity user, String gid, List<String> rids, Boolean synToFlowable)
+    void save(TuserEntity user, TroleEntity role, Boolean synToFlowable)
             throws ServiceException, Exception;
 
     void saveUser(TuserEntity user, List<String> rids, Boolean synToActiviti);
