@@ -2,15 +2,17 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.p
 
 public enum BusinessDataType {
     ZPT(1, "总评图"),
-    SFZ(2, "身份证"),
-    YYZZ(3, "营业执照"),
-    JGT(4, "竣工图"),
-    WTH(5, "委托函"),
-    SLQRS(6, "四临确认书"),
-    ZJLX1(7, "身份证"),
-    ZJLX2(8, "驾驶证"),
-    ZJLX3(9, "军官证"),
-    ZJLX4(10, "身份证");
+    JGT(2, "竣工图"),
+    WTH(3, "委托函"),
+    SLQRS(4, "四临确认书"),
+    SFZ(5, "身份证"),
+    GATSFZ(6, "港澳台身份证"),
+    HZ(7, "护照"),
+    HKB(8, "户口簿"),
+    JGZ(9, "军官证(士兵证)"),
+    ZZJGDM(10, "组织机构代码"),
+    YYZZ(11, "营业执照"),
+    QT(99, "其他");
 
     private int code;
     private String msg;
