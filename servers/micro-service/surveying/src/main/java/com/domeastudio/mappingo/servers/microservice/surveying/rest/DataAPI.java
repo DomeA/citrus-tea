@@ -28,8 +28,8 @@ public class DataAPI {
     }
 
     @RequestMapping(value = "/role", method = RequestMethod.POST)
-    public void addRole(@RequestParam("name") String name,@RequestParam("text")String text, @RequestParam("describe") String describe) {
-        Boolean f = tUserService.createRole(name,text, describe);
+    public void addRole(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
+        Boolean f = tUserService.createRole(name, text, describe);
         System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));
     }
 

@@ -27,7 +27,7 @@ public class JWTAuthenticationFilter implements Filter {
 
 
     @Override
-    public void init(FilterConfig filterConfig){
+    public void init(FilterConfig filterConfig) {
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
                 filterConfig.getServletContext());
     }
@@ -36,10 +36,10 @@ public class JWTAuthenticationFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         ClientMessage clientMessage;
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
-        HttpServletResponse httpResponse =(HttpServletResponse) servletResponse;
+        HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
         //跨域 预请求 Options 必须先放过 经跟后面是正式请求
-        if(httpRequest.getMethod().equals(RequestMethod.OPTIONS.name())) {
+        if (httpRequest.getMethod().equals(RequestMethod.OPTIONS.name())) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }

@@ -39,13 +39,15 @@ public interface TUserService {
 
     List<String> findRoleByUser(TuserEntity entity);
 
-    Boolean createUser(String name, String pwd, String email, String phone, Integer term);
+    Boolean createUser(String name, String pwd, String email, String phone, Boolean web, Boolean app, Boolean desktop, String mac, String equipmentid, Integer term);
 
-    Boolean createRole(String name, String text, String describe);
+    Boolean createRole(String name, String type, String describe);
 
     Boolean createResource(String name);
 
-    Boolean createGroup(String name, String id);
+    Boolean createGroup(String name, String type, String pid);
+
+    Boolean createGroup(String name, String type, String pid, String processids);
 
     Boolean allocationUserGroup(TuserEntity tuserEntity, TgroupEntity tgroupEntity);
 

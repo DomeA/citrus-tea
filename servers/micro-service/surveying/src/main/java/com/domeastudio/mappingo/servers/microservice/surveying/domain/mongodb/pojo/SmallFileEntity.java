@@ -15,6 +15,7 @@ public class SmallFileEntity {
     private Date uploadDate;
     private String md5;
     private byte[] content; // 文件内容
+
     public String getId() {
         return id;
     }

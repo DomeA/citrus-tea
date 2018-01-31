@@ -4,10 +4,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import javax.persistence.Id;
+
 //房产项目
 @Document(collection = "archives_info")
 public class BuildingProjectEntity {
-//    业务号	YWH	Char	255
+    //    业务号	YWH	Char	255
 //    幢号	ZH	Char	255
 //    丘号	QH	Char	100
 //    建筑物坐落	ZL	Char	255

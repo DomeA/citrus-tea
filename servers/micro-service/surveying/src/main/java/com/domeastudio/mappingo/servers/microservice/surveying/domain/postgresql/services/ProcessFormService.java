@@ -22,7 +22,7 @@ public interface ProcessFormService {
     void createSurveyProcessForm();
 
     //分步更新表单
-    void updateCadastralProcessForm1(String cid,String receive);
+    void updateCadastralProcessForm1(String cid, String receive);
 
     void updateCadastralProcessForm2(String cid);
 

@@ -37,10 +37,10 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         //创建核心引擎对象
         switch (processDefType) {
             case INPUTSTREAM:
-                deployment=repositoryService.
+                deployment = repositoryService.
                         createDeployment().
                         name(name).
-                        addInputStream(resourceName,inputStream).
+                        addInputStream(resourceName, inputStream).
                         deploy();
                 break;
             case ZIP:
@@ -142,7 +142,7 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
     @Override
     public ProcessDefinition findProcessDefinitionLastVersionByKey(String key) {
-       return repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).latestVersion().singleResult();
+        return repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).latestVersion().singleResult();
     }
 
     @Override
@@ -164,13 +164,13 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
     @Override
     public Task currentTaskById(String pid) {
-        Task task= taskService.createTaskQuery().processInstanceId(pid).singleResult();
+        Task task = taskService.createTaskQuery().processInstanceId(pid).singleResult();
         return task;
     }
 
     @Override
     public Task currentTaskByKey(String key) {
-        Task task= taskService.createTaskQuery().processInstanceBusinessKey(key).singleResult();
+        Task task = taskService.createTaskQuery().processInstanceBusinessKey(key).singleResult();
         return task;
     }
 

@@ -48,7 +48,7 @@ public class ProcessFormServiceImpl implements ProcessFormService {
 
     @Override
     public void createBuildingProcessForm(String projectName, String projectCode, String projectAddress, String projectTime) {
-        BbuildingProcessformEntity bbuildingProcessformEntity=new BbuildingProcessformEntity();
+        BbuildingProcessformEntity bbuildingProcessformEntity = new BbuildingProcessformEntity();
         bbuildingProcessformEntity.setProjectAddress(projectAddress);
         bbuildingProcessformEntity.setProjectCode(projectCode);
         bbuildingProcessformEntity.setProjectName(projectName);
@@ -58,14 +58,14 @@ public class ProcessFormServiceImpl implements ProcessFormService {
 
     @Override
     public void createSurveyProcessForm() {
-        BsurveyProcessformEntity bsurveyProcessformEntity=new BsurveyProcessformEntity();
+        BsurveyProcessformEntity bsurveyProcessformEntity = new BsurveyProcessformEntity();
 
         bsurveyProcessformRepository.save(bsurveyProcessformEntity);
     }
 
     @Override
-    public void updateCadastralProcessForm1(String cid,String receive) {
-        BcadastralProcessformEntity bcadastralProcessformEntity= findCadastralProcessFormByCid(cid);
+    public void updateCadastralProcessForm1(String cid, String receive) {
+        BcadastralProcessformEntity bcadastralProcessformEntity = findCadastralProcessFormByCid(cid);
         bcadastralProcessformEntity.setReceive(receive);
         bcadastralProcessformRepository.save(bcadastralProcessformEntity);
     }

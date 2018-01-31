@@ -4,7 +4,7 @@ import java.util.List;
 import javax.persistence.Id;
 
 public class BuildingLayerEntity {
-//    业务号	YWH	Char	255
+    //    业务号	YWH	Char	255
 //    幢号	ZH	Char	255
 //    层号	CH	Char	20
 //    坐落	ZL	Char	100

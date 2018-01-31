@@ -32,7 +32,8 @@ public class SurveyingApplication {
 
     //-----------------下面代码处理初始化一个用户-------------
     //用户名:system 用户密码:domea 用户角色:ROLE_SYSADMIN
-    //默认角色ROLE_SIGHTSEER
+    //除了system用户，其他用户默认角色ROLE_SIGHTSEER
+    //
     @Autowired
     TUserService tUserService;
 
@@ -48,26 +49,27 @@ public class SurveyingApplication {
     @Autowired
     public void init() {
         try {
-            Boolean uf = tUserService.createUser("system", "domea", "domeastudio@hotmail.com", "18182669306", 999999);
-            Boolean rf1 = tUserService.createRole("ROLE_SYSADMIN", "系统管理员","系统管理员角色");
-            Boolean rf2 = tUserService.createRole("ROLE_SIGHTSEER", "系统游客","默认角色,游客角色");
-            Boolean rf3=tUserService.createGroup("GROUP_SYSADMIN","0");
+            Boolean uf = tUserService.createUser("system", "domea", "domeastudio@hotmail.com", "18182669306", true, false, false, "", "", 999999);
+            Boolean rf1 = tUserService.createRole("ROLE_SYSADMIN", "系统管理员", "系统管理员角色");
+            Boolean rf2 = tUserService.createRole("ROLE_SIGHTSEER", "系统游客", "默认角色,游客角色");
+            Boolean rf3 = tUserService.createGroup("GROUP_SYSADMIN", "系统管理员组", "0");
 
-            TgroupEntity tgroupEntity=tUserService.findGroupByName("GROUP_SYSADMIN");
+            TgroupEntity tgroupEntity = tUserService.findGroupByName("GROUP_SYSADMIN");
             TuserEntity tuserEntity = tUserService.findUserByName("system");
             TroleEntity troleEntity = tUserService.findRoleByName("ROLE_SYSADMIN");
             Boolean urf = tUserService.allocationUserRole(tuserEntity, troleEntity);
-            Boolean uug=tUserService.allocationUserGroup(tuserEntity,tgroupEntity);
+            Boolean uug = tUserService.allocationUserGroup(tuserEntity, tgroupEntity);
 
-            File iconFile= ResourceUtils.getFile("classpath:img/menu32.png");
-            SmallFileEntity smallFileEntity=new SmallFileEntity();
+
+            File iconFile = ResourceUtils.getFile("classpath:img/menu32.png");
+            SmallFileEntity smallFileEntity = new SmallFileEntity();
             smallFileEntity.setName("菜单注册图标");
             smallFileEntity.setContentType("image/png");
             smallFileEntity.setContent(FileUtils.File2Byte(iconFile));
             smallFileEntity.setMd5(MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5(FileUtils.File2Byte(iconFile))));
             smallFileEntity = smallFileRepository.save(smallFileEntity);
 
-            TresourceEntity tresourceEntity=new TresourceEntity();
+            TresourceEntity tresourceEntity = new TresourceEntity();
             tresourceEntity.setCode("0000-0000-0000-0000-0000-0000-0000-0000-0000-0000");
             tresourceEntity.setIconId(smallFileEntity.getId());
             tresourceEntity.setName("菜单注册");
@@ -75,7 +77,7 @@ public class SurveyingApplication {
             tresourceEntity.setSelected(true);
             Boolean trf = dhtmlxService.createTresource(tresourceEntity);
             TresourceEntity tresource = dhtmlxService.findByCode(tresourceEntity.getCode());
-            Boolean rrf=tUserService.allocationRoleResource(troleEntity,tresource);
+            Boolean rrf = tUserService.allocationRoleResource(troleEntity, tresource);
 
             if (uf) {
                 System.out.println("管理员账户：system 创建成功");
@@ -104,14 +106,14 @@ public class SurveyingApplication {
             } else {
                 System.out.println("管理员账户：[system] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 已经存在");
             }
-            if(trf){
+            if (trf) {
                 System.out.println("菜单初始化：[菜单注册]创建成功");
-            }else{
+            } else {
                 System.out.println("菜单初始化：[菜单注册]已经存在");
             }
-            if(rrf){
+            if (rrf) {
                 System.out.println("菜单初始化：[菜单注册] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 成功");
-            }else {
+            } else {
                 System.out.println("菜单初始化：[菜单注册] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 已经存在");
             }
 

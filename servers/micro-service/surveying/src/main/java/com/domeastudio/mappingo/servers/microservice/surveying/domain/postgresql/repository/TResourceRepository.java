@@ -9,8 +9,11 @@ import java.util.List;
 @Repository
 public interface TResourceRepository extends JpaRepository<TresourceEntity, String> {
     TresourceEntity findByName(String name);
+
     TresourceEntity findByCode(String code);
+
     List<TresourceEntity> findByCodeContains(String code);
+
     List<TresourceEntity> findByParenId(String pid);
     //List<TresourceEntity> findByCodeMatchesRegex(String regex);
 }

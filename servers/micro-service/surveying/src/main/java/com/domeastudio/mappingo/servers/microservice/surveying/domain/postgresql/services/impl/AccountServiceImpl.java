@@ -40,15 +40,16 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * 保存用户信息，并且同步用户信息到Flowable的identity.User和identify.Group
-     * @param user              用户对象{@link TuserEntity}
-     * @param rids              用户拥有的角色ID集合
-     * @param synToFlowable     是否同步数据到Activiti
+     *
+     * @param user          用户对象{@link TuserEntity}
+     * @param rids          用户拥有的角色ID集合
+     * @param synToFlowable 是否同步数据到Activiti
      */
     @Override
     public void saveUser(TuserEntity user, List<String> rids, Boolean synToFlowable) {
         // 保存系统用户
         //todo:是否在此处保存系统用户
-        TuserEntity tuserEntity=tUserRepository.save(user);
+        TuserEntity tuserEntity = tUserRepository.save(user);
         String userId = tuserEntity.getUid();
 
         // 同步数据到Flowable Identify模块
@@ -70,8 +71,9 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * 添加工作流用户以及角色
-     * @param user      用户对象{@link TuserEntity}
-     * @param rids   用户拥有的角色ID集合
+     *
+     * @param user 用户对象{@link TuserEntity}
+     * @param rids 用户拥有的角色ID集合
      */
     private void newActivitiUser(TuserEntity user, List<String> rids) {
         String userId = user.getUid();
@@ -84,7 +86,8 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * 添加一个用户到Flowable {@link TuserEntity}
-     * @param user  用户对象, {@link TuserEntity}
+     *
+     * @param user 用户对象, {@link TuserEntity}
      */
     private void saveFlowableUser(TuserEntity user) {
         String userId = user.getUid();
@@ -95,8 +98,9 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * 添加Flowable Identify的用户于组关系
+     *
      * @param rids   角色ID集合
-     * @param userId    用户ID
+     * @param userId 用户ID
      */
     private void addMembershipToIdentify(List<String> rids, String userId) {
         for (String rid : rids) {
@@ -108,9 +112,10 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * 更新工作流用户以及角色
-     * @param user          用户对象{@link TuserEntity}
-     * @param rids       用户拥有的角色ID集合
-     * @param flowableUser  Activiti引擎的用户对象，{@link User}
+     *
+     * @param user         用户对象{@link TuserEntity}
+     * @param rids         用户拥有的角色ID集合
+     * @param flowableUser Activiti引擎的用户对象，{@link User}
      */
     private void updateFlowableData(TuserEntity user, List<String> rids, User flowableUser) {
 
@@ -132,8 +137,9 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * 使用系统用户对象属性设置到Flowable User对象中
-     * @param user          系统用户对象
-     * @param flowableUser  Flowable User
+     *
+     * @param user         系统用户对象
+     * @param flowableUser Flowable User
      */
     private void cloneAndSaveFlowableUser(TuserEntity user, User flowableUser) {
         flowableUser.setFirstName(user.getName());
@@ -156,7 +162,7 @@ public class AccountServiceImpl implements AccountService {
         if (synToFlowable) {
             // 同步删除Flowable User
             List<RuserroleEntity> roleList = rUserRoleRepository.findByTuserByUid(user);
-            for(RuserroleEntity ruserroleEntity : roleList){
+            for (RuserroleEntity ruserroleEntity : roleList) {
                 TroleEntity troleEntity = ruserroleEntity.getTroleByRid();
                 identityService.deleteMembership(userId, troleEntity.getRid());
             }
@@ -190,7 +196,7 @@ public class AccountServiceImpl implements AccountService {
             saveFlowableUser(user);
             // 角色和用户的关系
             List<RuserroleEntity> roleList = rUserRoleRepository.findByTuserByUid(user);
-            for(RuserroleEntity ruserroleEntity : roleList){
+            for (RuserroleEntity ruserroleEntity : roleList) {
                 TroleEntity troleEntity = ruserroleEntity.getTroleByRid();
                 identityService.createMembership(userId, troleEntity.getRid());
                 //logger.debug("add membership {user: {}, role: {}}", userId, role.getEnName());
@@ -214,17 +220,17 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void deleteAllFlowableIdentifyData() throws Exception {
-        List<TuserEntity> tuserEntities=tUserRepository.findAll();
-        for(TuserEntity tuserEntity:tuserEntities){
+        List<TuserEntity> tuserEntities = tUserRepository.findAll();
+        for (TuserEntity tuserEntity : tuserEntities) {
             identityService.deleteUser(tuserEntity.getUid());
         }
-        List<TroleEntity> troleEntities=tRoleRepository.findAll();
-        for (TroleEntity troleEntity:troleEntities){
+        List<TroleEntity> troleEntities = tRoleRepository.findAll();
+        for (TroleEntity troleEntity : troleEntities) {
             identityService.deleteGroup(troleEntity.getRid());
         }
-        List<RuserroleEntity> ruserroleEntities=rUserRoleRepository.findAll();
-        for(RuserroleEntity ruserroleEntity:ruserroleEntities){
-            identityService.deleteMembership(ruserroleEntity.getTuserByUid().getUid(),ruserroleEntity.getTroleByRid().getRid());
+        List<RuserroleEntity> ruserroleEntities = rUserRoleRepository.findAll();
+        for (RuserroleEntity ruserroleEntity : ruserroleEntities) {
+            identityService.deleteMembership(ruserroleEntity.getTuserByUid().getUid(), ruserroleEntity.getTroleByRid().getRid());
         }
     }
 }

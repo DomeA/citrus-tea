@@ -25,20 +25,19 @@ public class DhtmlXAPI {
     DhtmlxService dhtmlxService;
 
 
-
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public ClientMessage addMenu(MenuDef menu,@RequestParam("iconFile") MultipartFile multipartFile){
-        TresourceEntity tresourceEntity=new TresourceEntity();
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ClientMessage addMenu(MenuDef menu, @RequestParam("iconFile") MultipartFile multipartFile) {
+        TresourceEntity tresourceEntity = new TresourceEntity();
         tresourceEntity.setParenId(menu.getParentid());
         tresourceEntity.setName(menu.getName());
         tresourceEntity.setCode(menu.getCode());
         tresourceEntity.setSelected(false);
         tresourceEntity.setType(null);
 
-        Boolean flage = dhtmlxService.createTresource(menu.getRoleName(),tresourceEntity, FileUtils.FileInput2Byte(multipartFile));
+        Boolean flage = dhtmlxService.createTresource(menu.getRoleName(), tresourceEntity, FileUtils.FileInput2Byte(multipartFile));
 
         ClientMessage clientMessage;
-        if(flage){
+        if (flage) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), null);
             return clientMessage;
@@ -48,11 +47,11 @@ public class DhtmlXAPI {
         return clientMessage;
     }
 
-    @RequestMapping(value = "/sildebar/{userid}",method = RequestMethod.GET)
-    public ClientMessage getSidebarData(@PathVariable("userid") String userid){
+    @RequestMapping(value = "/sildebar/{userid}", method = RequestMethod.GET)
+    public ClientMessage getSidebarData(@PathVariable("userid") String userid) {
         DhtmlxData dhtmlxData = dhtmlxService.getDhtmlxSidebarData(userid);
         ClientMessage clientMessage;
-        if(dhtmlxData.getSidebarItem().getItems().size()>0){
+        if (dhtmlxData.getSidebarItem().getItems().size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), dhtmlxData);
             return clientMessage;
@@ -62,11 +61,11 @@ public class DhtmlXAPI {
         return clientMessage;
     }
 
-    @RequestMapping(value = "/treeview/{userid}",method = RequestMethod.GET)
-    public ClientMessage getTreeviewData(@PathVariable("userid") String userid){
+    @RequestMapping(value = "/treeview/{userid}", method = RequestMethod.GET)
+    public ClientMessage getTreeviewData(@PathVariable("userid") String userid) {
         DhtmlxData dhtmlxData = dhtmlxService.getDhtmlxTreeviewData(userid);
         ClientMessage clientMessage;
-        if(dhtmlxData.getTreeItems().size()>0){
+        if (dhtmlxData.getTreeItems().size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), dhtmlxData);
             return clientMessage;
@@ -76,11 +75,11 @@ public class DhtmlXAPI {
         return clientMessage;
     }
 
-    @RequestMapping(value = "/grid/{userid}",method = RequestMethod.GET)
-    public ClientMessage getGridData(@PathVariable("userid") String userid){
+    @RequestMapping(value = "/grid/{userid}", method = RequestMethod.GET)
+    public ClientMessage getGridData(@PathVariable("userid") String userid) {
         DhtmlxData dhtmlxData = dhtmlxService.getDhtmlxGridData(userid);
         ClientMessage clientMessage;
-        if(dhtmlxData.getTreeItems().size()>0){
+        if (dhtmlxData.getTreeItems().size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), dhtmlxData);
             return clientMessage;

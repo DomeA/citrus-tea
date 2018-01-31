@@ -31,22 +31,22 @@ public class TokenAPI {
     private Audience audienceEntity;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public Map<String,String> test() {
-        Map<String,String> stringStringMap=new HashMap<>();
-        stringStringMap.put("id","100");
-        stringStringMap.put("name","domea");
+    public Map<String, String> test() {
+        Map<String, String> stringStringMap = new HashMap<>();
+        stringStringMap.put("id", "100");
+        stringStringMap.put("name", "domea");
         return stringStringMap;
     }
 
     @RequestMapping(value = "/form/token", method = RequestMethod.POST)
     public ClientMessage getAccessToken4Form(Login loginPara, HttpServletRequest httpServletRequest) {
-        return getAccessToken(loginPara,httpServletRequest);
+        return getAccessToken(loginPara, httpServletRequest);
     }
 
     @RequestMapping(value = "/token", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientMessage getAccessToken(@RequestBody Login loginPara, HttpServletRequest httpServletRequest) {
         ClientMessage clientMessage;
-        String browserDetails=httpServletRequest.getHeader("User-Agent").toLowerCase();
+        String browserDetails = httpServletRequest.getHeader("User-Agent").toLowerCase();
         try {
             //验证码校验在后面章节添加
             //验证用户名密码
@@ -56,7 +56,7 @@ public class TokenAPI {
                         ResultStatusCode.INVALID_USERNAME_OR_PASSWORD.getMsg(), null);
                 return clientMessage;
             }
-            if(!isBrowser(browserDetails)) {
+            if (!isBrowser(browserDetails)) {
                 if (loginPara.getLicence() == null
                         || (loginPara.getLicence().compareTo(user.getToken()) != 0)) {
                     clientMessage = new ClientMessage(ResultStatusCode.INVALID_CLIENTID.getCode(),
@@ -98,8 +98,8 @@ public class TokenAPI {
         }
     }
 
-    private Boolean isBrowser(String browser){
-        if(browser!=null) {
+    private Boolean isBrowser(String browser) {
+        if (browser != null) {
             if (browser.contains("edge") || browser.contains("msie") ||
                     (browser.contains("safari") && browser.contains("version")) ||
                     (browser.contains("opr") || browser.contains("opera")) ||

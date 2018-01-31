@@ -32,6 +32,7 @@ public interface WorkFlowService {
     Task currentTaskByKey(String key);
 
     void complete(String tid);
+
     /**
      * 删除流程定义(删除key相同的所有不同版本的流程定义)
      */

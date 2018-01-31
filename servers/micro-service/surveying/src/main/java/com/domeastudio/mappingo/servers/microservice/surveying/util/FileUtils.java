@@ -20,8 +20,7 @@ public class FileUtils {
             data = output.toByteArray();
             output.close();
             input.close();
-        }
-        catch (IOException ex1) {
+        } catch (IOException ex1) {
             ex1.printStackTrace();
         }
         return data;
@@ -42,11 +41,9 @@ public class FileUtils {
             data = output.toByteArray();
             output.close();
             input.close();
-        }
-        catch (FileNotFoundException ex1) {
+        } catch (FileNotFoundException ex1) {
             ex1.printStackTrace();
-        }
-        catch (IOException ex1) {
+        } catch (IOException ex1) {
             ex1.printStackTrace();
         }
         return data;

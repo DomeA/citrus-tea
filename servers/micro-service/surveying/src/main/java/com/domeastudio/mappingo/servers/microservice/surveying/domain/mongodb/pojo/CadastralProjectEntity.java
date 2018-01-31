@@ -8,7 +8,7 @@ import java.util.List;
 //地籍测绘
 @Document(collection = "archives_info")
 public class CadastralProjectEntity {
-//    业务号	YWH	Char	255
+    //    业务号	YWH	Char	255
 //    总面积（公顷）	ZMJ	Float
 //    总面积（亩）	ZMJ1	Float
 //    使用面积（公顷）	SYMJ	Float

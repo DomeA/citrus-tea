@@ -213,6 +213,7 @@ public class TuserEntity {
     public void setBapprovalrecordsByUid(Set<BapprovalrecordEntity> bapprovalrecordsByUid) {
         this.bapprovalrecordsByUid = bapprovalrecordsByUid;
     }
+
     @Basic
     @Column(name = "mac")
     public String getMac() {
@@ -222,6 +223,7 @@ public class TuserEntity {
     public void setMac(String mac) {
         this.mac = mac;
     }
+
     @Basic
     @Column(name = "desktop")
     public Boolean getDesktop() {
@@ -231,6 +233,7 @@ public class TuserEntity {
     public void setDesktop(Boolean desktop) {
         this.desktop = desktop;
     }
+
     @Basic
     @Column(name = "web")
     public Boolean getWeb() {
@@ -240,6 +243,7 @@ public class TuserEntity {
     public void setWeb(Boolean web) {
         this.web = web;
     }
+
     @Basic
     @Column(name = "app")
     public Boolean getApp() {
@@ -249,6 +253,7 @@ public class TuserEntity {
     public void setApp(Boolean app) {
         this.app = app;
     }
+
     @Basic
     @Column(name = "equipmentid")
     public String getEquipmentid() {

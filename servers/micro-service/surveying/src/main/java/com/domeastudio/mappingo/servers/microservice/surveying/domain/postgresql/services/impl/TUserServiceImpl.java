@@ -138,7 +138,7 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public Boolean createUser(String loginName, String pwd, String email, String phone, Integer term) {
+    public Boolean createUser(String loginName, String pwd, String email, String phone, Boolean web, Boolean app, Boolean desktop, String mac, String equipmentid, Integer term) {
         if (tUserRepository.findByName(loginName) != null ||
                 tUserRepository.findByEmail(email) != null ||
                 tUserRepository.findByPhone(phone) != null) {
@@ -162,13 +162,13 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public Boolean createRole(String name, String text, String describe) {
+    public Boolean createRole(String name, String type, String describe) {
         if (tRoleRepository.findByName(name) != null) {
             return false;
         }
         TroleEntity troleEntity = new TroleEntity();
         troleEntity.setName(name);
-        troleEntity.setType(text);
+        troleEntity.setType(type);
         troleEntity.setDescribe(describe);
         save(troleEntity);
         return true;
@@ -187,13 +187,28 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public Boolean createGroup(String name, String id) {
+    public Boolean createGroup(String name, String type, String pid) {
         if (tGroupRepository.findByName(name) != null) {
             return false;
         }
         TgroupEntity tgroupEntity = new TgroupEntity();
         tgroupEntity.setName(name);
-        tgroupEntity.setParentId(id);
+        tgroupEntity.setType(type);
+        tgroupEntity.setParentId(pid);
+        save(tgroupEntity);
+        return true;
+    }
+
+    @Override
+    public Boolean createGroup(String name, String type, String pid, String processids) {
+        if (tGroupRepository.findByName(name) != null) {
+            return false;
+        }
+        TgroupEntity tgroupEntity = new TgroupEntity();
+        tgroupEntity.setName(name);
+        tgroupEntity.setType(type);
+        tgroupEntity.setParentId(pid);
+        tgroupEntity.setProcessIds(processids);
         save(tgroupEntity);
         return true;
     }

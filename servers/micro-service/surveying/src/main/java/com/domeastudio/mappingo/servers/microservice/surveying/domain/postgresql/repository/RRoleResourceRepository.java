@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface RRoleResourceRepository extends JpaRepository<RroleresourceEntity, String> {
     List<RroleresourceEntity> findByTroleByRid(TroleEntity troleEntity);
+
     RroleresourceEntity findByTroleByRidAndTresourceByReid(TroleEntity troleEntity, TresourceEntity tresourceEntity);
 }
