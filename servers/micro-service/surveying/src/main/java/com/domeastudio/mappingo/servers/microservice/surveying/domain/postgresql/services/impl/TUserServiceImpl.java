@@ -168,7 +168,7 @@ public class TUserServiceImpl implements TUserService {
         }
         TroleEntity troleEntity = new TroleEntity();
         troleEntity.setName(name);
-        troleEntity.setText(text);
+        troleEntity.setType(text);
         troleEntity.setDescribe(describe);
         save(troleEntity);
         return true;
