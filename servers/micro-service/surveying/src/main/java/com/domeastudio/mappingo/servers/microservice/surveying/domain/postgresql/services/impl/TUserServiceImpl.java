@@ -61,6 +61,11 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
+    public List<TgroupEntity> findGroupAll() {
+        return tGroupRepository.findAll();
+    }
+
+    @Override
     public TgroupEntity findGroupByName(String name) {
         return tGroupRepository.findByName(name);
     }
@@ -86,6 +91,11 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
+    public List<TroleEntity> findRoleAll() {
+        return tRoleRepository.findAll();
+    }
+
+    @Override
     public TresourceEntity findResourceByName(String name) {
         return tResourceRepository.findByName(name);
     }
@@ -93,6 +103,27 @@ public class TUserServiceImpl implements TUserService {
     @Override
     public TuserEntity save(TuserEntity entity) {
         return tUserRepository.save(entity);
+    }
+
+    @Override
+    public void deleteRole(String rid) {
+        TroleEntity troleEntity =tRoleRepository.findOne(rid);
+        List<RuserroleEntity> ruserroleEntities = rUserRoleRepository.findByTroleByRid(troleEntity);
+        for(RuserroleEntity ruserroleEntity : ruserroleEntities){
+            rUserRoleRepository.delete(ruserroleEntity.getId());
+        }
+        List<RroleresourceEntity> rroleresourceEntities = rRoleResourceRepository.findByTroleByRid(troleEntity);
+        for(RroleresourceEntity rroleresourceEntity : rroleresourceEntities){
+            rRoleResourceRepository.delete(rroleresourceEntity.getId());
+        }
+        tRoleRepository.delete(rid);
+    }
+
+    @Override
+    public void deleteAllRole() {
+        rUserRoleRepository.deleteAll();
+        rRoleResourceRepository.deleteAll();
+        tRoleRepository.deleteAll();
     }
 
     @Override
@@ -127,14 +158,25 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public List<String> findRoleByUser(TuserEntity entity) {
-        List<String> names = new ArrayList<>();
-        List<RuserroleEntity> ruserroleEntities = rUserRoleRepository.findByTuserByUid(entity);
+    public List<TroleEntity> findRoleByUser(TuserEntity tuserEntity) {
+        List<TroleEntity> roles = new ArrayList<>();
+        List<RuserroleEntity> ruserroleEntities = rUserRoleRepository.findByTuserByUid(tuserEntity);
         for (RuserroleEntity rr : ruserroleEntities) {
-            String name = rr.getTroleByRid().getName();
-            names.add(name);
+            TroleEntity name = rr.getTroleByRid();
+            roles.add(name);
         }
-        return names;
+        return roles;
+    }
+
+    @Override
+    public List<TgroupEntity> findGroupByUser(TuserEntity tuserEntity) {
+        List<TgroupEntity> groups = new ArrayList<>();
+        List<RusergroupEntity> rusergroupEntities = rUserGroupRepository.findByTuserByUid(tuserEntity);
+        for (RusergroupEntity ug : rusergroupEntities) {
+            TgroupEntity tgroupEntity = ug.getTgroupByGid();
+            groups.add(tgroupEntity);
+        }
+        return groups;
     }
 
     @Override
@@ -167,7 +209,8 @@ public class TUserServiceImpl implements TUserService {
 
     @Override
     public Boolean createRole(String name, String type, String describe) {
-        if (tRoleRepository.findByName(name) != null) {
+        if (tRoleRepository.findByName(name) != null||
+                tRoleRepository.findByType(type)!=null) {
             return false;
         }
         TroleEntity troleEntity = new TroleEntity();

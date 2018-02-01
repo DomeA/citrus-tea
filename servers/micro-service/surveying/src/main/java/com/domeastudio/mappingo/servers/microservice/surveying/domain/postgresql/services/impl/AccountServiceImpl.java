@@ -1,6 +1,7 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.impl;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RuserroleEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TgroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.RUserRoleRepository;
@@ -100,6 +101,11 @@ public class AccountServiceImpl implements AccountService {
                 newFlowableUser(tuserEntity, rids);
             }
         }
+    }
+
+    @Override
+    public void saveGroup(TgroupEntity tgroupEntity) {
+
     }
 
     /**

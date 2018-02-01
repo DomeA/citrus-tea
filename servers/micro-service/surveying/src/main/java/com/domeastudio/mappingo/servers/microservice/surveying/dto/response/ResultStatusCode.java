@@ -9,6 +9,7 @@ public enum ResultStatusCode {
     INVALID_TOKEN(30006, "Invalid token"),
     INVALID_TIME(30008, "Invalid time limit"),
     INVALID_USERNAME(30007, "Invalid User name"),
+    INVALID_ROLENAME(30010,"Invalid Role name"),
     INVALID_PARAM(30009, "Invalid Param"),
     FAILURE_PROCESS_DEFINITION(40001, "Process definition failure"),
     INVALID_PROCESS_ID_OR_KEY(40002, "Invalid process id or key"),

@@ -39,7 +39,7 @@ public class AccountAPI {
     @RequestMapping(value = "/register/user", method = RequestMethod.POST)
     public ClientMessage addUSer(Register register) {
         ClientMessage clientMessage;
-        TuserEntity tuserEntity = tUserService.createUser(register.getLoginName(), register.getPwd(), register.getEmail(), register.getPhone(),register.getWeb() ,register.getApp(),register.getDesktop(),register.getMac(),register.getEquipmentid(),register.getTerm());
+        TuserEntity tuserEntity = tUserService.createUser(register.getLoginName().trim(), register.getPwd(), register.getEmail().trim(), register.getPhone().trim(),register.getWeb() ,register.getApp(),register.getDesktop(),register.getMac().trim(),register.getEquipmentid().trim(),register.getTerm());
         System.out.println("用户：" + register.getName() + (tuserEntity!=null ? "创建成功！" : "已经存在"));
         if (tuserEntity!=null) {
             TroleEntity troleEntity = tUserService.findRoleByName("ROLE_SIGHTSEER");

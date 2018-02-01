@@ -12,5 +12,7 @@ import java.util.List;
 public interface RUserRoleRepository extends JpaRepository<RuserroleEntity, String> {
     List<RuserroleEntity> findByTuserByUid(TuserEntity tuserEntity);
 
+    List<RuserroleEntity> findByTroleByRid(TroleEntity troleEntity);
+
     RuserroleEntity findByTuserByUidAndTroleByRid(TuserEntity tuserEntity, TroleEntity troleEntity);
 }

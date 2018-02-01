@@ -1,5 +1,6 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services;
 
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TgroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
 import org.hibernate.service.spi.ServiceException;
@@ -25,6 +26,7 @@ public interface AccountService {
 
     void saveUser(TuserEntity user, List<String> rids, Boolean synToActiviti);
 
+    void saveGroup(TgroupEntity tgroupEntity);
     /**
      * 删除用户
      *
