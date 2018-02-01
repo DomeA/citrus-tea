@@ -170,9 +170,10 @@ public class DataAPI {
     }
 
     @RequestMapping(value = "/update/group", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateGroup(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
+    public ClientMessage updateGroup(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
         Boolean f = tUserService.createRole(name, text, describe);
         System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));
+        return null;
     }
 
     @RequestMapping(value = "/delete/group", method = RequestMethod.DELETE)
