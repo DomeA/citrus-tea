@@ -65,7 +65,13 @@ spring:
       password: domea
       driver-class-name: com.mysql.jdbc.Driver
   white-list:
-    service-filter: /manager/*
+    service-filter:
+      - /manager/*
+      - /account/*
+      - /workflow/*
+      - /filemanager/*
+      - /monitor/*
+      - /geobingo/*
   audience:
     name: restapiuser
     expiresSecond: 172800
