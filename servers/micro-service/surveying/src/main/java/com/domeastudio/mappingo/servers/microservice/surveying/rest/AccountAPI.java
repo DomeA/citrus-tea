@@ -50,7 +50,7 @@ public class AccountAPI {
     }
 
     @RequestMapping(value = "/forget/inspect/{loginName}", method = RequestMethod.GET)
-    public ClientMessage updateUSerPwd(@PathVariable String loginName) {
+    public ClientMessage inspectUSerPwd(@PathVariable String loginName) {
         ClientMessage clientMessage;
         TuserEntity tuserEntity = tUserService.findByNameOrEmailOrPhone(loginName);
         if (tuserEntity!=null) {
@@ -62,12 +62,12 @@ public class AccountAPI {
     }
 
     @RequestMapping(value = "/forget/update/form", method = RequestMethod.POST)
-    public ClientMessage updateUSerPwd4Form(ForgetUser forgetUser) {
-        return updateUSerPwd(forgetUser);
+    public ClientMessage updateUserPwd4Form(ForgetUser forgetUser) {
+        return updateUserPwd(forgetUser);
     }
 
     @RequestMapping(value = "/forget/update", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ClientMessage updateUSerPwd(@RequestBody ForgetUser forgetUser) {
+    public ClientMessage updateUserPwd(@RequestBody ForgetUser forgetUser) {
         ClientMessage clientMessage;
         TuserEntity tuserEntity = tUserService.findByNameOrEmailOrPhone(forgetUser.getUserName());
         if (tuserEntity!=null) {
