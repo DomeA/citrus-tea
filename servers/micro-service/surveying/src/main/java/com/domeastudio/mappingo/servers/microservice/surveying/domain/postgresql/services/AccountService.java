@@ -16,7 +16,7 @@ public interface AccountService {
      * </ul>
      *
      * @param user          用户对象
-     * @param role           部门ID
+     * @param role          部门ID
      * @param synToFlowable 是否同步到Activiti数据库，通过配置文件方式设置，使用属性：account.user.add.syntoactiviti
      * @throws ServiceException 关联用户和部门的时候从数据库查询不到哦啊部门对象
      * @throws Exception        其他未知异常
@@ -27,6 +27,7 @@ public interface AccountService {
     void saveUser(TuserEntity user, List<String> rids, Boolean synToActiviti);
 
     void saveGroup(TgroupEntity tgroupEntity);
+
     /**
      * 删除用户
      *

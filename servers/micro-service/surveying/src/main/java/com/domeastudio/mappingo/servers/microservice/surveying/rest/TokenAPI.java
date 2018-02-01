@@ -78,8 +78,8 @@ public class TokenAPI {
 
             List<TroleEntity> troleEntities = tUserService.findRoleByUser(user);
             StringBuilder stringBuilder = new StringBuilder();
-            if(troleEntities.size()>0){
-                for(TroleEntity troleEntity:troleEntities){
+            if (troleEntities.size() > 0) {
+                for (TroleEntity troleEntity : troleEntities) {
                     stringBuilder.append(troleEntity.getName());
                 }
             }

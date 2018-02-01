@@ -107,13 +107,13 @@ public class TUserServiceImpl implements TUserService {
 
     @Override
     public void deleteRole(String rid) {
-        TroleEntity troleEntity =tRoleRepository.findOne(rid);
+        TroleEntity troleEntity = tRoleRepository.findOne(rid);
         List<RuserroleEntity> ruserroleEntities = rUserRoleRepository.findByTroleByRid(troleEntity);
-        for(RuserroleEntity ruserroleEntity : ruserroleEntities){
+        for (RuserroleEntity ruserroleEntity : ruserroleEntities) {
             rUserRoleRepository.delete(ruserroleEntity.getId());
         }
         List<RroleresourceEntity> rroleresourceEntities = rRoleResourceRepository.findByTroleByRid(troleEntity);
-        for(RroleresourceEntity rroleresourceEntity : rroleresourceEntities){
+        for (RroleresourceEntity rroleresourceEntity : rroleresourceEntities) {
             rRoleResourceRepository.delete(rroleresourceEntity.getId());
         }
         tRoleRepository.delete(rid);
@@ -209,8 +209,8 @@ public class TUserServiceImpl implements TUserService {
 
     @Override
     public Boolean createRole(String name, String type, String describe) {
-        if (tRoleRepository.findByName(name) != null||
-                tRoleRepository.findByType(type)!=null) {
+        if (tRoleRepository.findByName(name) != null ||
+                tRoleRepository.findByType(type) != null) {
             return false;
         }
         TroleEntity troleEntity = new TroleEntity();

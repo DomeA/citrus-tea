@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TRoleRepository extends JpaRepository<TroleEntity, String> {
     TroleEntity findByName(String name);
+
     TroleEntity findByType(String type);
 }

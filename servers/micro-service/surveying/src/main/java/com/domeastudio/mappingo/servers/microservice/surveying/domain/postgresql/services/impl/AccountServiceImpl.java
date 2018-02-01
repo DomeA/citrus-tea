@@ -40,26 +40,27 @@ public class AccountServiceImpl implements AccountService {
         TuserEntity tuserEntity = tUserRepository.save(user);
         String userId = tuserEntity.getUid();
 
-        TroleEntity troleEntity=tRoleRepository.save(role);
-        String roleId=troleEntity.getRid();
+        TroleEntity troleEntity = tRoleRepository.save(role);
+        String roleId = troleEntity.getRid();
 
-        if(synToFlowable){
+        if (synToFlowable) {
             saveFlowableUser(tuserEntity);
             synRoleToFlowable(troleEntity);
-            addMembershipToIdentify(userId,roleId);
+            addMembershipToIdentify(userId, roleId);
         }
     }
+
     /**
      * 同步角色数据到{@link Group}
      */
     private void synRoleToFlowable(TroleEntity troleEntity) {
         TroleEntity allRole = tRoleRepository.findOne(troleEntity.getRid());
         GroupQuery groupQuery = identityService.createGroupQuery();
-        List<Group> groupList=groupQuery.groupId(troleEntity.getRid()).list();
-        if(groupList.size()>=1){
+        List<Group> groupList = groupQuery.groupId(troleEntity.getRid()).list();
+        if (groupList.size() >= 1) {
             String errorMsg = "发现重复组：id=" + troleEntity.getRid();
             //logger.error(errorMsg);
-        }else{
+        } else {
             newFlowableGroup(troleEntity);
         }
     }
@@ -152,7 +153,7 @@ public class AccountServiceImpl implements AccountService {
     /**
      * 添加Flowable Identify的用户于组关系
      *
-     * @param rid   角色ID集合
+     * @param rid    角色ID集合
      * @param userId 用户ID
      */
     private void addMembershipToIdentify(String rid, String userId) {

@@ -46,34 +46,34 @@ public class DataAPI {
     }
 
     //角色管理
-    @RequestMapping(value = "/create/role", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/create/role", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientMessage createRole(@RequestBody Role role) {
         ClientMessage clientMessage;
         Boolean f = tUserService.createRole(role.getName().trim(), role.getType().trim(), role.getDescribe().trim());
         System.out.println("角色：" + role.getName() + (f ? "创建成功！" : "已经存在"));
-        if(f){
+        if (f) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), "角色创建成功");
             return clientMessage;
-        }else{
+        } else {
             clientMessage = new ClientMessage(ResultStatusCode.INVALID_ROLENAME.getCode(),
                     ResultStatusCode.OK.getMsg(), "角色已存在，无法创建");
             return clientMessage;
         }
     }
 
-    @RequestMapping(value = "/update/role", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/update/role", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientMessage updateRole(@RequestBody Role role) {
-        TroleEntity troleEntity=tUserService.findRoleByName(role.getName());
-        if(null!=role.getDescribe()&&
-                !"".equals(role.getDescribe().trim())&&
-                !troleEntity.getDescribe().equals(role.getDescribe())){
+        TroleEntity troleEntity = tUserService.findRoleByName(role.getName());
+        if (null != role.getDescribe() &&
+                !"".equals(role.getDescribe().trim()) &&
+                !troleEntity.getDescribe().equals(role.getDescribe())) {
             troleEntity.setDescribe(role.getDescribe());
             tUserService.save(troleEntity);
         }
-        if(null!=role.getType()&&
-                !"".equals(role.getType().trim())&&
-                !troleEntity.getType().equals(role.getType())){
+        if (null != role.getType() &&
+                !"".equals(role.getType().trim()) &&
+                !troleEntity.getType().equals(role.getType())) {
             troleEntity.setType(role.getType());
             tUserService.save(troleEntity);
         }
@@ -85,11 +85,11 @@ public class DataAPI {
     @RequestMapping(value = "/get/roles", method = RequestMethod.GET)
     public ClientMessage getRoles() {
         ClientMessage clientMessage;
-        List<TroleEntity> troleEntities=tUserService.findRoleAll();
-        if(troleEntities.size()>0){
+        List<TroleEntity> troleEntities = tUserService.findRoleAll();
+        if (troleEntities.size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), troleEntities);
-        }else{
+        } else {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), "角色列表为空");
         }
@@ -99,12 +99,12 @@ public class DataAPI {
     @RequestMapping(value = "/get/roles/{user}", method = RequestMethod.GET)
     public ClientMessage getRolesByUid(@PathVariable String user) {
         ClientMessage clientMessage;
-        TuserEntity tuserEntity=tUserService.findByNameOrEmailOrPhone(user);
-        List<TroleEntity> troleEntities=tUserService.findRoleByUser(tuserEntity);
-        if(troleEntities.size()>0){
+        TuserEntity tuserEntity = tUserService.findByNameOrEmailOrPhone(user);
+        List<TroleEntity> troleEntities = tUserService.findRoleByUser(tuserEntity);
+        if (troleEntities.size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), troleEntities);
-        }else{
+        } else {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), "角色列表为空");
         }
@@ -130,7 +130,7 @@ public class DataAPI {
     //组管理
     @RequestMapping(value = "/get/groups", method = RequestMethod.GET)
     public ClientMessage getGroups() {
-        List<TgroupEntity> tgroupEntities =tUserService.findGroupAll();
+        List<TgroupEntity> tgroupEntities = tUserService.findGroupAll();
         ClientMessage clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                 ResultStatusCode.OK.getMsg(), tgroupEntities);
 
@@ -140,12 +140,12 @@ public class DataAPI {
     @RequestMapping(value = "/get/group/{user}", method = RequestMethod.GET)
     public ClientMessage getGroupsByUid(@PathVariable String user) {
         ClientMessage clientMessage;
-        TuserEntity tuserEntity=tUserService.findByNameOrEmailOrPhone(user);
-        List<TgroupEntity> tgroupEntities=tUserService.findGroupByUser(tuserEntity);
-        if(tgroupEntities.size()>0){
+        TuserEntity tuserEntity = tUserService.findByNameOrEmailOrPhone(user);
+        List<TgroupEntity> tgroupEntities = tUserService.findGroupByUser(tuserEntity);
+        if (tgroupEntities.size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), tgroupEntities);
-        }else{
+        } else {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), "组列表为空");
         }
@@ -153,26 +153,28 @@ public class DataAPI {
     }
 
 
-    @RequestMapping(value = "/create/group", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/create/group", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientMessage createGroup(@RequestBody Group group) {
         ClientMessage clientMessage;
         Boolean f = tUserService.createGroup(group.getName().trim(), group.getType().trim(), group.getParentId().trim());
         System.out.println("组：" + group.getName() + (f ? "创建成功！" : "已经存在"));
-        if(f){
+        if (f) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), "组创建成功");
             return clientMessage;
-        }else{
+        } else {
             clientMessage = new ClientMessage(ResultStatusCode.INVALID_ROLENAME.getCode(),
                     ResultStatusCode.OK.getMsg(), "组已存在，无法创建");
             return clientMessage;
         }
     }
-    @RequestMapping(value = "/update/group", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(value = "/update/group", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateGroup(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
         Boolean f = tUserService.createRole(name, text, describe);
         System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));
     }
+
     @RequestMapping(value = "/delete/group", method = RequestMethod.DELETE)
     public void deleteGroup(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
         Boolean f = tUserService.createRole(name, text, describe);

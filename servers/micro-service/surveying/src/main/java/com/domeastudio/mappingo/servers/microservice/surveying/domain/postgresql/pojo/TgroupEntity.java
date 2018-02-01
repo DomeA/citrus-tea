@@ -79,6 +79,7 @@ public class TgroupEntity {
     public void setRusergroupsByGid(Set<RusergroupEntity> rusergroupsByGid) {
         this.rusergroupsByGid = rusergroupsByGid;
     }
+
     @Basic
     @Column(name = "type")
     public String getType() {

@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface RUserGroupRepository extends JpaRepository<RusergroupEntity, String> {
     RusergroupEntity findByTuserByUidAndAndTgroupByGid(TuserEntity tuserEntity, TgroupEntity tgroupEntity);
+
     List<RusergroupEntity> findByTuserByUid(TuserEntity tuserEntity);
 }

@@ -84,7 +84,7 @@ public class SurveyingApplication {
 //            TresourceEntity tresource = dhtmlxService.findByCode(tresourceEntity.getCode());
 //            Boolean rrf = tUserService.allocationRoleResource(troleEntity, tresource);
 
-            if (uf!=null) {
+            if (uf != null) {
                 System.out.println("管理员账户：system 创建成功");
                 System.out.println("管理员账户clientId：" + tuserEntity.getToken());
             } else {

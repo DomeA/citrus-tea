@@ -39,13 +39,13 @@ public class AccountAPI {
     @RequestMapping(value = "/register/user", method = RequestMethod.POST)
     public ClientMessage addUSer(Register register) {
         ClientMessage clientMessage;
-        TuserEntity tuserEntity = tUserService.createUser(register.getLoginName().trim(), register.getPwd(), register.getEmail().trim(), register.getPhone().trim(),register.getWeb() ,register.getApp(),register.getDesktop(),register.getMac().trim(),register.getEquipmentid().trim(),register.getTerm());
-        System.out.println("用户：" + register.getName() + (tuserEntity!=null ? "创建成功！" : "已经存在"));
-        if (tuserEntity!=null) {
+        TuserEntity tuserEntity = tUserService.createUser(register.getLoginName().trim(), register.getPwd(), register.getEmail().trim(), register.getPhone().trim(), register.getWeb(), register.getApp(), register.getDesktop(), register.getMac().trim(), register.getEquipmentid().trim(), register.getTerm());
+        System.out.println("用户：" + register.getName() + (tuserEntity != null ? "创建成功！" : "已经存在"));
+        if (tuserEntity != null) {
             TroleEntity troleEntity = tUserService.findRoleByName("ROLE_SIGHTSEER");
             TgroupEntity tgroupEntity = tUserService.findGroupByName("GROUP_SYSADMIN");
-            tUserService.allocationUserGroup(tuserEntity,tgroupEntity);
-            tUserService.allocationUserRole(tuserEntity,troleEntity);
+            tUserService.allocationUserGroup(tuserEntity, tgroupEntity);
+            tUserService.allocationUserRole(tuserEntity, troleEntity);
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(), ResultStatusCode.OK.getMsg(), tuserEntity.getToken());
         } else {
             clientMessage = new ClientMessage(ResultStatusCode.INVALID_USERNAME.getCode(), ResultStatusCode.INVALID_USERNAME.getMsg(), "用户名已经存在");
@@ -57,7 +57,7 @@ public class AccountAPI {
     public ClientMessage inspectUSerPwd(@PathVariable String loginName) {
         ClientMessage clientMessage;
         TuserEntity tuserEntity = tUserService.findByNameOrEmailOrPhone(loginName);
-        if (tuserEntity!=null) {
+        if (tuserEntity != null) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(), ResultStatusCode.OK.getMsg(), "用户存在并可用");
         } else {
             clientMessage = new ClientMessage(ResultStatusCode.INVALID_USERNAME.getCode(), ResultStatusCode.INVALID_USERNAME.getMsg(), "用户名不存在");
@@ -70,12 +70,12 @@ public class AccountAPI {
         return updateUserPwd(forgetUser);
     }
 
-    @RequestMapping(value = "/forget/update", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/forget/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientMessage updateUserPwd(@RequestBody ForgetUser forgetUser) {
         ClientMessage clientMessage;
         TuserEntity tuserEntity = tUserService.findByNameOrEmailOrPhone(forgetUser.getUserName());
-        if (tuserEntity!=null) {
-            String pwdstr = MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5((forgetUser.getPassword()+tuserEntity.getSalt()).getBytes()));
+        if (tuserEntity != null) {
+            String pwdstr = MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5((forgetUser.getPassword() + tuserEntity.getSalt()).getBytes()));
             tuserEntity.setPwd(pwdstr);
             tUserService.save(tuserEntity);
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(), ResultStatusCode.OK.getMsg(), "用户密码修改成功");
