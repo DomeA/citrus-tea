@@ -13,7 +13,6 @@ public class TgroupEntity {
     private String name;
     private String type;
     private String parentId;
-    private String processIds;
     private Set<RusergroupEntity> rusergroupsByGid;
 
     @Id
@@ -58,7 +57,6 @@ public class TgroupEntity {
         if (gid != null ? !gid.equals(that.gid) : that.gid != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (parentId != null ? !parentId.equals(that.parentId) : that.parentId != null) return false;
-        if (processIds != null ? !processIds.equals(that.processIds) : that.processIds != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
@@ -69,7 +67,6 @@ public class TgroupEntity {
         int result = gid != null ? gid.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
-        result = 31 * result + (processIds != null ? processIds.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
@@ -82,17 +79,6 @@ public class TgroupEntity {
     public void setRusergroupsByGid(Set<RusergroupEntity> rusergroupsByGid) {
         this.rusergroupsByGid = rusergroupsByGid;
     }
-
-    @Basic
-    @Column(name = "processids")
-    public String getProcessIds() {
-        return processIds;
-    }
-
-    public void setProcessIds(String processIds) {
-        this.processIds = processIds;
-    }
-
     @Basic
     @Column(name = "type")
     public String getType() {

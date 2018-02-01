@@ -57,8 +57,6 @@ public interface TUserService {
 
     Boolean createGroup(String name, String type, String pid);
 
-    Boolean createGroup(String name, String type, String pid, String processids);
-
     Boolean allocationUserGroup(TuserEntity tuserEntity, TgroupEntity tgroupEntity);
 
     Boolean allocationUserRole(TuserEntity tuserEntity, TroleEntity troleEntity);

@@ -247,20 +247,6 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public Boolean createGroup(String name, String type, String pid, String processids) {
-        if (tGroupRepository.findByName(name) != null) {
-            return false;
-        }
-        TgroupEntity tgroupEntity = new TgroupEntity();
-        tgroupEntity.setName(name);
-        tgroupEntity.setType(type);
-        tgroupEntity.setParentId(pid);
-        tgroupEntity.setProcessIds(processids);
-        save(tgroupEntity);
-        return true;
-    }
-
-    @Override
     public Boolean allocationUserGroup(TuserEntity tuserEntity, TgroupEntity tgroupEntity) {
         if (rUserGroupRepository.findByTuserByUidAndAndTgroupByGid(tuserEntity, tgroupEntity) == null) {
             RusergroupEntity rusergroupEntity = new RusergroupEntity();

@@ -6,6 +6,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.AccountService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.TUserService;
+import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Group;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Role;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ClientMessage;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ResultStatusCode;
@@ -49,7 +50,7 @@ public class DataAPI {
     public ClientMessage createRole(@RequestBody Role role) {
         ClientMessage clientMessage;
         Boolean f = tUserService.createRole(role.getName().trim(), role.getType().trim(), role.getDescribe().trim());
-        System.out.println("角色：" + role.getName() + (f ? "成功！" : "已经存在"));
+        System.out.println("角色：" + role.getName() + (f ? "创建成功！" : "已经存在"));
         if(f){
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), "角色创建成功");
@@ -152,17 +153,27 @@ public class DataAPI {
     }
 
 
-    @RequestMapping(value = "/create/group", method = RequestMethod.POST)
-    public void createGroup(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
-        Boolean f = tUserService.createRole(name, text, describe);
-        System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));
+    @RequestMapping(value = "/create/group", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ClientMessage createGroup(@RequestBody Group group) {
+        ClientMessage clientMessage;
+        Boolean f = tUserService.createGroup(group.getName().trim(), group.getType().trim(), group.getParentId().trim());
+        System.out.println("组：" + group.getName() + (f ? "创建成功！" : "已经存在"));
+        if(f){
+            clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
+                    ResultStatusCode.OK.getMsg(), "组创建成功");
+            return clientMessage;
+        }else{
+            clientMessage = new ClientMessage(ResultStatusCode.INVALID_ROLENAME.getCode(),
+                    ResultStatusCode.OK.getMsg(), "组已存在，无法创建");
+            return clientMessage;
+        }
     }
-    @RequestMapping(value = "/update/group", method = RequestMethod.POST)
+    @RequestMapping(value = "/update/group", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateGroup(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
         Boolean f = tUserService.createRole(name, text, describe);
         System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));
     }
-    @RequestMapping(value = "/delete/group", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete/group", method = RequestMethod.DELETE)
     public void deleteGroup(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
         Boolean f = tUserService.createRole(name, text, describe);
         System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));

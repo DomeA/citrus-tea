@@ -1,6 +1,7 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.rest;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.config.Audience;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Login;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.AccessToken;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ClientMessage;
@@ -17,10 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -77,11 +75,12 @@ public class TokenAPI {
                         ResultStatusCode.INVALID_TIME.getMsg(), null);
                 return clientMessage;
             }
-            List<String> roleByName = tUserService.findRoleByUser(user);
+
+            List<TroleEntity> troleEntities = tUserService.findRoleByUser(user);
             StringBuilder stringBuilder = new StringBuilder();
-            if (roleByName.size() > 0) {
-                for (String role : roleByName) {
-                    stringBuilder.append(role);
+            if(troleEntities.size()>0){
+                for(TroleEntity troleEntity:troleEntities){
+                    stringBuilder.append(troleEntity.getName());
                 }
             }
             //拼装accessToken
