@@ -53,7 +53,7 @@ public class SurveyingApplication {
     @Autowired
     public void init() {
         try {
-            Boolean uf = tUserService.createUser("system", "domea", "domeastudio@hotmail.com", "18182669306", true, false, false, "", "", 999999);
+            TuserEntity uf = tUserService.createUser("system", "domea", "domeastudio@hotmail.com", "18182669306", true, false, false, "", "", 999999);
             Boolean rf1 = tUserService.createRole("ROLE_SYSADMIN", "系统管理员", "系统管理员角色");
             Boolean rf2 = tUserService.createRole("ROLE_SIGHTSEER", "系统游客", "默认角色,游客角色");
             Boolean rf3 = tUserService.createGroup("GROUP_SYSADMIN", "系统管理员组", "0");
@@ -84,7 +84,7 @@ public class SurveyingApplication {
 //            TresourceEntity tresource = dhtmlxService.findByCode(tresourceEntity.getCode());
 //            Boolean rrf = tUserService.allocationRoleResource(troleEntity, tresource);
 
-            if (uf) {
+            if (uf!=null) {
                 System.out.println("管理员账户：system 创建成功");
                 System.out.println("管理员账户clientId：" + tuserEntity.getToken());
             } else {

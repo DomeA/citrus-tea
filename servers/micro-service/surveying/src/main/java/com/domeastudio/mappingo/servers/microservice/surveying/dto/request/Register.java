@@ -7,9 +7,30 @@ public class Register {
     private String name;
     private String loginName;
     private String pwd;
+    private Boolean web;
+    private Boolean app;
+    private Boolean desktop;
+    private String mac;
+    private String equipmentid;
     private String email;
     private String phone;
     private Integer term;
+
+    public String getMac() {
+        return mac;
+    }
+
+    public void setMac(String mac) {
+        this.mac = mac;
+    }
+
+    public String getEquipmentid() {
+        return equipmentid;
+    }
+
+    public void setEquipmentid(String equipmentid) {
+        this.equipmentid = equipmentid;
+    }
 
     public String getName() {
         return name;
@@ -57,5 +78,29 @@ public class Register {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public Boolean getWeb() {
+        return web;
+    }
+
+    public void setWeb(Boolean web) {
+        this.web = web;
+    }
+
+    public Boolean getApp() {
+        return app;
+    }
+
+    public void setApp(Boolean app) {
+        this.app = app;
+    }
+
+    public Boolean getDesktop() {
+        return desktop;
+    }
+
+    public void setDesktop(Boolean desktop) {
+        this.desktop = desktop;
     }
 }

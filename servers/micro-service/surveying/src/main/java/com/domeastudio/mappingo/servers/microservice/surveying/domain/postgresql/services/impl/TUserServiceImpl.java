@@ -91,8 +91,8 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public void save(TuserEntity entity) {
-        tUserRepository.save(entity);
+    public TuserEntity save(TuserEntity entity) {
+        return tUserRepository.save(entity);
     }
 
     @Override
@@ -138,11 +138,11 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
-    public Boolean createUser(String loginName, String pwd, String email, String phone, Boolean web, Boolean app, Boolean desktop, String mac, String equipmentid, Integer term) {
+    public TuserEntity createUser(String loginName, String pwd, String email, String phone, Boolean web, Boolean app, Boolean desktop, String mac, String equipmentid, Integer term) {
         if (tUserRepository.findByName(loginName) != null ||
                 tUserRepository.findByEmail(email) != null ||
                 tUserRepository.findByPhone(phone) != null) {
-            return false;
+            return null;
         }
         String salt = UUID.randomUUID().toString().replace("-", "");
         TuserEntity tuserEntity = new TuserEntity();
@@ -152,13 +152,17 @@ public class TUserServiceImpl implements TUserService {
         tuserEntity.setPwd(pwdstr);
         tuserEntity.setPhone(phone);
         tuserEntity.setSalt(salt);
+        tuserEntity.setApp(app);
+        tuserEntity.setDesktop(desktop);
+        tuserEntity.setMac(mac);
+        tuserEntity.setEquipmentid(equipmentid);
+        tuserEntity.setWeb(web);
         String rtime = DateUtil.dateToString("yyyy-MM-dd", new Date(), "MEDIUM");
         tuserEntity.setRegistTime(rtime);
         tuserEntity.setAuthorTime(term);
         String token = UUID.randomUUID().toString().replace("-", "");
         tuserEntity.setToken(token);
-        save(tuserEntity);
-        return true;
+        return save(tuserEntity);
     }
 
     @Override

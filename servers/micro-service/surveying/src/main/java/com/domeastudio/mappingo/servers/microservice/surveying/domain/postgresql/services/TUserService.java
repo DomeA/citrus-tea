@@ -27,7 +27,7 @@ public interface TUserService {
 
     TresourceEntity findResourceByName(String name);
 
-    void save(TuserEntity entity);
+    TuserEntity save(TuserEntity entity);
 
     void save(TroleEntity troleEntity);
 
@@ -39,7 +39,7 @@ public interface TUserService {
 
     List<String> findRoleByUser(TuserEntity entity);
 
-    Boolean createUser(String name, String pwd, String email, String phone, Boolean web, Boolean app, Boolean desktop, String mac, String equipmentid, Integer term);
+    TuserEntity createUser(String name, String pwd, String email, String phone, Boolean web, Boolean app, Boolean desktop, String mac, String equipmentid, Integer term);
 
     Boolean createRole(String name, String type, String describe);
 

@@ -2,7 +2,6 @@ package com.domeastudio.mappingo.servers.microservice.surveying.rest;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.config.Audience;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Login;
-import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Register;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.AccessToken;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ClientMessage;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ResultStatusCode;
@@ -26,8 +25,11 @@ import java.util.Map;
 @Api("用户登录服务")
 @RequestMapping("/oauth")
 public class TokenAPI {
+    /**
+     * 用户输入密码，当客户端是非浏览器时，需要客户端ID，这个ID是用户注册时生成的（根据MAC或设备ID计算出来的）
+     */
     @Autowired
-    TUserService tUserService;
+    private TUserService tUserService;
 
     @Autowired
     private Audience audienceEntity;
@@ -35,8 +37,7 @@ public class TokenAPI {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public Map<String, String> test() {
         Map<String, String> stringStringMap = new HashMap<>();
-        stringStringMap.put("id", "100");
-        stringStringMap.put("name", "domea");
+        stringStringMap.put("message", "hello world");
         return stringStringMap;
     }
 
@@ -114,19 +115,5 @@ public class TokenAPI {
             }
         }
         return false;
-    }
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ClientMessage addUSer(Register register) {
-        ClientMessage clientMessage;
-        Boolean f = tUserService.createUser(register.getLoginName(), register.getPwd(), register.getEmail(), register.getPhone(),register.getWeb() ,register.getApp(),register.getDesktop(),register.getMac(),register.getEquipmentid(),register.getTerm());
-        System.out.println("用户：" + register.getName() + (f ? "创建成功！" : "已经存在"));
-        if (f) {
-            TuserEntity tuserEntity = tUserService.findUserByName(register.getName());
-            clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(), ResultStatusCode.OK.getMsg(), tuserEntity.getToken());
-        } else {
-            clientMessage = new ClientMessage(ResultStatusCode.INVALID_USERNAME.getCode(), ResultStatusCode.INVALID_USERNAME.getMsg(), "用户名已经存在");
-        }
-        return clientMessage;
     }
 }
