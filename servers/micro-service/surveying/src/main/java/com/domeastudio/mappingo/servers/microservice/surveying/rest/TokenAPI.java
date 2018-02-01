@@ -10,6 +10,8 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import com.domeastudio.mappingo.servers.microservice.surveying.util.DateUtil;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.JwtUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +36,8 @@ public class TokenAPI {
     @Autowired
     private Audience audienceEntity;
 
+    @ApiOperation(value = "用于测试服务是否正常", notes = "", httpMethod = "GET")
+    @ApiResponse(code = 200, message = "String", response = Map.class)
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public Map<String, String> test() {
         Map<String, String> stringStringMap = new HashMap<>();

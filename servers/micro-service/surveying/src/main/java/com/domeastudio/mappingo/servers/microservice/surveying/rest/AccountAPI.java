@@ -10,6 +10,8 @@ import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.Clie
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ResultStatusCode;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.security.MD5SHAHelper;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,8 @@ public class AccountAPI {
     @Autowired
     private TUserService tUserService;
 
+    @ApiOperation(value = "用于测试服务是否正常", notes = "", httpMethod = "GET")
+    @ApiResponse(code = 200, message = "String", response = Map.class)
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public Map<String, String> test() {
         Map<String, String> stringStringMap = new HashMap<>();
