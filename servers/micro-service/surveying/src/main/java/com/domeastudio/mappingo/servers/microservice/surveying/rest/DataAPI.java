@@ -7,6 +7,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.AccountService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.TUserService;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Group;
+import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Register;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Role;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ClientMessage;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ResultStatusCode;
@@ -170,23 +171,43 @@ public class DataAPI {
     }
 
     @RequestMapping(value = "/update/group", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ClientMessage updateGroup(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
-        Boolean f = tUserService.createRole(name, text, describe);
-        System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));
-        return null;
+    public ClientMessage updateGroup(@RequestBody Group group) {
+        TgroupEntity tgroupEntity=tUserService.findGroupByName(group.getName());
+        if (null != group.getType() &&
+                !"".equals(group.getType().trim()) &&
+                !tgroupEntity.getType().equals(group.getType())) {
+            group.setType(group.getType());
+            tUserService.save(tgroupEntity);
+        }
+        if (null != group.getName() &&
+                !"".equals(group.getName().trim()) &&
+                !tgroupEntity.getName().equals(group.getName())) {
+            tgroupEntity.setName(group.getName());
+            tUserService.save(tgroupEntity);
+        }
+        if (null != group.getParentId() &&
+                !"".equals(group.getParentId().trim()) &&
+                !tgroupEntity.getParentId().equals(group.getParentId())) {
+            tgroupEntity.setParentId(group.getParentId());
+            tUserService.save(tgroupEntity);
+        }
+        ClientMessage clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
+                ResultStatusCode.OK.getMsg(), "组更新成功");
+        return clientMessage;
     }
 
-    @RequestMapping(value = "/delete/group", method = RequestMethod.DELETE)
-    public void deleteGroup(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
-        Boolean f = tUserService.createRole(name, text, describe);
-        System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));
+    @RequestMapping(value = "/delete/group/{groupId}", method = RequestMethod.DELETE)
+    public ClientMessage deleteGroup(@PathVariable String groupId) {
+        ClientMessage clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
+                ResultStatusCode.OK.getMsg(), "组删除成功");
+        tUserService.deleteGroup(groupId);
+        return clientMessage;
     }
 
     //用户管理
     @RequestMapping(value = "/update/user", method = RequestMethod.POST)
-    public void updateUser(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
-        Boolean f = tUserService.createRole(name, text, describe);
-        System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));
+    public void updateUser(@RequestBody Register register) {
+        TuserEntity tuserEntity =tUserService.findByNameOrEmailOrPhone(register.getName());
     }
 
     @RequestMapping(value = "/get/users", method = RequestMethod.POST)
