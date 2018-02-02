@@ -24,6 +24,8 @@ public class BbuildingProcessformEntity {
     private String surveyType;
     //接件情况
     private String receive;
+    private String datumId;
+    private String projectAchievementsId;
     //实测情况
     //计算方法
     //经办人意见
@@ -93,6 +95,8 @@ public class BbuildingProcessformEntity {
             return false;
         if (surveyType != null ? !surveyType.equals(that.surveyType) : that.surveyType != null) return false;
         if (receive != null ? !receive.equals(that.receive) : that.receive != null) return false;
+        if (datumId != null ? !datumId.equals(that.datumId) : that.datumId != null) return false;
+        if (projectAchievementsId != null ? !projectAchievementsId.equals(that.projectAchievementsId) : that.projectAchievementsId != null) return false;
 
         return true;
     }
@@ -107,6 +111,8 @@ public class BbuildingProcessformEntity {
         result = 31 * result + (entrustmentUnit != null ? entrustmentUnit.hashCode() : 0);
         result = 31 * result + (surveyType != null ? surveyType.hashCode() : 0);
         result = 31 * result + (receive != null ? receive.hashCode() : 0);
+        result = 31 * result + (projectAchievementsId != null ? projectAchievementsId.hashCode() : 0);
+        result = 31 * result + (datumId != null ? datumId.hashCode() : 0);
         return result;
     }
 
@@ -148,5 +154,21 @@ public class BbuildingProcessformEntity {
 
     public void setReceive(String receive) {
         this.receive = receive;
+    }
+
+    public String getDatumId() {
+        return datumId;
+    }
+
+    public void setDatumId(String datumId) {
+        this.datumId = datumId;
+    }
+
+    public String getProjectAchievementsId() {
+        return projectAchievementsId;
+    }
+
+    public void setProjectAchievementsId(String projectAchievementsId) {
+        this.projectAchievementsId = projectAchievementsId;
     }
 }

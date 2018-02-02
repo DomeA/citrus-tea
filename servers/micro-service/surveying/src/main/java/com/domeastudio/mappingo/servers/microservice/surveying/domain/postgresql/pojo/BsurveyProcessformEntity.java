@@ -24,6 +24,8 @@ public class BsurveyProcessformEntity {
     private String surveyType;
     //接件情况
     private String receive;
+    private String datumId;
+    private String projectAchievementsId;
     private Set<BapprovalrecordEntity> bapprovalrecordsByBid;
 
     @Id
@@ -101,5 +103,21 @@ public class BsurveyProcessformEntity {
 
     public void setBapprovalrecordsByBid(Set<BapprovalrecordEntity> bapprovalrecordsByBid) {
         this.bapprovalrecordsByBid = bapprovalrecordsByBid;
+    }
+
+    public String getDatumId() {
+        return datumId;
+    }
+
+    public void setDatumId(String datumId) {
+        this.datumId = datumId;
+    }
+
+    public String getProjectAchievementsId() {
+        return projectAchievementsId;
+    }
+
+    public void setProjectAchievementsId(String projectAchievementsId) {
+        this.projectAchievementsId = projectAchievementsId;
     }
 }
