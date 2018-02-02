@@ -25,6 +25,8 @@ public interface TUserService {
 
     TuserEntity findUserByName(String name);
 
+    List<TuserEntity> findUserAll();
+
     TroleEntity findRoleByName(String name);
 
     List<TroleEntity> findRoleAll();
@@ -37,6 +39,8 @@ public interface TUserService {
 
     void deleteAllRole();
 
+    void deleteGroup(String gid);
+
     void save(TroleEntity troleEntity);
 
     void save(TresourceEntity tresourceEntity);
@@ -48,6 +52,8 @@ public interface TUserService {
     List<TroleEntity> findRoleByUser(TuserEntity tuserEntity);
 
     List<TgroupEntity> findGroupByUser(TuserEntity tuserEntity);
+
+    List<TuserEntity> findUserByGroup(TgroupEntity tgroupEntity);
 
     TuserEntity createUser(String name, String pwd, String email, String phone, Boolean web, Boolean app, Boolean desktop, String mac, String equipmentid, Integer term);
 

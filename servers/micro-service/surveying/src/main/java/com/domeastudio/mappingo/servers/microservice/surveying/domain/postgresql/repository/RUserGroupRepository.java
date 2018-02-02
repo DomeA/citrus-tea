@@ -13,4 +13,6 @@ public interface RUserGroupRepository extends JpaRepository<RusergroupEntity, St
     RusergroupEntity findByTuserByUidAndAndTgroupByGid(TuserEntity tuserEntity, TgroupEntity tgroupEntity);
 
     List<RusergroupEntity> findByTuserByUid(TuserEntity tuserEntity);
+
+    List<RusergroupEntity> findByTgroupByGid(TgroupEntity tgroupEntity);
 }
