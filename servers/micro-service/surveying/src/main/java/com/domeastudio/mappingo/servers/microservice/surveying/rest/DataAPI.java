@@ -1,6 +1,7 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.rest;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.services.FileService;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RusergroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TgroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
@@ -58,7 +59,7 @@ public class DataAPI {
             return clientMessage;
         } else {
             clientMessage = new ClientMessage(ResultStatusCode.INVALID_ROLENAME.getCode(),
-                    ResultStatusCode.OK.getMsg(), "角色已存在，无法创建");
+                    ResultStatusCode.INVALID_ROLENAME.getMsg(), "角色已存在，无法创建");
             return clientMessage;
         }
     }
@@ -165,7 +166,7 @@ public class DataAPI {
             return clientMessage;
         } else {
             clientMessage = new ClientMessage(ResultStatusCode.INVALID_ROLENAME.getCode(),
-                    ResultStatusCode.OK.getMsg(), "组已存在，无法创建");
+                    ResultStatusCode.INVALID_ROLENAME.getMsg(), "组已存在，无法创建");
             return clientMessage;
         }
     }
@@ -210,11 +211,51 @@ public class DataAPI {
         TuserEntity tuserEntity =tUserService.findByNameOrEmailOrPhone(register.getName());
     }
 
-    @RequestMapping(value = "/get/users", method = RequestMethod.POST)
-    public void getUsers(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
-        Boolean f = tUserService.createRole(name, text, describe);
-        System.out.println("角色：" + name + (f ? "成功！" : "已经存在"));
+    @RequestMapping(value = "/get/users", method = RequestMethod.GET)
+    public ClientMessage getUsers() {
+        ClientMessage clientMessage;
+        List<TuserEntity> tuserEntities=tUserService.findUserAll();
+        if(tuserEntities.size()>0){
+            clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
+                    ResultStatusCode.OK.getMsg(), tuserEntities);
+        }else{
+            clientMessage = new ClientMessage(ResultStatusCode.SYSTEM_ERR.getCode(),
+                    ResultStatusCode.SYSTEM_ERR.getMsg(), "用户列表不存在");
+        }
+        return clientMessage;
     }
+
+    @RequestMapping(value = "/get/user/{user}", method = RequestMethod.GET)
+    public ClientMessage getUserByUid(@PathVariable String user) {
+        ClientMessage clientMessage;
+        TuserEntity tuserEntity = tUserService.findByNameOrEmailOrPhone(user);
+        if(tuserEntity!=null){
+            clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
+                    ResultStatusCode.OK.getMsg(), tuserEntity);
+        }else{
+            clientMessage = new ClientMessage(ResultStatusCode.INVALID_USERNAME.getCode(),
+                    ResultStatusCode.INVALID_USERNAME.getMsg(), "用户不存在");
+        }
+        return clientMessage;
+    }
+
+    @RequestMapping(value = "/get/users/{groupId}", method = RequestMethod.GET)
+    public ClientMessage getUsersByGid(@PathVariable String groupId) {
+        ClientMessage clientMessage;
+        TgroupEntity tgroupEntity =tUserService.findGroupOne(groupId);
+
+        List<TuserEntity> tuserEntities=tUserService.findUserByGroup(tgroupEntity);
+
+        if(tuserEntities.size()>0){
+            clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
+                    ResultStatusCode.OK.getMsg(), tuserEntities);
+        }else{
+            clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
+                    ResultStatusCode.OK.getMsg(), "当前组内用户列表不存在");
+        }
+        return clientMessage;
+    }
+
 
     @RequestMapping(value = "/delete/user", method = RequestMethod.POST)
     public void deleteUser(@RequestParam("name") String name, @RequestParam("text") String text, @RequestParam("describe") String describe) {
