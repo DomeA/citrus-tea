@@ -1,8 +1,11 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Id;
 import java.util.List;
 
+@Document(collection = "archives_info")
 public class BuildingHouseholdEntity {
     //    业务号	YWH	Char	255
 //    幢号	ZH	Char	255
