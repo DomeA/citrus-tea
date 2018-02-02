@@ -1,7 +1,6 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.rest;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.services.FileService;
-import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.RusergroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TgroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TuserEntity;
@@ -269,8 +268,46 @@ public class DataAPI {
         tUserService.createResource(name);
     }
 
+    //分配 用户 角色 关系
     @RequestMapping(value = "/allocation/{uid}/{rid}", method = RequestMethod.GET)
-    public void allocationUserRole(@PathVariable String uid, @PathVariable String rid) {
+    public void allocationUserRole(@RequestBody String uid,@RequestBody String rid) {
+        tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
+
+    }
+    //分配 用户 组 关系
+    @RequestMapping(value = "/allocation/{uid}/{gid}", method = RequestMethod.GET)
+    public void allocationUserGroup(@PathVariable String uid, @PathVariable String gid) {
+        tUserService.allocationUserGroup(tUserService.findUserOne(uid), tUserService.findGroupOne(gid));
+    }
+    //分配 用户 资源 关系
+    @RequestMapping(value = "/allocation/{uid}/{reid}", method = RequestMethod.GET)
+    public void allocationUserResource(@PathVariable String uid, @PathVariable String rid) {
+        tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
+    }
+    //分配 角色 资源 关系
+    @RequestMapping(value = "/allocation/{rid}/{reid}", method = RequestMethod.GET)
+    public void allocationRoleResource(@PathVariable String uid, @PathVariable String rid) {
+        tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
+    }
+
+    //删除 角色 资源 关系
+    @RequestMapping(value = "/delallocation/{rid}/{reid}", method = RequestMethod.DELETE)
+    public void delAllocationRoleResource(@PathVariable String uid, @PathVariable String rid) {
+        tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
+    }
+    //删除 用户 资源 关系
+    @RequestMapping(value = "/allocation/{uid}/{reid}", method = RequestMethod.DELETE)
+    public void delAllocationUserResource(@PathVariable String uid, @PathVariable String rid) {
+        tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
+    }
+    //删除 用户 角色 关系
+    @RequestMapping(value = "/allocation/{uid}/{rid}", method = RequestMethod.DELETE)
+    public void delAllocationUserRole(@PathVariable String uid, @PathVariable String rid) {
+        tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
+    }
+    //删除 用户 组 关系
+    @RequestMapping(value = "/allocation/{rid}/{gid}", method = RequestMethod.DELETE)
+    public void delAllocationUserGroup(@PathVariable String uid, @PathVariable String rid) {
         tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
     }
 }
