@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:flowable="http://flowable.org/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.flowable.org/processdef" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1516347109309" name="" targetNamespace="http://www.flowable.org/processdef" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="suvery" isClosed="false" isExecutable="true" name="suvery" processType="None">
+    <startEvent id="startEvent1"/>
+    <userTask activiti:exclusive="true" flowable:assignee="domea" id="sid-DA00E932-53AC-44C5-85FA-FDEB154BDCE5" name="收件">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[domeastudio@hotmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[domea]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[studio]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-3A2D66F8-82B7-464A-8106-10DA33205485" sourceRef="startEvent1" targetRef="sid-DA00E932-53AC-44C5-85FA-FDEB154BDCE5"/>
+    <userTask activiti:exclusive="true" flowable:assignee="zm" id="sid-931F5DFA-4C64-4FCB-A494-7A3DE7776901" name="生产">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[zky168@126.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[z]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[m]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask activiti:exclusive="true" flowable:assignee="domea" id="sid-454ECC41-3215-4429-8934-918717F51199" name="检查">
+      <extensionElements>
+        <modeler:activiti-idm-assignee xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email xmlns:modeler="http://flowable.org/modeler"><![CDATA[domeastudio@hotmail.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname xmlns:modeler="http://flowable.org/modeler"><![CDATA[domea]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname xmlns:modeler="http://flowable.org/modeler"><![CDATA[studio]]></modeler:assignee-info-lastname>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <endEvent id="sid-69DCD6A8-287A-4430-9E56-825B88A0EEF6"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="sid-790D3EC1-9B5C-4817-96A7-E73BA97BA6E5"/>
+    <sequenceFlow id="sid-338E9758-624F-4A0A-807E-6D3A13E1DFE6" sourceRef="sid-454ECC41-3215-4429-8934-918717F51199" targetRef="sid-790D3EC1-9B5C-4817-96A7-E73BA97BA6E5"/>
+    <sequenceFlow id="sid-4708B077-039D-40CB-B0B5-F2384BCE8225" sourceRef="sid-931F5DFA-4C64-4FCB-A494-7A3DE7776901" targetRef="sid-454ECC41-3215-4429-8934-918717F51199"/>
+    <sequenceFlow id="sid-0D814F3E-8B78-414B-95CA-E0D20B66E128" sourceRef="sid-DA00E932-53AC-44C5-85FA-FDEB154BDCE5" targetRef="sid-931F5DFA-4C64-4FCB-A494-7A3DE7776901"/>
+    <sequenceFlow id="sid-CEFB6958-55F8-4E38-B26B-B8BB12138C57" sourceRef="sid-790D3EC1-9B5C-4817-96A7-E73BA97BA6E5" targetRef="sid-69DCD6A8-287A-4430-9E56-825B88A0EEF6"/>
+    <sequenceFlow id="sid-47C17E38-3C67-4E92-B5FC-57699F70B5C6" sourceRef="sid-790D3EC1-9B5C-4817-96A7-E73BA97BA6E5" targetRef="sid-931F5DFA-4C64-4FCB-A494-7A3DE7776901"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="suvery">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="Shape-startEvent1">
+        <omgdc:Bounds height="32.0" width="32.0" x="75.0" y="163.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-DA00E932-53AC-44C5-85FA-FDEB154BDCE5" id="Shape-sid-DA00E932-53AC-44C5-85FA-FDEB154BDCE5">
+        <omgdc:Bounds height="80.0" width="100.0" x="195.0" y="138.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-931F5DFA-4C64-4FCB-A494-7A3DE7776901" id="Shape-sid-931F5DFA-4C64-4FCB-A494-7A3DE7776901">
+        <omgdc:Bounds height="80.0" width="100.0" x="390.0" y="138.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-454ECC41-3215-4429-8934-918717F51199" id="Shape-sid-454ECC41-3215-4429-8934-918717F51199">
+        <omgdc:Bounds height="80.0" width="100.0" x="600.0" y="45.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-69DCD6A8-287A-4430-9E56-825B88A0EEF6" id="Shape-sid-69DCD6A8-287A-4430-9E56-825B88A0EEF6">
+        <omgdc:Bounds height="32.0" width="32.0" x="885.0" y="164.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-790D3EC1-9B5C-4817-96A7-E73BA97BA6E5" id="Shape-sid-790D3EC1-9B5C-4817-96A7-E73BA97BA6E5" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="755.0" y="265.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-CEFB6958-55F8-4E38-B26B-B8BB12138C57" id="BPMNEdge_sid-CEFB6958-55F8-4E38-B26B-B8BB12138C57" sourceElement="sid-790D3EC1-9B5C-4817-96A7-E73BA97BA6E5" targetElement="sid-69DCD6A8-287A-4430-9E56-825B88A0EEF6">
+        <omgdi:waypoint x="787.0" y="281.0"/>
+        <omgdi:waypoint x="899.0" y="246.0"/>
+        <omgdi:waypoint x="899.0" y="195.87450786638755"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0D814F3E-8B78-414B-95CA-E0D20B66E128" id="BPMNEdge_sid-0D814F3E-8B78-414B-95CA-E0D20B66E128" sourceElement="sid-DA00E932-53AC-44C5-85FA-FDEB154BDCE5" targetElement="sid-931F5DFA-4C64-4FCB-A494-7A3DE7776901">
+        <omgdi:waypoint x="295.0" y="178.0"/>
+        <omgdi:waypoint x="390.0" y="178.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-47C17E38-3C67-4E92-B5FC-57699F70B5C6" id="BPMNEdge_sid-47C17E38-3C67-4E92-B5FC-57699F70B5C6" sourceElement="sid-790D3EC1-9B5C-4817-96A7-E73BA97BA6E5" targetElement="sid-931F5DFA-4C64-4FCB-A494-7A3DE7776901">
+        <omgdi:waypoint x="755.0" y="281.0"/>
+        <omgdi:waypoint x="440.0" y="246.0"/>
+        <omgdi:waypoint x="440.0" y="218.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3A2D66F8-82B7-464A-8106-10DA33205485" id="BPMNEdge_sid-3A2D66F8-82B7-464A-8106-10DA33205485" sourceElement="startEvent1" targetElement="sid-DA00E932-53AC-44C5-85FA-FDEB154BDCE5">
+        <omgdi:waypoint x="107.0" y="179.0"/>
+        <omgdi:waypoint x="195.0" y="178.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-338E9758-624F-4A0A-807E-6D3A13E1DFE6" id="BPMNEdge_sid-338E9758-624F-4A0A-807E-6D3A13E1DFE6" sourceElement="sid-454ECC41-3215-4429-8934-918717F51199" targetElement="sid-790D3EC1-9B5C-4817-96A7-E73BA97BA6E5">
+        <omgdi:waypoint x="700.0" y="85.0"/>
+        <omgdi:waypoint x="771.0" y="85.0"/>
+        <omgdi:waypoint x="771.0" y="265.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4708B077-039D-40CB-B0B5-F2384BCE8225" id="BPMNEdge_sid-4708B077-039D-40CB-B0B5-F2384BCE8225" sourceElement="sid-931F5DFA-4C64-4FCB-A494-7A3DE7776901" targetElement="sid-454ECC41-3215-4429-8934-918717F51199">
+        <omgdi:waypoint x="490.0" y="178.0"/>
+        <omgdi:waypoint x="650.0" y="178.0"/>
+        <omgdi:waypoint x="650.0" y="125.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

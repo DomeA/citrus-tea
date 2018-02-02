@@ -1,0 +1,1 @@
+package com.domeastudio.mappingo.servers.microservice.surveying.domain;

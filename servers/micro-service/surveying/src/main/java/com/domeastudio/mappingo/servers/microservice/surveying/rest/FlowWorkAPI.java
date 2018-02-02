@@ -2,6 +2,7 @@ package com.domeastudio.mappingo.servers.microservice.surveying.rest;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.BpmnFileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.services.FileService;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.BusinessService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.WorkFlowService;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.ProcessDef;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ClientMessage;
@@ -30,6 +31,8 @@ public class FlowWorkAPI {
     private WorkFlowService workFlow;
     @Autowired
     private FileService fileService;
+    @Autowired
+    private BusinessService businessService;
 
     @RequestMapping(value = "/process/deployment",
             method = RequestMethod.POST,
