@@ -174,7 +174,7 @@ public class DataAPI {
 
     @RequestMapping(value = "/update/group", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientMessage updateGroup(@RequestBody Group group) {
-        TgroupEntity tgroupEntity=tUserService.findGroupByName(group.getName());
+        TgroupEntity tgroupEntity = tUserService.findGroupByName(group.getName());
         if (null != group.getType() &&
                 !"".equals(group.getType().trim()) &&
                 !tgroupEntity.getType().equals(group.getType())) {
@@ -209,17 +209,17 @@ public class DataAPI {
     //用户管理
     @RequestMapping(value = "/update/user", method = RequestMethod.POST)
     public void updateUser(@RequestBody Register register) {
-        TuserEntity tuserEntity =tUserService.findByNameOrEmailOrPhone(register.getName());
+        TuserEntity tuserEntity = tUserService.findByNameOrEmailOrPhone(register.getName());
     }
 
     @RequestMapping(value = "/get/users", method = RequestMethod.GET)
     public ClientMessage getUsers() {
         ClientMessage clientMessage;
-        List<TuserEntity> tuserEntities=tUserService.findUserAll();
-        if(tuserEntities.size()>0){
+        List<TuserEntity> tuserEntities = tUserService.findUserAll();
+        if (tuserEntities.size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), tuserEntities);
-        }else{
+        } else {
             clientMessage = new ClientMessage(ResultStatusCode.SYSTEM_ERR.getCode(),
                     ResultStatusCode.SYSTEM_ERR.getMsg(), "用户列表不存在");
         }
@@ -230,10 +230,10 @@ public class DataAPI {
     public ClientMessage getUserByUid(@PathVariable String user) {
         ClientMessage clientMessage;
         TuserEntity tuserEntity = tUserService.findByNameOrEmailOrPhone(user);
-        if(tuserEntity!=null){
+        if (tuserEntity != null) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), tuserEntity);
-        }else{
+        } else {
             clientMessage = new ClientMessage(ResultStatusCode.INVALID_USERNAME.getCode(),
                     ResultStatusCode.INVALID_USERNAME.getMsg(), "用户不存在");
         }
@@ -243,14 +243,14 @@ public class DataAPI {
     @RequestMapping(value = "/get/users/{groupId}", method = RequestMethod.GET)
     public ClientMessage getUsersByGid(@PathVariable String groupId) {
         ClientMessage clientMessage;
-        TgroupEntity tgroupEntity =tUserService.findGroupOne(groupId);
+        TgroupEntity tgroupEntity = tUserService.findGroupOne(groupId);
 
-        List<TuserEntity> tuserEntities=tUserService.findUserByGroup(tgroupEntity);
+        List<TuserEntity> tuserEntities = tUserService.findUserByGroup(tgroupEntity);
 
-        if(tuserEntities.size()>0){
+        if (tuserEntities.size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), tuserEntities);
-        }else{
+        } else {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), "当前组内用户列表不存在");
         }
@@ -272,20 +272,23 @@ public class DataAPI {
 
     //分配 用户 角色 关系
     @RequestMapping(value = "/allocation/{uid}/{rid}", method = RequestMethod.GET)
-    public void allocationUserRole(@RequestBody String uid,@RequestBody String rid) {
+    public void allocationUserRole(@RequestBody String uid, @RequestBody String rid) {
         tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
 
     }
+
     //分配 用户 组 关系
     @RequestMapping(value = "/allocation/{uid}/{gid}", method = RequestMethod.GET)
     public void allocationUserGroup(@PathVariable String uid, @PathVariable String gid) {
         tUserService.allocationUserGroup(tUserService.findUserOne(uid), tUserService.findGroupOne(gid));
     }
+
     //分配 用户 资源 关系
     @RequestMapping(value = "/allocation/{uid}/{reid}", method = RequestMethod.GET)
     public void allocationUserResource(@PathVariable String uid, @PathVariable String rid) {
         tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
     }
+
     //分配 角色 资源 关系
     @RequestMapping(value = "/allocation/{rid}/{reid}", method = RequestMethod.GET)
     public void allocationRoleResource(@PathVariable String uid, @PathVariable String rid) {
@@ -297,16 +300,19 @@ public class DataAPI {
     public void delAllocationRoleResource(@PathVariable String uid, @PathVariable String rid) {
         tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
     }
+
     //删除 用户 资源 关系
     @RequestMapping(value = "/allocation/{uid}/{reid}", method = RequestMethod.DELETE)
     public void delAllocationUserResource(@PathVariable String uid, @PathVariable String rid) {
         tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
     }
+
     //删除 用户 角色 关系
     @RequestMapping(value = "/allocation/{uid}/{rid}", method = RequestMethod.DELETE)
     public void delAllocationUserRole(@PathVariable String uid, @PathVariable String rid) {
         tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
     }
+
     //删除 用户 组 关系
     @RequestMapping(value = "/allocation/{rid}/{gid}", method = RequestMethod.DELETE)
     public void delAllocationUserGroup(@PathVariable String uid, @PathVariable String rid) {

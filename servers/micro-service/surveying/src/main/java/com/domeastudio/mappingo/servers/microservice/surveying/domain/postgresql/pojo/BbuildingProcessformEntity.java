@@ -96,7 +96,8 @@ public class BbuildingProcessformEntity {
         if (surveyType != null ? !surveyType.equals(that.surveyType) : that.surveyType != null) return false;
         if (receive != null ? !receive.equals(that.receive) : that.receive != null) return false;
         if (datumId != null ? !datumId.equals(that.datumId) : that.datumId != null) return false;
-        if (projectAchievementsId != null ? !projectAchievementsId.equals(that.projectAchievementsId) : that.projectAchievementsId != null) return false;
+        if (projectAchievementsId != null ? !projectAchievementsId.equals(that.projectAchievementsId) : that.projectAchievementsId != null)
+            return false;
 
         return true;
     }

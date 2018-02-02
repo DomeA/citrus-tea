@@ -53,6 +53,21 @@ public class BusinessServiceImpl implements BusinessService {
         return obj;
     }
 
+    @Override
+    public void updateBuildingProcessform(BbuildingProcessformEntity bbuildingProcessformEntity) {
+
+    }
+
+    @Override
+    public void updateCadastralProcessform(BcadastralProcessformEntity bcadastralProcessformEntity) {
+
+    }
+
+    @Override
+    public void updateSurveyProcessform(BsurveyProcessformEntity bsurveyProcessformEntity) {
+
+    }
+
     private BsurveyProcessformEntity newSurveyProcess() {
         BsurveyProcessformEntity bsurveyProcessformEntity = new BsurveyProcessformEntity();
 

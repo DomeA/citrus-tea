@@ -133,10 +133,10 @@ public class TUserServiceImpl implements TUserService {
 
     @Override
     public void deleteGroup(String gid) {
-        TgroupEntity tgroupEntity=tGroupRepository.findOne(gid);
-        List<RusergroupEntity> rusergroupEntities=rUserGroupRepository.findByTgroupByGid(tgroupEntity);
+        TgroupEntity tgroupEntity = tGroupRepository.findOne(gid);
+        List<RusergroupEntity> rusergroupEntities = rUserGroupRepository.findByTgroupByGid(tgroupEntity);
 
-        for(RusergroupEntity rusergroupEntity : rusergroupEntities){
+        for (RusergroupEntity rusergroupEntity : rusergroupEntities) {
             rUserGroupRepository.delete(rusergroupEntity.getId());
         }
         tGroupRepository.delete(gid);
@@ -198,9 +198,9 @@ public class TUserServiceImpl implements TUserService {
     @Override
     public List<TuserEntity> findUserByGroup(TgroupEntity tgroupEntity) {
         List<RusergroupEntity> rusergroupEntities = rUserGroupRepository.findByTgroupByGid(tgroupEntity);
-        if(rusergroupEntities.size()>0){
-            List<TuserEntity> tuserEntities=new ArrayList<>();
-            for(RusergroupEntity rusergroupEntity :rusergroupEntities){
+        if (rusergroupEntities.size() > 0) {
+            List<TuserEntity> tuserEntities = new ArrayList<>();
+            for (RusergroupEntity rusergroupEntity : rusergroupEntities) {
                 tuserEntities.add(rusergroupEntity.getTuserByUid());
             }
             return tuserEntities;
