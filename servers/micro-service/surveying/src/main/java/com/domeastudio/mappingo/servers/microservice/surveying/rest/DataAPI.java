@@ -137,7 +137,6 @@ public class DataAPI {
         List<TgroupEntity> tgroupEntities = tUserService.findGroupAll();
         ClientMessage clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                 ResultStatusCode.OK.getMsg(), tgroupEntities);
-
         return clientMessage;
     }
 
