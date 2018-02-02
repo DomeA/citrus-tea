@@ -65,7 +65,6 @@ public class FileAPI {
 //                    stream.write(bytes);
 //                    stream.close();
                     fileEntities.add(filetemp);
-
                 } catch (Exception e) {
                     //stream = null;
                     clientMessage = new ClientMessage(ResultStatusCode.SYSTEM_ERR.getCode(),
@@ -80,7 +79,6 @@ public class FileAPI {
         }
         projectEntity.setFileEntity(fileEntities);
         ProjectEntity p = fileService.saveProject(projectEntity);
-
         clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                 ResultStatusCode.OK.getMsg(), p);
         return clientMessage;
