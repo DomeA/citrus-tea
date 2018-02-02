@@ -64,8 +64,6 @@ public class SurveyingApplication {
             Boolean urf = tUserService.allocationUserRole(tuserEntity, troleEntity);
             Boolean uug = tUserService.allocationUserGroup(tuserEntity, tgroupEntity);
             accountService.synAllUserAndRoleToFlowable();
-
-
 //            File iconFile = ResourceUtils.getFile("classpath:img/menu32.png");
 //            SmallFileEntity smallFileEntity = new SmallFileEntity();
 //            smallFileEntity.setName("菜单注册图标");
