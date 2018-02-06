@@ -11,14 +11,10 @@ import java.util.Set;
 public class TresourceEntity {
     private String reid;
     private String name;
-    /**
-     * 0000-0000-0000-0000-0000-0000-00000-0000-0000-0000
-     * 十级菜单
-     */
-    private String code;
     private String iconId;
     private String type;
     private Boolean selected;
+    private String code;
     private String parenId;
     private Set<RroleresourceEntity> rroleresourcesByReid;
     private Set<RuserresourceEntity> ruserresourcesByReid;
@@ -54,6 +50,11 @@ public class TresourceEntity {
 
         if (reid != null ? !reid.equals(that.reid) : that.reid != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (iconId != null ? !iconId.equals(that.iconId) : that.iconId != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (selected != null ? !selected.equals(that.selected) : that.selected != null) return false;
+        if (parenId != null ? !parenId.equals(that.parenId) : that.parenId != null) return false;
+        if (code != null ? !code.equals(that.code) : that.code != null) return false;
 
         return true;
     }
@@ -62,6 +63,11 @@ public class TresourceEntity {
     public int hashCode() {
         int result = reid != null ? reid.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (iconId != null ? iconId.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (selected != null ? selected.hashCode() : 0);
+        result = 31 * result + (parenId != null ? parenId.hashCode() : 0);
+        result = 31 * result + (code != null ? code.hashCode() : 0);
         return result;
     }
 
@@ -81,19 +87,6 @@ public class TresourceEntity {
 
     public void setRuserresourcesByReid(Set<RuserresourceEntity> ruserresourcesByReid) {
         this.ruserresourcesByReid = ruserresourcesByReid;
-    }
-
-    @Basic
-    @Column(name = "code")
-    public String getCode() {
-        if (code.length() > 49) {
-            return code.substring(0, 48);
-        }
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     @Basic
@@ -134,5 +127,15 @@ public class TresourceEntity {
 
     public void setParenId(String parenId) {
         this.parenId = parenId;
+    }
+
+    @Basic
+    @Column(name = "code")
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
