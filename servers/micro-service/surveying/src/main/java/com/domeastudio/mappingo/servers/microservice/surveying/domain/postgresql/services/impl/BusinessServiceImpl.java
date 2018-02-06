@@ -53,19 +53,67 @@ public class BusinessServiceImpl implements BusinessService {
         return obj;
     }
 
+    //待完善
     @Override
-    public void updateBuildingProcessform(BbuildingProcessformEntity bbuildingProcessformEntity) {
+    public void updateBuildingProcessform(BbuildingProcessformEntity bbuildingProcessformEntity,
+                                          BuildingProjectEntity buildingProjectEntity,DatumEntity datumEntity) {
+        datumRepository.save(datumEntity);
+        bbuildingProcessformRepository.save(bbuildingProcessformEntity);
+    }
 
+    private BuildingLayerEntity newBuildingLayer(){
+        BuildingLayerEntity buildingLayerEntity=new BuildingLayerEntity();
+        return buildingLayerRepository.save(buildingLayerEntity);
+    }
+
+    private BuildingHouseholdEntity newBuildingHouseHold(){
+        BuildingHouseholdEntity buildingHouseholdEntity=new BuildingHouseholdEntity();
+        return buildingHouseholdRepository.save(buildingHouseholdEntity);
+    }
+
+    private void updateBuildingLayer(BuildingLayerEntity buildingLayerEntity){
+        buildingLayerRepository.save(buildingLayerEntity);
+    }
+
+    private void updateBuildingHouseHold(BuildingHouseholdEntity buildingHouseholdEntity){
+        buildingHouseholdRepository.save(buildingHouseholdEntity);
     }
 
     @Override
-    public void updateCadastralProcessform(BcadastralProcessformEntity bcadastralProcessformEntity) {
-
+    public void updateCadastralProcessform(BcadastralProcessformEntity bcadastralProcessformEntity,
+                                           CadastralProjectEntity cadastralProjectEntity,DatumEntity datumEntity) {
+        //更新保存项目
+        cadastralProjectRepository.save(cadastralProjectEntity);
+        //更新保存资料
+        datumRepository.save(datumEntity);
+        //更新保存流程表单
+        bcadastralProcessformRepository.save(bcadastralProcessformEntity);
     }
 
     @Override
-    public void updateSurveyProcessform(BsurveyProcessformEntity bsurveyProcessformEntity) {
+    public void updateSurveyProcessform(BsurveyProcessformEntity bsurveyProcessformEntity,
+                                        SurveyProjectEntity surveyProjectEntity,DatumEntity datumEntity) {
+        //更新保存项目
+        surveyProjectRepository.save(surveyProjectEntity);
+        //更新保存资料
+        datumRepository.save(datumEntity);
+        //更新保存流程表单
+        bsurveyProcessformRepository.save(bsurveyProcessformEntity);
+    }
 
+    @Override
+    public BsurveyProcessformEntity getSurveyProcess(String sid) {
+        return bsurveyProcessformRepository.findOne(sid);
+    }
+
+    @Override
+    public BcadastralProcessformEntity getCadastralProcess(String cid) {
+        return bcadastralProcessformRepository.findOne(cid);
+    }
+
+    @Override
+    public BbuildingProcessformEntity getBuildingProcess(String bid) {
+        return bbuildingProcessformRepository.findOne(bid);
     }
 
     private BsurveyProcessformEntity newSurveyProcess() {
@@ -99,11 +147,6 @@ public class BusinessServiceImpl implements BusinessService {
     private BbuildingProcessformEntity newBuildingProcess() {
         BbuildingProcessformEntity bbuildingProcessformEntity = new BbuildingProcessformEntity();
 
-//        BuildingHouseholdEntity buildingHouseholdEntity=new BuildingHouseholdEntity();
-//        buildingHouseholdEntity=buildingHouseholdRepository.save(buildingHouseholdEntity);
-//
-//        BuildingLayerEntity  buildingLayerEntity=new BuildingLayerEntity();
-//        buildingLayerEntity.set
         BuildingProjectEntity buildingProjectEntity = new BuildingProjectEntity();
         buildingProjectEntity = buildingProjectRepository.save(buildingProjectEntity);
         bbuildingProcessformEntity.setProjectAchievementsId(buildingProjectEntity.getId());
