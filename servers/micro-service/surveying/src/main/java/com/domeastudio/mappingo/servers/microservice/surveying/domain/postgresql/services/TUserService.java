@@ -60,6 +60,7 @@ public interface TUserService {
     Boolean createRole(String name, String type, String describe);
 
     Boolean createResource(String name);
+    Boolean createResource(TresourceEntity tresourceEntity);
 
     Boolean createGroup(String name, String type, String pid);
 

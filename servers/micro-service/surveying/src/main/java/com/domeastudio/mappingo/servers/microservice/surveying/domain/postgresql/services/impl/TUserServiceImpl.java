@@ -263,6 +263,16 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
+    public Boolean createResource(TresourceEntity tresourceEntity) {
+        if(tResourceRepository.findByName(tresourceEntity.getName())!=null||
+                tResourceRepository.findByCode(tresourceEntity.getCode())!=null){
+            return false;
+        }
+        save(tresourceEntity);
+        return true;
+    }
+
+    @Override
     public Boolean createGroup(String name, String type, String pid) {
         if (tGroupRepository.findByName(name) != null) {
             return false;
