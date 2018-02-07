@@ -52,6 +52,9 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public FileEntity saveFile(FileEntity fileEntity) {
+        if(fileRepository.findByMd5(fileEntity.getMd5())!=null){
+            return null;
+        }
         return fileRepository.save(fileEntity);
     }
 
@@ -62,6 +65,9 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public SmallFileEntity saveSmallFile(SmallFileEntity smallFileEntity) {
+        if(smallFileRepository.findByMd5(smallFileEntity.getMd5())!=null){
+            return null;
+        }
         return smallFileRepository.save(smallFileEntity);
     }
 

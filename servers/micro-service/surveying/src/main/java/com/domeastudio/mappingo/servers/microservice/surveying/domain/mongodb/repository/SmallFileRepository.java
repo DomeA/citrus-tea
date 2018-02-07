@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SmallFileRepository extends MongoRepository<SmallFileEntity, String> {
+
+    SmallFileEntity findByMd5(String md5);
 }
