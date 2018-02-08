@@ -6,6 +6,7 @@ public class DhtmlxData {
     private DhtmlxSidebarData sidebarItem;
     private List<DhtmlxTreeViewObject> treeItems;
     private DhtmlxGridObject gridItems;
+    private DhtmlxToolbarData toolbarItems;
 
 
     public List<DhtmlxTreeViewObject> getTreeItems() {
@@ -30,5 +31,13 @@ public class DhtmlxData {
 
     public void setGridItems(DhtmlxGridObject gridItems) {
         this.gridItems = gridItems;
+    }
+
+    public DhtmlxToolbarData getToolbarItems() {
+        return toolbarItems;
+    }
+
+    public void setToolbarItems(DhtmlxToolbarData toolbarItems) {
+        this.toolbarItems = toolbarItems;
     }
 }

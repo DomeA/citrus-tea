@@ -2,6 +2,7 @@ package com.domeastudio.mappingo.servers.microservice.surveying;
 
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.SmallFileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.SmallFileRepository;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.services.FileService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TgroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
@@ -41,8 +42,11 @@ public class SurveyingApplication {
     @Autowired
     DhtmlxService dhtmlxService;
 
+//    @Autowired
+//    SmallFileRepository smallFileRepository;
+
     @Autowired
-    SmallFileRepository smallFileRepository;
+    FileService fileService;
 
     @Autowired
     WorkFlowService workFlowService;
@@ -64,23 +68,36 @@ public class SurveyingApplication {
             Boolean urf = tUserService.allocationUserRole(tuserEntity, troleEntity);
             Boolean uug = tUserService.allocationUserGroup(tuserEntity, tgroupEntity);
             accountService.synAllUserAndRoleToFlowable();
-//            File iconFile = ResourceUtils.getFile("classpath:img/menu32.png");
-//            SmallFileEntity smallFileEntity = new SmallFileEntity();
-//            smallFileEntity.setName("菜单注册图标");
-//            smallFileEntity.setContentType("image/png");
-//            smallFileEntity.setContent(FileUtils.File2Byte(iconFile));
-//            smallFileEntity.setMd5(MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5(FileUtils.File2Byte(iconFile))));
-//            smallFileEntity = smallFileRepository.save(smallFileEntity);
-//
-//            TresourceEntity tresourceEntity = new TresourceEntity();
-//            tresourceEntity.setCode("0000-0000-0000-0000-0000-0000-0000-0000-0000-0000");
-//            tresourceEntity.setIconId(smallFileEntity.getId());
-//            tresourceEntity.setName("菜单注册");
-//            tresourceEntity.setParenId("0");
-//            tresourceEntity.setSelected(true);
-//            Boolean trf = dhtmlxService.createTresource(tresourceEntity);
-//            TresourceEntity tresource = dhtmlxService.findByCode(tresourceEntity.getCode());
-//            Boolean rrf = tUserService.allocationRoleResource(troleEntity, tresource);
+
+            initResources(troleEntity,"classpath:img/menu32.png","菜单新建图标",
+                    "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
+                    "菜单注册","0","","","",true);
+            TresourceEntity tresourceEntity= tUserService.findResourceByCode("0000-0000-0000-0000-0000-0000-0000-0000-0000-0000");
+
+            initResources(troleEntity,"",null,
+                    "0000-0001-0000-0000-0000-0000-0000-0000-0000-0000",
+                    "新建菜单",tresourceEntity.getReid(),"button","","",false);
+            initResources(troleEntity,"",null,
+                    "0000-0002-0001-0000-0000-0000-0000-0000-0000-0000",
+                    "分割线",tresourceEntity.getReid(),"separator","","",false);
+
+            initResources(troleEntity,"",null,
+                    "0000-0002-0000-0000-0000-0000-0000-0000-0000-0000",
+                    "修改菜单",tresourceEntity.getReid(),"button","","",false);
+            initResources(troleEntity,"",null,
+                    "0000-0003-0000-0000-0000-0000-0000-0000-0000-0000",
+                    "删除菜单",tresourceEntity.getReid(),"button","","",false);
+            initResources(troleEntity,"",null,
+                    "0000-0003-0001-0000-0000-0000-0000-0000-0000-0000",
+                    "分割线",tresourceEntity.getReid(),"separator","","",false);
+            initResources(troleEntity,"",null,
+                    "0000-0004-0000-0000-0000-0000-0000-0000-0000-0000",
+                    "查询框",tresourceEntity.getReid(),"buttonInput","150","",false);
+
+            initResources(troleEntity,"",null,
+                    "0000-0005-0000-0000-0000-0000-0000-0000-0000-0000",
+                    "查询",tresourceEntity.getReid(),"button","","",false);
+
 
             if (uf != null) {
                 System.out.println("管理员账户：system 创建成功");
@@ -109,19 +126,49 @@ public class SurveyingApplication {
             } else {
                 System.out.println("管理员账户：[system] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 已经存在");
             }
-//            if (trf) {
-//                System.out.println("菜单初始化：[菜单注册]创建成功");
-//            } else {
-//                System.out.println("菜单初始化：[菜单注册]已经存在");
-//            }
-//            if (rrf) {
-//                System.out.println("菜单初始化：[菜单注册] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 成功");
-//            } else {
-//                System.out.println("菜单初始化：[菜单注册] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 已经存在");
-//            }
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void initResources(TroleEntity troleEntity,String imgPath,
+                               String iconName,String code,String menuName,
+                               String parenId,String type,String width,String height,Boolean select) throws FileNotFoundException {
+        File iconFile = null;
+        if(null!=imgPath){
+            iconFile = ResourceUtils.getFile(imgPath);
+        }
+        SmallFileEntity smallFileEntity=null;
+        if(iconFile.exists()) {
+            smallFileEntity = new SmallFileEntity();
+            smallFileEntity.setName(iconName);
+            smallFileEntity.setContentType("image/png");
+            smallFileEntity.setContent(FileUtils.File2Byte(iconFile));
+            smallFileEntity.setMd5(MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5(FileUtils.File2Byte(iconFile))));
+        }
+
+        TresourceEntity tresourceEntity = new TresourceEntity();
+        tresourceEntity.setCode(code);
+        tresourceEntity.setName(menuName);
+        tresourceEntity.setParenId(parenId);
+        tresourceEntity.setWidth(width);
+        tresourceEntity.setHeight(height);
+        tresourceEntity.setType(type);
+        tresourceEntity.setSelected(select);
+        Boolean trf = tUserService.createResource(smallFileEntity,tresourceEntity);
+        TresourceEntity tresource = dhtmlxService.findByCode(tresourceEntity.getCode());
+        Boolean rrf = tUserService.allocationRoleResource(troleEntity, tresource);
+
+        if (trf) {
+            System.out.println("菜单初始化：["+menuName+"]创建成功");
+        } else {
+            System.out.println("菜单初始化：["+menuName+"]已经存在");
+        }
+        if (rrf) {
+            System.out.println("菜单初始化：["+menuName+"] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 成功");
+        } else {
+            System.out.println("菜单初始化：["+menuName+"] 被赋予 系统管理员角色：[ROLE_SYSADMIN] 已经存在");
         }
     }
 }

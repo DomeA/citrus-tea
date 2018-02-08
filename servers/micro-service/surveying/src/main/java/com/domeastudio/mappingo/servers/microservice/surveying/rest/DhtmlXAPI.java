@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.stream.FileImageInputStream;
 import java.io.*;
+import java.util.List;
 
 
 @Api()
@@ -24,6 +25,20 @@ public class DhtmlXAPI {
     @Autowired
     DhtmlxService dhtmlxService;
 
+    @RequestMapping(value = "/registmenu/toolbar", method = RequestMethod.GET)
+    public ClientMessage getRegistMenuToolbar(String pid) {
+        DhtmlxData dhtmlxData = dhtmlxService.getResources(pid);
+
+        ClientMessage clientMessage;
+        if (dhtmlxData.getToolbarItems()!=null) {
+            clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
+                    ResultStatusCode.OK.getMsg(), dhtmlxData);
+            return clientMessage;
+        }
+        clientMessage = new ClientMessage(ResultStatusCode.INVALID_PARAM.getCode(),
+                ResultStatusCode.INVALID_PARAM.getMsg(), null);
+        return clientMessage;
+    }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ClientMessage addMenu(MenuDef menu, @RequestParam("iconFile") MultipartFile multipartFile) {
