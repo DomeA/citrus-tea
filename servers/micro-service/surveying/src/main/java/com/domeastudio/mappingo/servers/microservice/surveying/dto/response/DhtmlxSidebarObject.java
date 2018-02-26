@@ -2,6 +2,7 @@ package com.domeastudio.mappingo.servers.microservice.surveying.dto.response;
 
 public class DhtmlxSidebarObject {
     private String id;
+    private String code;
     private String type;
     private byte[] icon;
     private String text;
@@ -54,5 +55,13 @@ public class DhtmlxSidebarObject {
 
     public void setUserdata(Object userdata) {
         this.userdata = userdata;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

@@ -4,18 +4,9 @@ import java.util.List;
 
 public class DhtmlxData {
     private DhtmlxSidebarData sidebarItem;
-    private List<DhtmlxTreeViewObject> treeItems;
-    private DhtmlxGridObject gridItems;
-    private DhtmlxToolbarData toolbarItems;
-
-
-    public List<DhtmlxTreeViewObject> getTreeItems() {
-        return treeItems;
-    }
-
-    public void setTreeItems(List<DhtmlxTreeViewObject> treeItems) {
-        this.treeItems = treeItems;
-    }
+    private List<DhtmlxTreeViewObject> treeItem;
+    private DhtmlxGridObject gridItem;
+    private DhtmlxToolbarData toolbarItem;
 
     public DhtmlxSidebarData getSidebarItem() {
         return sidebarItem;
@@ -25,19 +16,27 @@ public class DhtmlxData {
         this.sidebarItem = sidebarItem;
     }
 
-    public DhtmlxGridObject getGridItems() {
-        return gridItems;
+    public List<DhtmlxTreeViewObject> getTreeItem() {
+        return treeItem;
     }
 
-    public void setGridItems(DhtmlxGridObject gridItems) {
-        this.gridItems = gridItems;
+    public void setTreeItem(List<DhtmlxTreeViewObject> treeItem) {
+        this.treeItem = treeItem;
     }
 
-    public DhtmlxToolbarData getToolbarItems() {
-        return toolbarItems;
+    public DhtmlxGridObject getGridItem() {
+        return gridItem;
     }
 
-    public void setToolbarItems(DhtmlxToolbarData toolbarItems) {
-        this.toolbarItems = toolbarItems;
+    public void setGridItem(DhtmlxGridObject gridItem) {
+        this.gridItem = gridItem;
+    }
+
+    public DhtmlxToolbarData getToolbarItem() {
+        return toolbarItem;
+    }
+
+    public void setToolbarItem(DhtmlxToolbarData toolbarItem) {
+        this.toolbarItem = toolbarItem;
     }
 }

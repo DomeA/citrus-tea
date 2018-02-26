@@ -25,12 +25,12 @@ public class DhtmlXAPI {
     @Autowired
     DhtmlxService dhtmlxService;
 
-    @RequestMapping(value = "/registmenu/toolbar", method = RequestMethod.GET)
-    public ClientMessage getRegistMenuToolbar(String pid) {
+    @RequestMapping(value = "/registmenu/toolbar/{pid}", method = RequestMethod.GET)
+    public ClientMessage getRegistMenuToolbar(@PathVariable String pid) {
         DhtmlxData dhtmlxData = dhtmlxService.getResources(pid);
 
         ClientMessage clientMessage;
-        if (dhtmlxData.getToolbarItems()!=null) {
+        if (dhtmlxData.getToolbarItem()!=null) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), dhtmlxData);
             return clientMessage;
@@ -80,7 +80,7 @@ public class DhtmlXAPI {
     public ClientMessage getTreeviewData(@PathVariable("userid") String userid) {
         DhtmlxData dhtmlxData = dhtmlxService.getDhtmlxTreeviewData(userid);
         ClientMessage clientMessage;
-        if (dhtmlxData.getTreeItems().size() > 0) {
+        if (dhtmlxData.getTreeItem().size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), dhtmlxData);
             return clientMessage;
@@ -94,7 +94,7 @@ public class DhtmlXAPI {
     public ClientMessage getGridData(@PathVariable("userid") String userid) {
         DhtmlxData dhtmlxData = dhtmlxService.getDhtmlxGridData(userid);
         ClientMessage clientMessage;
-        if (dhtmlxData.getTreeItems().size() > 0) {
+        if (dhtmlxData.getTreeItem().size() > 0) {
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
                     ResultStatusCode.OK.getMsg(), dhtmlxData);
             return clientMessage;
