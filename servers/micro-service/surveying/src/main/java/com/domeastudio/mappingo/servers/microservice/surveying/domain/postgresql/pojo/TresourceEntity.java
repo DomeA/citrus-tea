@@ -16,6 +16,8 @@ public class TresourceEntity {
     private Boolean selected;
     private String code;
     private String parenId;
+    private String width;
+    private String height;
     private Set<RroleresourceEntity> rroleresourcesByReid;
     private Set<RuserresourceEntity> ruserresourcesByReid;
 
@@ -137,5 +139,25 @@ public class TresourceEntity {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    @Basic
+    @Column(name = "width")
+    public String getWidth() {
+        return width;
+    }
+
+    public void setWidth(String width) {
+        this.width = width;
+    }
+
+    @Basic
+    @Column(name = "height")
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
     }
 }
