@@ -5,6 +5,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.Dhtm
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.List;
 
 public interface DhtmlxService {
     DhtmlxData getDhtmlxSidebarData();
@@ -20,4 +21,6 @@ public interface DhtmlxService {
     DhtmlxData getDhtmlxTreeviewData(String useid);
 
     DhtmlxData getDhtmlxGridData(String useid);
+
+    DhtmlxData getResources(String pid);
 }

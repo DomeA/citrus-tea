@@ -1,5 +1,6 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services;
 
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.SmallFileEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TgroupEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TresourceEntity;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.TroleEntity;
@@ -33,6 +34,8 @@ public interface TUserService {
 
     TresourceEntity findResourceByName(String name);
 
+    TresourceEntity findResourceByCode(String code);
+
     TuserEntity save(TuserEntity entity);
 
     void deleteRole(String rid);
@@ -40,6 +43,8 @@ public interface TUserService {
     void deleteAllRole();
 
     void deleteGroup(String gid);
+
+    Boolean deleteResource(String reid);
 
     void save(TroleEntity troleEntity);
 
@@ -61,6 +66,7 @@ public interface TUserService {
 
     Boolean createResource(String name);
     Boolean createResource(TresourceEntity tresourceEntity);
+    Boolean createResource(SmallFileEntity smallFileEntity,TresourceEntity tresourceEntity);
 
     Boolean createGroup(String name, String type, String pid);
 
