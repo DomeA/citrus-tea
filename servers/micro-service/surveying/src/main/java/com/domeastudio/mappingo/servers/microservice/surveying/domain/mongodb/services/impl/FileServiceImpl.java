@@ -72,6 +72,11 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public void deleteSmaillFiles() {
+        smallFileRepository.deleteAll();
+    }
+
+    @Override
     public void removeProject(String id) {
         projectRepository.delete(id);
     }

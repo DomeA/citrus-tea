@@ -18,6 +18,7 @@ public interface FileService {
     ProjectEntity saveProject(ProjectEntity projectEntity);
 
     SmallFileEntity saveSmallFile(SmallFileEntity smallFileEntity);
+    void deleteSmaillFiles();
 
     void removeProject(String id);
 
