@@ -10,6 +10,7 @@ import java.util.List;
 public interface DhtmlxService {
     DhtmlxData getDhtmlxSidebarData();
 
+
     DhtmlxData getDhtmlxSidebarData(String useid);
 
     Boolean createTresource(String roleName, TresourceEntity tresourceEntity, byte[] file);
