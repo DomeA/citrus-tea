@@ -67,9 +67,11 @@ public class DhtmlxServiceImpl implements DhtmlxService {
                 DhtmlxSidebarObject dhtmlxSidebarObject = new DhtmlxSidebarObject();
                 SmallFileEntity smallFileEntity = smallFileRepository.findOne(tresourceEntity.getIconId());
                 dhtmlxSidebarObject.setIcon(smallFileEntity.getContent());
-                dhtmlxSidebarObject.setId(tresourceEntity.getCode());
+                dhtmlxSidebarObject.setId(tresourceEntity.getReid());
+                dhtmlxSidebarObject.setCode(tresourceEntity.getCode());
                 dhtmlxSidebarObject.setText(tresourceEntity.getName());
                 dhtmlxSidebarObject.setType(tresourceEntity.getType());
+                dhtmlxSidebarObject.setSelected(tresourceEntity.getSelected());
                 if (null == tresourceEntity.getType()) {
                     dhtmlxSidebarObject.setSelected(tresourceEntity.getSelected());
                 }
@@ -139,7 +141,7 @@ public class DhtmlxServiceImpl implements DhtmlxService {
             dhtmlxTreeViewObject.setType(tresourceEntity.getType());
             dhtmlxTreeViewObjects.add(dhtmlxTreeViewObject);
         }
-        dhtmlxData.setTreeItems(TreeParser.getTreeList("0", dhtmlxTreeViewObjects));
+        dhtmlxData.setTreeItem(TreeParser.getTreeList("0", dhtmlxTreeViewObjects));
         return dhtmlxData;
     }
 
@@ -210,5 +212,28 @@ public class DhtmlxServiceImpl implements DhtmlxService {
 
         List<TresourceEntity> tresourceEntitiesRoot = getResourceEntitiesByUseid(useid);
         return null;
+    }
+
+    @Override
+    public DhtmlxData getResources(String pid) {
+        List<TresourceEntity> tresourceEntities=tResourceRepository.findByParenId(pid);
+        DhtmlxData dhtmlxData=new DhtmlxData();
+        if(tresourceEntities.size()<1){
+            return null;
+        }
+        List<DhtmlxToolbarObject> dhtmlxToolbarObjects=new ArrayList<>();
+        DhtmlxToolbarData dhtmlxToolbarData=new DhtmlxToolbarData();
+        for(TresourceEntity tresourceEntity:tresourceEntities){
+            DhtmlxToolbarObject dhtmlxToolbarObject=new DhtmlxToolbarObject();
+            dhtmlxToolbarObject.setId(tresourceEntity.getReid());
+            dhtmlxToolbarObject.setText(tresourceEntity.getName());
+            dhtmlxToolbarObject.setType(tresourceEntity.getType());
+            dhtmlxToolbarObject.setWidth(tresourceEntity.getWidth());
+            dhtmlxToolbarObject.setTitle(tresourceEntity.getName());
+            dhtmlxToolbarObjects.add(dhtmlxToolbarObject);
+        }
+        dhtmlxToolbarData.setItems(dhtmlxToolbarObjects);
+        dhtmlxData.setToolbarItem(dhtmlxToolbarData);
+        return dhtmlxData;
     }
 }

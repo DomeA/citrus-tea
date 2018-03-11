@@ -1,5 +1,7 @@
 package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.impl;
 
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.pojo.SmallFileEntity;
+import com.domeastudio.mappingo.servers.microservice.surveying.domain.mongodb.repository.SmallFileRepository;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo.*;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.repository.*;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.TUserService;
@@ -31,6 +33,8 @@ public class TUserServiceImpl implements TUserService {
     RUserResourceRepository rUserResourceRepository;
     @Autowired
     RRoleResourceRepository rRoleResourceRepository;
+    @Autowired
+    SmallFileRepository smallFileRepository;
 
 
     @Override
@@ -106,6 +110,11 @@ public class TUserServiceImpl implements TUserService {
     }
 
     @Override
+    public TresourceEntity findResourceByCode(String code) {
+        return tResourceRepository.findByCode(code);
+    }
+
+    @Override
     public TuserEntity save(TuserEntity entity) {
         return tUserRepository.save(entity);
     }
@@ -140,6 +149,17 @@ public class TUserServiceImpl implements TUserService {
             rUserGroupRepository.delete(rusergroupEntity.getId());
         }
         tGroupRepository.delete(gid);
+    }
+
+    @Override
+    public Boolean deleteResource(String reid) {
+        TresourceEntity tresourceEntity=tResourceRepository.findOne(reid);
+        if(tresourceEntity==null){
+            return false;
+        }
+        smallFileRepository.delete(tresourceEntity.getIconId());
+        tResourceRepository.delete(tresourceEntity);
+        return true;
     }
 
     @Override
@@ -264,10 +284,31 @@ public class TUserServiceImpl implements TUserService {
 
     @Override
     public Boolean createResource(TresourceEntity tresourceEntity) {
-        if(tResourceRepository.findByName(tresourceEntity.getName())!=null||
-                tResourceRepository.findByCode(tresourceEntity.getCode())!=null){
+        if(tResourceRepository.findByCode(tresourceEntity.getCode())!=null){
             return false;
         }
+        save(tresourceEntity);
+        return true;
+    }
+
+    @Override
+    public Boolean createResource(SmallFileEntity smallFileEntity, TresourceEntity tresourceEntity) {
+
+        if(tResourceRepository.findByCode(tresourceEntity.getCode())!=null){
+            return false;
+        }
+        if(null==smallFileEntity){
+            save(tresourceEntity);
+            return true;
+        }
+        if(smallFileRepository.findByMd5(smallFileEntity.getMd5())!=null){
+            SmallFileEntity smalltemp=smallFileRepository.findByMd5(smallFileEntity.getMd5());
+            tresourceEntity.setIconId(smalltemp.getId());
+            save(tresourceEntity);
+            return true;
+        }
+        SmallFileEntity smallFile=smallFileRepository.save(smallFileEntity);
+        tresourceEntity.setIconId(smallFile.getId());
         save(tresourceEntity);
         return true;
     }
