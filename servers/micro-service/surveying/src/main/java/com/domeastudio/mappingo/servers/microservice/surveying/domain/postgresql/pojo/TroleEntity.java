@@ -15,6 +15,7 @@ public class TroleEntity {
     private String describe;
     private Set<RroleresourceEntity> rroleresourcesByRid;
     private Set<RuserroleEntity> ruserrolesByRid;
+    private Set<RrolegroupEntity> rrolegroupsByRid;
 
     @Id
     @GeneratedValue(generator = "autoid")
@@ -98,5 +99,14 @@ public class TroleEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @OneToMany(mappedBy = "troleByRid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    public Set<RrolegroupEntity> getRrolegroupsByRid() {
+        return rrolegroupsByRid;
+    }
+
+    public void setRrolegroupsByRid(Set<RrolegroupEntity> rrolegroupsByRid) {
+        this.rrolegroupsByRid = rrolegroupsByRid;
     }
 }

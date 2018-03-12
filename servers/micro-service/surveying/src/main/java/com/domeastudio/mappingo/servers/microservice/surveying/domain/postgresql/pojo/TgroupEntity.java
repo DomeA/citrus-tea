@@ -14,6 +14,7 @@ public class TgroupEntity {
     private String type;
     private String parentId;
     private Set<RusergroupEntity> rusergroupsByGid;
+    private Set<RrolegroupEntity> rrolegroupsByGid;
 
     @Id
     @GeneratedValue(generator = "autoid")
@@ -88,5 +89,14 @@ public class TgroupEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @OneToMany(mappedBy = "tgroupByGid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    public Set<RrolegroupEntity> getRrolegroupsByGid() {
+        return rrolegroupsByGid;
+    }
+
+    public void setRrolegroupsByGid(Set<RrolegroupEntity> rrolegroupsByGid) {
+        this.rrolegroupsByGid = rrolegroupsByGid;
     }
 }
