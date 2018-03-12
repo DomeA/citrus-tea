@@ -22,7 +22,7 @@ public class TuserEntity {
     private String token;
     private Integer authorTime;
     private String registTime;
-    private String processIds;
+//    private String processIds;
     private Set<RuserresourceEntity> ruserresourcesByUid;
     private Set<RuserroleEntity> ruserrolesByUid;
     private Set<RusergroupEntity> rusergroupsByUid;
@@ -94,7 +94,7 @@ public class TuserEntity {
         if (mac != null ? !mac.equals(that.mac) : that.mac != null) return false;
         if (desktop != null ? !desktop.equals(that.desktop) : that.desktop != null) return false;
         if (equipmentid != null ? !equipmentid.equals(that.equipmentid) : that.equipmentid != null) return false;
-        if (processIds != null ? !processIds.equals(that.processIds) : that.processIds != null) return false;
+//        if (processIds != null ? !processIds.equals(that.processIds) : that.processIds != null) return false;
 
         return true;
     }
@@ -116,7 +116,7 @@ public class TuserEntity {
         result = 31 * result + (desktop != null ? desktop.hashCode() : 0);
         result = 31 * result + (mac != null ? mac.hashCode() : 0);
         result = 31 * result + (equipmentid != null ? equipmentid.hashCode() : 0);
-        result = 31 * result + (processIds != null ? processIds.hashCode() : 0);
+//        result = 31 * result + (processIds != null ? processIds.hashCode() : 0);
 
         return result;
     }
@@ -267,13 +267,13 @@ public class TuserEntity {
         this.equipmentid = equipmentid;
     }
 
-    @Basic
-    @Column(name = "processIds")
-    public String getProcessIds() {
-        return processIds;
-    }
-
-    public void setProcessIds(String processIds) {
-        this.processIds = processIds;
-    }
+//    @Basic
+//    @Column(name = "processIds")
+//    public String getProcessIds() {
+//        return processIds;
+//    }
+//
+//    public void setProcessIds(String processIds) {
+//        this.processIds = processIds;
+//    }
 }

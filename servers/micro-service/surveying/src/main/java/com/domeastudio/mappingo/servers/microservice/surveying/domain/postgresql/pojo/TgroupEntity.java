@@ -3,7 +3,6 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresq
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,6 +14,7 @@ public class TgroupEntity {
     private String parentId;
     private Set<RusergroupEntity> rusergroupsByGid;
     private Set<RrolegroupEntity> rrolegroupsByGid;
+    private Set<RgroupprocessEntity> rgroupprocessesByGid;
 
     @Id
     @GeneratedValue(generator = "autoid")
@@ -98,5 +98,14 @@ public class TgroupEntity {
 
     public void setRrolegroupsByGid(Set<RrolegroupEntity> rrolegroupsByGid) {
         this.rrolegroupsByGid = rrolegroupsByGid;
+    }
+
+    @OneToMany(mappedBy = "tgroupByGid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    public Set<RgroupprocessEntity> getRgroupprocessesByGid() {
+        return rgroupprocessesByGid;
+    }
+
+    public void setRgroupprocessesByGid(Set<RgroupprocessEntity> rgroupprocessesByGid) {
+        this.rgroupprocessesByGid = rgroupprocessesByGid;
     }
 }
