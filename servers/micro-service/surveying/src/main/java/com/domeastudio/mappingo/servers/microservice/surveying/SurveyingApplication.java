@@ -11,7 +11,6 @@ import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.DhtmlxService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.TUserService;
 import com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.services.WorkFlowService;
-import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.ProcessDefType;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.FileUtils;
 import com.domeastudio.mappingo.servers.microservice.surveying.util.security.MD5SHAHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.util.ResourceUtils;
 
-import javax.imageio.stream.FileImageInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 @SpringBootApplication
 public class SurveyingApplication {
