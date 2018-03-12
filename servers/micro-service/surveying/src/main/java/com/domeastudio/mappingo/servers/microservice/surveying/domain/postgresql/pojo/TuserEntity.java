@@ -22,6 +22,7 @@ public class TuserEntity {
     private String token;
     private Integer authorTime;
     private String registTime;
+    private Boolean isDelete;
 //    private String processIds;
     private Set<RuserresourceEntity> ruserresourcesByUid;
     private Set<RuserroleEntity> ruserrolesByUid;
@@ -71,6 +72,16 @@ public class TuserEntity {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "isdelete")
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,6 +105,7 @@ public class TuserEntity {
         if (mac != null ? !mac.equals(that.mac) : that.mac != null) return false;
         if (desktop != null ? !desktop.equals(that.desktop) : that.desktop != null) return false;
         if (equipmentid != null ? !equipmentid.equals(that.equipmentid) : that.equipmentid != null) return false;
+        if (isDelete != null ? !isDelete.equals(that.isDelete) : that.isDelete != null) return false;
 //        if (processIds != null ? !processIds.equals(that.processIds) : that.processIds != null) return false;
 
         return true;
@@ -116,6 +128,7 @@ public class TuserEntity {
         result = 31 * result + (desktop != null ? desktop.hashCode() : 0);
         result = 31 * result + (mac != null ? mac.hashCode() : 0);
         result = 31 * result + (equipmentid != null ? equipmentid.hashCode() : 0);
+        result = 31 * result + (isDelete != null ? isDelete.hashCode() : 0);
 //        result = 31 * result + (processIds != null ? processIds.hashCode() : 0);
 
         return result;

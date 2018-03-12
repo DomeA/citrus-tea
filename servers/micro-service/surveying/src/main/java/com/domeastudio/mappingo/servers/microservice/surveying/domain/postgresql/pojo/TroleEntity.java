@@ -13,6 +13,7 @@ public class TroleEntity {
     private String name;
     private String type;
     private String describe;
+    private Boolean isDelete;
     private Set<RroleresourceEntity> rroleresourcesByRid;
     private Set<RuserroleEntity> ruserrolesByRid;
     private Set<RrolegroupEntity> rrolegroupsByRid;
@@ -39,6 +40,16 @@ public class TroleEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "isdelete")
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,6 +61,7 @@ public class TroleEntity {
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
         if (describe != null ? !describe.equals(that.describe) : that.describe != null) return false;
+        if (isDelete != null ? !isDelete.equals(that.isDelete) : that.isDelete != null) return false;
 
         return true;
     }
@@ -60,6 +72,7 @@ public class TroleEntity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (describe != null ? describe.hashCode() : 0);
+        result = 31 * result + (isDelete != null ? isDelete.hashCode() : 0);
         return result;
     }
 
