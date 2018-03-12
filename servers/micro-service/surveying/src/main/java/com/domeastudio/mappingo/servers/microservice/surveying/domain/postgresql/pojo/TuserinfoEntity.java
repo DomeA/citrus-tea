@@ -3,7 +3,6 @@ package com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresq
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 @Table(name = "tuserinfo", schema = "public", catalog = "postgres")
