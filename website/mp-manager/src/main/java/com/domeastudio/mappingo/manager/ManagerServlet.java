@@ -7,7 +7,6 @@ import us.monoid.json.JSONObject;
 import us.monoid.web.JSONResource;
 import us.monoid.web.Resty;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +43,7 @@ public class ManagerServlet extends HttpServlet {
             login.put("password",req.getParameter("password").toString());
             JSONObject jsonObject=new JSONObject(login);
             JSONResource jsonResource = resty.identifyAsMozilla().json(url,Resty.content(jsonObject));
+
             if(jsonResource.get("code").equals(200)){
 
                 String tokenStr = jsonResource.get("data.access_token").toString();
@@ -56,6 +56,12 @@ public class ManagerServlet extends HttpServlet {
                     session.setAttribute("userid", user.get("userid"));
                     session.setAttribute("token_type",jsonResource.get("data.token_type").toString());
                     resp.setHeader("Authorization", "bearer " + tokenStr);
+
+//                    //设置头
+//                    resty.withHeader("Authorization","bearer "+tokenStr);
+//                    JSONResource jsonResource1=resty.identifyAsMozilla().json();
+//                    这是对服务做了第二次服务请求，携带头信息
+
                     resp.sendRedirect(path+"/manager.jsp");
                 }else {
                     session.removeAttribute("token");
