@@ -70,31 +70,6 @@ public class SurveyingApplication {
                     "菜单注册","0","","","",true);
             TresourceEntity tresourceEntity= tUserService.findResourceByCode("0000-0000-0000-0000-0000-0000-0000-0000-0000-0000");
 
-            initResources(troleEntity,"",null,
-                    "0000-0001-0000-0000-0000-0000-0000-0000-0000-0000",
-                    "新建菜单",tresourceEntity.getReid(),"button","","",false);
-            initResources(troleEntity,"",null,
-                    "0000-0002-0001-0000-0000-0000-0000-0000-0000-0000",
-                    "分割线",tresourceEntity.getReid(),"separator","","",false);
-
-            initResources(troleEntity,"",null,
-                    "0000-0002-0000-0000-0000-0000-0000-0000-0000-0000",
-                    "修改菜单",tresourceEntity.getReid(),"button","","",false);
-            initResources(troleEntity,"",null,
-                    "0000-0003-0000-0000-0000-0000-0000-0000-0000-0000",
-                    "删除菜单",tresourceEntity.getReid(),"button","","",false);
-            initResources(troleEntity,"",null,
-                    "0000-0003-0001-0000-0000-0000-0000-0000-0000-0000",
-                    "分割线",tresourceEntity.getReid(),"separator","","",false);
-            initResources(troleEntity,"",null,
-                    "0000-0004-0000-0000-0000-0000-0000-0000-0000-0000",
-                    "查询框",tresourceEntity.getReid(),"buttonInput","150","",false);
-
-            initResources(troleEntity,"",null,
-                    "0000-0005-0000-0000-0000-0000-0000-0000-0000-0000",
-                    "查询",tresourceEntity.getReid(),"button","","",false);
-
-
             if (uf != null) {
                 System.out.println("管理员账户：system 创建成功");
                 System.out.println("管理员账户clientId：" + tuserEntity.getToken());
