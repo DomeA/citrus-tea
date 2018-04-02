@@ -92,7 +92,7 @@
                                         window.location.href=getRootPath_dc()+data;
                                     }
                                 },
-                                contentType: 'application/json;charset=utf-8',
+                                contentType: 'application/json;charset=utf-8'
                             });
                             console.log(reslut);
                         }
