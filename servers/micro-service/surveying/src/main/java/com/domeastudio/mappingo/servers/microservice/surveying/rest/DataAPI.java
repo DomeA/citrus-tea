@@ -11,6 +11,7 @@ import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Regis
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.request.Role;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ClientMessage;
 import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.ResultStatusCode;
+import com.domeastudio.mappingo.servers.microservice.surveying.dto.response.UserObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -217,8 +219,18 @@ public class DataAPI {
         ClientMessage clientMessage;
         List<TuserEntity> tuserEntities = tUserService.findUserAll();
         if (tuserEntities.size() > 0) {
+            List<UserObject> userObjects=new ArrayList<>();
+            for(TuserEntity tuserEntity:tuserEntities){
+                UserObject userObject=new UserObject();
+                userObject.setEmail(tuserEntity.getEmail());
+                userObject.setId(tuserEntity.getUid());
+                userObject.setName(tuserEntity.getName());
+                userObject.setPhone(tuserEntity.getPhone());
+               // userObject.setRealName(tuserEntity.getTuserinfoByUiid().getRealName());
+                userObjects.add(userObject);
+            }
             clientMessage = new ClientMessage(ResultStatusCode.OK.getCode(),
-                    ResultStatusCode.OK.getMsg(), tuserEntities);
+                    ResultStatusCode.OK.getMsg(), userObjects);
         } else {
             clientMessage = new ClientMessage(ResultStatusCode.SYSTEM_ERR.getCode(),
                     ResultStatusCode.SYSTEM_ERR.getMsg(), "用户列表不存在");
