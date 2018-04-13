@@ -313,7 +313,7 @@ public class DataAPI {
         tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));
     }
 
-    //删除 用户 资源 关系
+    //分配 用户 资源 关系
     @RequestMapping(value = "/allocation/{uid}/{reid}", method = RequestMethod.DELETE)
     public void delAllocationUserResource(@PathVariable String uid, @PathVariable String rid) {
         tUserService.allocationUserRole(tUserService.findUserOne(uid), tUserService.findRoleOne(rid));

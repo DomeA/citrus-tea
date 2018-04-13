@@ -17,7 +17,7 @@ import java.io.*;
 import java.util.List;
 
 
-@Api()
+@Api("dhtmlx组件数据结构服务")
 @CrossOrigin
 @RestController
 @RequestMapping("/manager/menu")
