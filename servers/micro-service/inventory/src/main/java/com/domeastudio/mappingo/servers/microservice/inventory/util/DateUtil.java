@@ -93,8 +93,8 @@ public class DateUtil {
         return str;
     }
 
-    public static Date stringToDate(String str) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    public static Date stringToDate(String str,String formatStr) {
+        SimpleDateFormat format = new SimpleDateFormat(formatStr);
         Date date = null;
         try {
             // Fri Feb 24 00:00:00 CST 2012
