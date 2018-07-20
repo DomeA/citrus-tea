@@ -1,6 +1,5 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.services.impl;
 
-import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo.TDepartmentEntity;
 import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.repository.TDepartmentRepository;
 import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.services.TDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +32,15 @@ public class TDepartmentServiceImpl implements TDepartmentService {
     @Override
     public TDepartmentEntity findByName(String name) {
         return tDepartmentRepository.findTDepartmentEntitiesByName(name);
+    }
+
+    @Override
+    public TDepartmentEntity delete(String name) {
+        return null;
+    }
+
+    @Override
+    public TDepartmentEntity update(String name) {
+        return null;
     }
 }

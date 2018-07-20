@@ -23,10 +23,16 @@ public class TUserServiceImpl implements TUserService {
         tUserEntity.setName(name);
         String salt = UUID.randomUUID().toString().replace("-", "");
         tUserEntity.setSalt(salt);
-        String pwdstr = MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5((pwd + salt).getBytes()));
-        tUserEntity.setPwd(pwdstr);
+        String tokenstr = MD5SHAHelper.toString(MD5SHAHelper.encryptByMD5((pwd + salt).getBytes()));
+        tUserEntity.setPwd("NULL");
+        tUserEntity.setToken(tokenstr);
         tUserEntity.settDepartmentByDid(tDepartmentEntity);
         return tUserRepository.save(tUserEntity);
+    }
+
+    @Override
+    public TUserEntity update(String name) {
+        return null;
     }
 
     @Override
@@ -42,5 +48,10 @@ public class TUserServiceImpl implements TUserService {
     @Override
     public List<TUserEntity> findByDepartment(TDepartmentEntity tDepartmentEntity) {
         return tUserRepository.findByTDepartmentByDid(tDepartmentEntity);
+    }
+
+    @Override
+    public TUserEntity login(String name, String token) {
+        return null;
     }
 }

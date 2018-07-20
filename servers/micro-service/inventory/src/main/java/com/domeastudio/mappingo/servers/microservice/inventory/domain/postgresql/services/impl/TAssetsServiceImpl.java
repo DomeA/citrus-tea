@@ -1,9 +1,6 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.services.impl;
 
-import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo.TAssetsEntity;
-import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo.TAssetsstatusEntity;
-import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo.TAssetstypeEntity;
-import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo.TUserEntity;
+import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo.*;
 import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.repository.TAssetsRepository;
 import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.services.TAssetsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +11,9 @@ import java.util.List;
 public class TAssetsServiceImpl implements TAssetsService {
     @Autowired
     TAssetsRepository tAssetsRepository;
-    //资产初始化状态 是 待入库
+
     @Override
-    public TAssetsEntity save(String code, String purchasingtime, BigDecimal price, TUserEntity tUserEntity, TAssetstypeEntity tAssetstypeEntity, TAssetsstatusEntity tAssetsstatusEntity) {
+    public TAssetsEntity save(String code, TAssetsinfoEntity tAssetsinfoEntity, TUserEntity tUserEntity, TAssetstypeEntity tAssetstypeEntity, TAssetsstatusEntity tAssetsstatusEntity) {
         return null;
     }
 
@@ -113,7 +110,8 @@ public class TAssetsServiceImpl implements TAssetsService {
     }
 
     //超时 状态闲置
-    private Boolean updateAssetsStatusFromTimeOut(){
-        return false;
-    }
+    //存储过程完成闲置状态改变
+//    private Boolean updateAssetsStatusFromTimeOut(){
+//        return false;
+//    }
 }

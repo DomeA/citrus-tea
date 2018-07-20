@@ -8,4 +8,6 @@ public interface TDepartmentService {
     TDepartmentEntity save(String name);
     List<TDepartmentEntity> findAll();
     TDepartmentEntity findByName(String name);
+    TDepartmentEntity delete(String name);
+    TDepartmentEntity update(String name);
 }
