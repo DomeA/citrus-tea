@@ -4,4 +4,5 @@ import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TWarehouseRepository extends JpaRepository<TWarehouseEntity,String> {
+    TWarehouseEntity findByCode(String code);
 }

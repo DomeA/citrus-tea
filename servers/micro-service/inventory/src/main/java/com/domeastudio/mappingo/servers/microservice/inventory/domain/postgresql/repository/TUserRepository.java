@@ -2,7 +2,6 @@ package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresq
 
 import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo.TDepartmentEntity;
 import com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo.TUserEntity;
-import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
