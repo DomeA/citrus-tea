@@ -1,7 +1,8 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +15,10 @@ public class THistoricalwarehouseEntity {
     private Integer count;
     private TUserEntity tUserByUid;
 
+    @Id
+    @GeneratedValue(generator = "autoid")
+    @GenericGenerator(name = "autoid", strategy = "uuid")
+    @Column(name = "hwid")
     public String getHwid() {
         return hwid;
     }

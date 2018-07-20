@@ -1,7 +1,8 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,6 +14,10 @@ public class TAssetstypeEntity {
     private String code;
     private Set<TAssetsEntity> tAssetsByAtid;
 
+    @Id
+    @GeneratedValue(generator = "autoid")
+    @GenericGenerator(name = "autoid", strategy = "uuid")
+    @Column(name = "atid")
     public String getAtid() {
         return atid;
     }

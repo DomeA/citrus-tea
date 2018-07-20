@@ -1,7 +1,8 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Objects;
@@ -17,6 +18,10 @@ public class TAssetsinfoEntity {
     private Integer count;
     private Set<TAssetsEntity> tAssetsByAiid;
 
+    @Id
+    @GeneratedValue(generator = "autoid")
+    @GenericGenerator(name = "autoid", strategy = "uuid")
+    @Column(name = "aiid")
     public String getAiid() {
         return aiid;
     }
