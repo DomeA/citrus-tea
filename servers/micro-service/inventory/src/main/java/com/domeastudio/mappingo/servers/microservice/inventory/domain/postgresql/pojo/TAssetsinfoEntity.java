@@ -3,6 +3,7 @@ package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresq
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Objects;
@@ -13,9 +14,10 @@ import java.util.Set;
 public class TAssetsinfoEntity {
     private String aiid;
     private String purchasingtime;
-    private BigInteger price;
+    private BigDecimal price;
     private String code;
     private Integer count;
+    private String name;
     private TAssetsEntity tAssetsByAiid;
 
     @Id
@@ -30,6 +32,8 @@ public class TAssetsinfoEntity {
         this.aiid = aiid;
     }
 
+    @Basic
+    @Column(name = "purchasingtime")
     public String getPurchasingtime() {
         return purchasingtime;
     }
@@ -38,14 +42,18 @@ public class TAssetsinfoEntity {
         this.purchasingtime = purchasingtime;
     }
 
-    public BigInteger getPrice() {
+    @Basic
+    @Column(name = "price")
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigInteger price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
+    @Basic
+    @Column(name = "code")
     public String getCode() {
         return code;
     }
@@ -54,6 +62,8 @@ public class TAssetsinfoEntity {
         this.code = code;
     }
 
+    @Basic
+    @Column(name = "count")
     public Integer getCount() {
         return count;
     }
@@ -71,21 +81,32 @@ public class TAssetsinfoEntity {
                 Objects.equals(purchasingtime, that.purchasingtime) &&
                 Objects.equals(price, that.price) &&
                 Objects.equals(code, that.code) &&
-                Objects.equals(count, that.count);
+                Objects.equals(count, that.count)&&
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(aiid, purchasingtime, price, code, count);
+        return Objects.hash(aiid, purchasingtime, price, code, count,name);
     }
 
-    @OneToOne()
+    @OneToOne(mappedBy = "tAssetsinfoByAiid", fetch = FetchType.LAZY)
     public TAssetsEntity gettAssetsByAiid() {
         return tAssetsByAiid;
     }
 
     public void settAssetsByAiid(TAssetsEntity tAssetsByAiid) {
         this.tAssetsByAiid = tAssetsByAiid;
+    }
+
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
