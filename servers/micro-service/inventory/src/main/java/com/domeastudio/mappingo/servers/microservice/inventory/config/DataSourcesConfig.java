@@ -20,30 +20,4 @@ public class DataSourcesConfig {
     public DataSource primaryDataSource() {
         return DataSourceBuilder.create().type(ComboPooledDataSource.class).build();
     }
-
-    @Bean(name = "secondaryDataSource")
-    @Qualifier("secondaryDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.secondary")
-    public DataSource secondaryDataSource() {
-        return DataSourceBuilder.create().build();
-    }
-
-    @Bean(name = "thirdDataSource")
-    @Qualifier("thirdDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.third")
-    public DataSource thirdDataSource() {
-        return DataSourceBuilder.create().build();
-    }
-
-//    @Bean(name = "fourthDataSource")
-//    @Qualifier("fourthDataSource")
-//    @ConfigurationProperties(prefix="spring.datasource.fourth")
-//    public DataSource fourthDataSource() {
-//        return DataSourceBuilder.create().build();
-//    }
-//    @Bean(name="fourthMongoProperties")
-//    @ConfigurationProperties(prefix="spring.datasource.fourth")
-//    public MongoProperties fourthDataSource() {
-//        return new MongoProperties();
-//    }
 }

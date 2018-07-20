@@ -51,7 +51,7 @@ public class PrimaryConfig {
 
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(primaryDataSource);
-        factoryBean.setPackagesToScan("com.domeastudio.mappingo.servers.microservice.surveying.domain.postgresql.pojo");
+        factoryBean.setPackagesToScan("com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo");
         factoryBean.setPersistenceUnitName("primaryPersistenceUnit");
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         factoryBean.setJpaPropertyMap(jpaProperties());
