@@ -1,13 +1,22 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "t_scanninggun", schema = "public", catalog = "invenDB")
 public class TScanninggunEntity {
     private String sid;
     private Integer code;
     private String name;
     private TDepartmentEntity tDepartmentByDid;
 
+    @Id
+    @GeneratedValue(generator = "autoid")
+    @GenericGenerator(name = "autoid", strategy = "uuid")
+    @Column(name = "sid")
     public String getSid() {
         return sid;
     }

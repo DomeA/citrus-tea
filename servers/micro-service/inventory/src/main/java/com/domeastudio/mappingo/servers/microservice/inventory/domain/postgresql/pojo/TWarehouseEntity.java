@@ -1,7 +1,13 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+
+@Entity
+@Table(name = "t_warehouse", schema = "public", catalog = "invenDB")
 public class TWarehouseEntity {
     private String code;
     private String wid;
@@ -18,6 +24,10 @@ public class TWarehouseEntity {
         this.code = code;
     }
 
+    @Id
+    @GeneratedValue(generator = "autoid")
+    @GenericGenerator(name = "autoid", strategy = "uuid")
+    @Column(name = "wid")
     public String getWid() {
         return wid;
     }

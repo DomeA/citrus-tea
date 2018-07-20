@@ -1,8 +1,12 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "t_department", schema = "public", catalog = "invenDB")
 public class TDepartmentEntity {
     private String did;
     private String name;

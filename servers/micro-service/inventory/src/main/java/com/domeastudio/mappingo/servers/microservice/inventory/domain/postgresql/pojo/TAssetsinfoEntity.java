@@ -1,10 +1,14 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "t_assetsinfo", schema = "public", catalog = "invenDB")
 public class TAssetsinfoEntity {
     private String aiid;
     private String purchasingtime;
