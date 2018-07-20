@@ -69,6 +69,7 @@ public class TAssetsEntity {
         this.tAssetstypeByAtid = tAssetstypeByAtid;
     }
 
+    @OneToOne()
     public TAssetsinfoEntity gettAssetsinfoByAiid() {
         return tAssetsinfoByAiid;
     }

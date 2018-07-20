@@ -16,7 +16,7 @@ public class TAssetsinfoEntity {
     private BigInteger price;
     private String code;
     private Integer count;
-    private Set<TAssetsEntity> tAssetsByAiid;
+    private TAssetsEntity tAssetsByAiid;
 
     @Id
     @GeneratedValue(generator = "autoid")
@@ -80,11 +80,12 @@ public class TAssetsinfoEntity {
         return Objects.hash(aiid, purchasingtime, price, code, count);
     }
 
-    public Set<TAssetsEntity> gettAssetsByAiid() {
+    @OneToOne()
+    public TAssetsEntity gettAssetsByAiid() {
         return tAssetsByAiid;
     }
 
-    public void settAssetsByAiid(Set<TAssetsEntity> tAssetsByAiid) {
+    public void settAssetsByAiid(TAssetsEntity tAssetsByAiid) {
         this.tAssetsByAiid = tAssetsByAiid;
     }
 }
