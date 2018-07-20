@@ -1,0 +1,78 @@
+package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "t_historicalwarehouse", schema = "public", catalog = "invenDB")
+public class THistoricalwarehouseEntity {
+    private String hwid;
+    private String code;
+    private String uid;
+    private String inventorytime;
+    private Boolean isinventory;
+
+    @Id
+    @GeneratedValue(generator = "autoid")
+    @GenericGenerator(name = "autoid", strategy = "uuid")
+    @Column(name = "hwid")
+    public String getHwid() {
+        return hwid;
+    }
+
+    public void setHwid(String hwid) {
+        this.hwid = hwid;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getInventorytime() {
+        return inventorytime;
+    }
+
+    public void setInventorytime(String inventorytime) {
+        this.inventorytime = inventorytime;
+    }
+
+    public Boolean getIsinventory() {
+        return isinventory;
+    }
+
+    public void setIsinventory(Boolean isinventory) {
+        this.isinventory = isinventory;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        THistoricalwarehouseEntity that = (THistoricalwarehouseEntity) o;
+        return Objects.equals(hwid, that.hwid) &&
+                Objects.equals(code, that.code) &&
+                Objects.equals(uid, that.uid) &&
+                Objects.equals(inventorytime, that.inventorytime) &&
+                Objects.equals(isinventory, that.isinventory);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(hwid, code, uid, inventorytime, isinventory);
+    }
+}
