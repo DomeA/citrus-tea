@@ -1,21 +1,14 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
-@Entity
-@Table(name = "t_assetstype", schema = "public", catalog = "invenDB")
 public class TAssetstypeEntity {
     private String atid;
     private String typename;
     private String code;
+    private Collection<TAssetsEntity> tAssetsByAtid;
 
-    @Id
-    @GeneratedValue(generator = "autoid")
-    @GenericGenerator(name = "autoid", strategy = "uuid")
-    @Column(name = "atid")
     public String getAtid() {
         return atid;
     }
@@ -54,5 +47,13 @@ public class TAssetstypeEntity {
     public int hashCode() {
 
         return Objects.hash(atid, typename, code);
+    }
+
+    public Collection<TAssetsEntity> gettAssetsByAtid() {
+        return tAssetsByAtid;
+    }
+
+    public void settAssetsByAtid(Collection<TAssetsEntity> tAssetsByAtid) {
+        this.tAssetsByAtid = tAssetsByAtid;
     }
 }

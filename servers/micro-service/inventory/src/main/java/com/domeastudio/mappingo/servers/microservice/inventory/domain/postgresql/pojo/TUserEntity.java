@@ -1,37 +1,18 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
-@Entity
-@Table(name = "t_user", schema = "public", catalog = "invenDB")
 public class TUserEntity {
     private String name;
     private String pwd;
     private String uid;
-    private TDepartmentEntity tDepartmentByDid;
     private String token;
     private String salt;
+    private Collection<THistoricalwarehouseEntity> tHistoricalwarehousesByUid;
+    private TDepartmentEntity tDepartmentByDid;
+    private Collection<TWarehouseEntity> tWarehousesByUid;
 
-    public TUserEntity() {
-    }
-
-    @Id
-    @GeneratedValue(generator = "autoid")
-    @GenericGenerator(name = "autoid", strategy = "uuid")
-    @Column(name = "uid")
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -40,8 +21,6 @@ public class TUserEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "pwd")
     public String getPwd() {
         return pwd;
     }
@@ -50,7 +29,29 @@ public class TUserEntity {
         this.pwd = pwd;
     }
 
+    public String getUid() {
+        return uid;
+    }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -60,7 +61,6 @@ public class TUserEntity {
         return Objects.equals(name, that.name) &&
                 Objects.equals(pwd, that.pwd) &&
                 Objects.equals(uid, that.uid) &&
-                Objects.equals(tDepartmentByDid, that.tDepartmentByDid) &&
                 Objects.equals(token, that.token) &&
                 Objects.equals(salt, that.salt);
     }
@@ -68,35 +68,30 @@ public class TUserEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, pwd, uid, tDepartmentByDid,token,salt);
+        return Objects.hash(name, pwd, uid, token, salt);
     }
 
-    @Basic
-    @Column(name = "token")
-    public String getToken() {
-        return token;
+    public Collection<THistoricalwarehouseEntity> gettHistoricalwarehousesByUid() {
+        return tHistoricalwarehousesByUid;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void settHistoricalwarehousesByUid(Collection<THistoricalwarehouseEntity> tHistoricalwarehousesByUid) {
+        this.tHistoricalwarehousesByUid = tHistoricalwarehousesByUid;
     }
 
-    @Basic
-    @Column(name = "salt")
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "did", referencedColumnName = "did")
     public TDepartmentEntity gettDepartmentByDid() {
         return tDepartmentByDid;
     }
+
     public void settDepartmentByDid(TDepartmentEntity tDepartmentByDid) {
         this.tDepartmentByDid = tDepartmentByDid;
+    }
+
+    public Collection<TWarehouseEntity> gettWarehousesByUid() {
+        return tWarehousesByUid;
+    }
+
+    public void settWarehousesByUid(Collection<TWarehouseEntity> tWarehousesByUid) {
+        this.tWarehousesByUid = tWarehousesByUid;
     }
 }

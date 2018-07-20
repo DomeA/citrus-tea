@@ -1,24 +1,17 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
-@Entity
-@Table(name = "t_assets", schema = "public", catalog = "invenDB")
 public class TAssetsEntity {
     private String aid;
     private String code;
-    private TUserEntity tUserEntityByAid;
-    private TAssetstypeEntity tAssetstypeEntityByAid;
-    private TAssetsstatusEntity tAssetsstatusEntityByAid;
-    private TAssetsinfoEntity tAssetsinfoEntityByAid;
+    private TDepartmentEntity tDepartmentByDid;
+    private TAssetstypeEntity tAssetstypeByAtid;
+    private TAssetsinfoEntity tAssetsinfoByAiid;
+    private Collection<THistoricalrecordsEntity> tHistoricalrecordsByAid;
+    private Collection<TRealtimerecordsEntity> tRealtimerecordsByAid;
 
-    @Id
-    @GeneratedValue(generator = "autoid")
-    @GenericGenerator(name = "autoid", strategy = "uuid")
-    @Column(name = "aid")
     public String getAid() {
         return aid;
     }
@@ -27,8 +20,6 @@ public class TAssetsEntity {
         this.aid = aid;
     }
 
-    @Basic
-    @Column(name = "code")
     public String getCode() {
         return code;
     }
@@ -37,46 +28,58 @@ public class TAssetsEntity {
         this.code = code;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TAssetsEntity that = (TAssetsEntity) o;
         return Objects.equals(aid, that.aid) &&
-                Objects.equals(code, that.code) &&
-                Objects.equals(tUserEntityByAid, that.tUserEntityByAid) &&
-                Objects.equals(tAssetstypeEntityByAid, that.tAssetstypeEntityByAid) &&
-                Objects.equals(tAssetsstatusEntityByAid, that.tAssetsstatusEntityByAid);
+                Objects.equals(code, that.code);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(aid, code, tUserEntityByAid, tAssetstypeEntityByAid, tAssetsstatusEntityByAid);
+        return Objects.hash(aid, code);
     }
 
-    public TUserEntity gettUserEntityByAid() {
-        return tUserEntityByAid;
+    public TDepartmentEntity gettDepartmentByDid() {
+        return tDepartmentByDid;
     }
 
-    public void settUserEntityByAid(TUserEntity tUserEntityByAid) {
-        this.tUserEntityByAid = tUserEntityByAid;
+    public void settDepartmentByDid(TDepartmentEntity tDepartmentByDid) {
+        this.tDepartmentByDid = tDepartmentByDid;
     }
 
-    public TAssetstypeEntity gettAssetstypeEntityByAid() {
-        return tAssetstypeEntityByAid;
+    public TAssetstypeEntity gettAssetstypeByAtid() {
+        return tAssetstypeByAtid;
     }
 
-    public void settAssetstypeEntityByAid(TAssetstypeEntity tAssetstypeEntityByAid) {
-        this.tAssetstypeEntityByAid = tAssetstypeEntityByAid;
+    public void settAssetstypeByAtid(TAssetstypeEntity tAssetstypeByAtid) {
+        this.tAssetstypeByAtid = tAssetstypeByAtid;
     }
 
-    public TAssetsstatusEntity gettAssetsstatusEntityByAid() {
-        return tAssetsstatusEntityByAid;
+    public TAssetsinfoEntity gettAssetsinfoByAiid() {
+        return tAssetsinfoByAiid;
     }
 
-    public void settAssetsstatusEntityByAid(TAssetsstatusEntity tAssetsstatusEntityByAid) {
-        this.tAssetsstatusEntityByAid = tAssetsstatusEntityByAid;
+    public void settAssetsinfoByAiid(TAssetsinfoEntity tAssetsinfoByAiid) {
+        this.tAssetsinfoByAiid = tAssetsinfoByAiid;
+    }
+
+    public Collection<THistoricalrecordsEntity> gettHistoricalrecordsByAid() {
+        return tHistoricalrecordsByAid;
+    }
+
+    public void settHistoricalrecordsByAid(Collection<THistoricalrecordsEntity> tHistoricalrecordsByAid) {
+        this.tHistoricalrecordsByAid = tHistoricalrecordsByAid;
+    }
+
+    public Collection<TRealtimerecordsEntity> gettRealtimerecordsByAid() {
+        return tRealtimerecordsByAid;
+    }
+
+    public void settRealtimerecordsByAid(Collection<TRealtimerecordsEntity> tRealtimerecordsByAid) {
+        this.tRealtimerecordsByAid = tRealtimerecordsByAid;
     }
 }

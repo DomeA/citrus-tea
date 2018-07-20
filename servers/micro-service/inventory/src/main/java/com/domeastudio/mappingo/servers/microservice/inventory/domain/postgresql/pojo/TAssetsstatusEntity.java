@@ -1,20 +1,14 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
-@Entity
-@Table(name = "t_assetsstatus", schema = "public", catalog = "invenDB")
 public class TAssetsstatusEntity {
     private String asid;
     private String name;
+    private Collection<THistoricalrecordsEntity> tHistoricalrecordsByAsid;
+    private Collection<TRealtimerecordsEntity> tRealtimerecordsByAsid;
 
-    @Id
-    @GeneratedValue(generator = "autoid")
-    @GenericGenerator(name = "autoid", strategy = "uuid")
-    @Column(name = "asid")
     public String getAsid() {
         return asid;
     }
@@ -44,5 +38,21 @@ public class TAssetsstatusEntity {
     public int hashCode() {
 
         return Objects.hash(asid, name);
+    }
+
+    public Collection<THistoricalrecordsEntity> gettHistoricalrecordsByAsid() {
+        return tHistoricalrecordsByAsid;
+    }
+
+    public void settHistoricalrecordsByAsid(Collection<THistoricalrecordsEntity> tHistoricalrecordsByAsid) {
+        this.tHistoricalrecordsByAsid = tHistoricalrecordsByAsid;
+    }
+
+    public Collection<TRealtimerecordsEntity> gettRealtimerecordsByAsid() {
+        return tRealtimerecordsByAsid;
+    }
+
+    public void settRealtimerecordsByAsid(Collection<TRealtimerecordsEntity> tRealtimerecordsByAsid) {
+        this.tRealtimerecordsByAsid = tRealtimerecordsByAsid;
     }
 }

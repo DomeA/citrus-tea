@@ -1,21 +1,13 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "t_scanninggun", schema = "public", catalog = "invenDB")
 public class TScanninggunEntity {
     private String sid;
     private Integer code;
-    private String did;
+    private String name;
+    private TDepartmentEntity tDepartmentByDid;
 
-    @Id
-    @GeneratedValue(generator = "autoid")
-    @GenericGenerator(name = "autoid", strategy = "uuid")
-    @Column(name = "sid")
     public String getSid() {
         return sid;
     }
@@ -32,12 +24,12 @@ public class TScanninggunEntity {
         this.code = code;
     }
 
-    public String getDid() {
-        return did;
+    public String getName() {
+        return name;
     }
 
-    public void setDid(String did) {
-        this.did = did;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -47,12 +39,20 @@ public class TScanninggunEntity {
         TScanninggunEntity that = (TScanninggunEntity) o;
         return Objects.equals(sid, that.sid) &&
                 Objects.equals(code, that.code) &&
-                Objects.equals(did, that.did);
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(sid, code, did);
+        return Objects.hash(sid, code, name);
+    }
+
+    public TDepartmentEntity gettDepartmentByDid() {
+        return tDepartmentByDid;
+    }
+
+    public void settDepartmentByDid(TDepartmentEntity tDepartmentByDid) {
+        this.tDepartmentByDid = tDepartmentByDid;
     }
 }

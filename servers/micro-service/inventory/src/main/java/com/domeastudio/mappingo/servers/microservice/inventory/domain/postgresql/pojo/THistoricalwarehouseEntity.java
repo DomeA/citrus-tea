@@ -1,23 +1,15 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "t_historicalwarehouse", schema = "public", catalog = "invenDB")
 public class THistoricalwarehouseEntity {
     private String hwid;
     private String code;
-    private String uid;
     private String inventorytime;
     private Boolean isinventory;
+    private Integer count;
+    private TUserEntity tUserByUid;
 
-    @Id
-    @GeneratedValue(generator = "autoid")
-    @GenericGenerator(name = "autoid", strategy = "uuid")
-    @Column(name = "hwid")
     public String getHwid() {
         return hwid;
     }
@@ -32,14 +24,6 @@ public class THistoricalwarehouseEntity {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
     }
 
     public String getInventorytime() {
@@ -58,6 +42,14 @@ public class THistoricalwarehouseEntity {
         this.isinventory = isinventory;
     }
 
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,14 +57,22 @@ public class THistoricalwarehouseEntity {
         THistoricalwarehouseEntity that = (THistoricalwarehouseEntity) o;
         return Objects.equals(hwid, that.hwid) &&
                 Objects.equals(code, that.code) &&
-                Objects.equals(uid, that.uid) &&
                 Objects.equals(inventorytime, that.inventorytime) &&
-                Objects.equals(isinventory, that.isinventory);
+                Objects.equals(isinventory, that.isinventory) &&
+                Objects.equals(count, that.count);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(hwid, code, uid, inventorytime, isinventory);
+        return Objects.hash(hwid, code, inventorytime, isinventory, count);
+    }
+
+    public TUserEntity gettUserByUid() {
+        return tUserByUid;
+    }
+
+    public void settUserByUid(TUserEntity tUserByUid) {
+        this.tUserByUid = tUserByUid;
     }
 }

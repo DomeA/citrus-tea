@@ -1,22 +1,15 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 
-@Entity
-@Table(name = "t_department", schema = "public", catalog = "invenDB")
 public class TDepartmentEntity {
     private String did;
     private String name;
-    private Set<TUserEntity> tUserEntitiesByDid;
+    private Collection<TAssetsEntity> tAssetsByDid;
+    private Collection<TScanninggunEntity> tScanninggunsByDid;
+    private Collection<TUserEntity> tUsersByDid;
 
-    @Id
-    @GeneratedValue(generator = "autoid")
-    @GenericGenerator(name = "autoid", strategy = "uuid")
-    @Column(name = "did")
     public String getDid() {
         return did;
     }
@@ -48,12 +41,27 @@ public class TDepartmentEntity {
         return Objects.hash(did, name);
     }
 
-    @OneToMany(mappedBy = "tDepartmentByDid", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
-    public Set<TUserEntity> gettUserEntitiesByDid() {
-        return tUserEntitiesByDid;
+    public Collection<TAssetsEntity> gettAssetsByDid() {
+        return tAssetsByDid;
     }
 
-    public void settUserEntitiesByDid(Set<TUserEntity> tUserEntitiesByDid) {
-        this.tUserEntitiesByDid = tUserEntitiesByDid;
+    public void settAssetsByDid(Collection<TAssetsEntity> tAssetsByDid) {
+        this.tAssetsByDid = tAssetsByDid;
+    }
+
+    public Collection<TScanninggunEntity> gettScanninggunsByDid() {
+        return tScanninggunsByDid;
+    }
+
+    public void settScanninggunsByDid(Collection<TScanninggunEntity> tScanninggunsByDid) {
+        this.tScanninggunsByDid = tScanninggunsByDid;
+    }
+
+    public Collection<TUserEntity> gettUsersByDid() {
+        return tUsersByDid;
+    }
+
+    public void settUsersByDid(Collection<TUserEntity> tUsersByDid) {
+        this.tUsersByDid = tUsersByDid;
     }
 }
