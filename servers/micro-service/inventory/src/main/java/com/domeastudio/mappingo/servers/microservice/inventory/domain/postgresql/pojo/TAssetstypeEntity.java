@@ -1,13 +1,13 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 public class TAssetstypeEntity {
     private String atid;
     private String typename;
     private String code;
-    private Collection<TAssetsEntity> tAssetsByAtid;
+    private Set<TAssetsEntity> tAssetsByAtid;
 
     public String getAtid() {
         return atid;
@@ -49,11 +49,11 @@ public class TAssetstypeEntity {
         return Objects.hash(atid, typename, code);
     }
 
-    public Collection<TAssetsEntity> gettAssetsByAtid() {
+    public Set<TAssetsEntity> gettAssetsByAtid() {
         return tAssetsByAtid;
     }
 
-    public void settAssetsByAtid(Collection<TAssetsEntity> tAssetsByAtid) {
+    public void settAssetsByAtid(Set<TAssetsEntity> tAssetsByAtid) {
         this.tAssetsByAtid = tAssetsByAtid;
     }
 }

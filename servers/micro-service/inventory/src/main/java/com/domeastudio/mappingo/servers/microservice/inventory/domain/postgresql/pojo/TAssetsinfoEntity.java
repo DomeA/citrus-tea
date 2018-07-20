@@ -3,6 +3,7 @@ package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresq
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 public class TAssetsinfoEntity {
     private String aiid;
@@ -10,7 +11,7 @@ public class TAssetsinfoEntity {
     private BigInteger price;
     private String code;
     private Integer count;
-    private Collection<TAssetsEntity> tAssetsByAiid;
+    private Set<TAssetsEntity> tAssetsByAiid;
 
     public String getAiid() {
         return aiid;
@@ -70,11 +71,11 @@ public class TAssetsinfoEntity {
         return Objects.hash(aiid, purchasingtime, price, code, count);
     }
 
-    public Collection<TAssetsEntity> gettAssetsByAiid() {
+    public Set<TAssetsEntity> gettAssetsByAiid() {
         return tAssetsByAiid;
     }
 
-    public void settAssetsByAiid(Collection<TAssetsEntity> tAssetsByAiid) {
+    public void settAssetsByAiid(Set<TAssetsEntity> tAssetsByAiid) {
         this.tAssetsByAiid = tAssetsByAiid;
     }
 }

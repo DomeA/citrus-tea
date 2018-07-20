@@ -1,13 +1,13 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 public class TAssetsstatusEntity {
     private String asid;
     private String name;
-    private Collection<THistoricalrecordsEntity> tHistoricalrecordsByAsid;
-    private Collection<TRealtimerecordsEntity> tRealtimerecordsByAsid;
+    private Set<THistoricalrecordsEntity> tHistoricalrecordsByAsid;
+    private Set<TRealtimerecordsEntity> tRealtimerecordsByAsid;
 
     public String getAsid() {
         return asid;
@@ -40,19 +40,19 @@ public class TAssetsstatusEntity {
         return Objects.hash(asid, name);
     }
 
-    public Collection<THistoricalrecordsEntity> gettHistoricalrecordsByAsid() {
+    public Set<THistoricalrecordsEntity> gettHistoricalrecordsByAsid() {
         return tHistoricalrecordsByAsid;
     }
 
-    public void settHistoricalrecordsByAsid(Collection<THistoricalrecordsEntity> tHistoricalrecordsByAsid) {
+    public void settHistoricalrecordsByAsid(Set<THistoricalrecordsEntity> tHistoricalrecordsByAsid) {
         this.tHistoricalrecordsByAsid = tHistoricalrecordsByAsid;
     }
 
-    public Collection<TRealtimerecordsEntity> gettRealtimerecordsByAsid() {
+    public Set<TRealtimerecordsEntity> gettRealtimerecordsByAsid() {
         return tRealtimerecordsByAsid;
     }
 
-    public void settRealtimerecordsByAsid(Collection<TRealtimerecordsEntity> tRealtimerecordsByAsid) {
+    public void settRealtimerecordsByAsid(Set<TRealtimerecordsEntity> tRealtimerecordsByAsid) {
         this.tRealtimerecordsByAsid = tRealtimerecordsByAsid;
     }
 }

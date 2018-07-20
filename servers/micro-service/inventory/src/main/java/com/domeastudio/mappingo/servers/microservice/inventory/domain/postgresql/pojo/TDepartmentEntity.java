@@ -1,14 +1,13 @@
 package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresql.pojo;
 
-import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 public class TDepartmentEntity {
     private String did;
     private String name;
-    private Collection<TAssetsEntity> tAssetsByDid;
-    private Collection<TScanninggunEntity> tScanninggunsByDid;
-    private Collection<TUserEntity> tUsersByDid;
+    private Set<TScanninggunEntity> tScanninggunsByDid;
+    private Set<TUserEntity> tUsersByDid;
 
     public String getDid() {
         return did;
@@ -41,27 +40,19 @@ public class TDepartmentEntity {
         return Objects.hash(did, name);
     }
 
-    public Collection<TAssetsEntity> gettAssetsByDid() {
-        return tAssetsByDid;
-    }
-
-    public void settAssetsByDid(Collection<TAssetsEntity> tAssetsByDid) {
-        this.tAssetsByDid = tAssetsByDid;
-    }
-
-    public Collection<TScanninggunEntity> gettScanninggunsByDid() {
+    public Set<TScanninggunEntity> gettScanninggunsByDid() {
         return tScanninggunsByDid;
     }
 
-    public void settScanninggunsByDid(Collection<TScanninggunEntity> tScanninggunsByDid) {
+    public void settScanninggunsByDid(Set<TScanninggunEntity> tScanninggunsByDid) {
         this.tScanninggunsByDid = tScanninggunsByDid;
     }
 
-    public Collection<TUserEntity> gettUsersByDid() {
+    public Set<TUserEntity> gettUsersByDid() {
         return tUsersByDid;
     }
 
-    public void settUsersByDid(Collection<TUserEntity> tUsersByDid) {
+    public void settUsersByDid(Set<TUserEntity> tUsersByDid) {
         this.tUsersByDid = tUsersByDid;
     }
 }

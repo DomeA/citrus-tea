@@ -2,6 +2,7 @@ package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresq
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 public class TUserEntity {
     private String name;
@@ -9,9 +10,10 @@ public class TUserEntity {
     private String uid;
     private String token;
     private String salt;
-    private Collection<THistoricalwarehouseEntity> tHistoricalwarehousesByUid;
+    private Set<TAssetsEntity> tAssetsByUid;
+    private Set<THistoricalwarehouseEntity> tHistoricalwarehousesByUid;
     private TDepartmentEntity tDepartmentByDid;
-    private Collection<TWarehouseEntity> tWarehousesByUid;
+    private Set<TWarehouseEntity> tWarehousesByUid;
 
     public String getName() {
         return name;
@@ -71,11 +73,19 @@ public class TUserEntity {
         return Objects.hash(name, pwd, uid, token, salt);
     }
 
-    public Collection<THistoricalwarehouseEntity> gettHistoricalwarehousesByUid() {
+    public Set<TAssetsEntity> gettAssetsByUid() {
+        return tAssetsByUid;
+    }
+
+    public void settAssetsByUid(Set<TAssetsEntity> tAssetsByUid) {
+        this.tAssetsByUid = tAssetsByUid;
+    }
+
+    public Set<THistoricalwarehouseEntity> gettHistoricalwarehousesByUid() {
         return tHistoricalwarehousesByUid;
     }
 
-    public void settHistoricalwarehousesByUid(Collection<THistoricalwarehouseEntity> tHistoricalwarehousesByUid) {
+    public void settHistoricalwarehousesByUid(Set<THistoricalwarehouseEntity> tHistoricalwarehousesByUid) {
         this.tHistoricalwarehousesByUid = tHistoricalwarehousesByUid;
     }
 
@@ -87,11 +97,11 @@ public class TUserEntity {
         this.tDepartmentByDid = tDepartmentByDid;
     }
 
-    public Collection<TWarehouseEntity> gettWarehousesByUid() {
+    public Set<TWarehouseEntity> gettWarehousesByUid() {
         return tWarehousesByUid;
     }
 
-    public void settWarehousesByUid(Collection<TWarehouseEntity> tWarehousesByUid) {
+    public void settWarehousesByUid(Set<TWarehouseEntity> tWarehousesByUid) {
         this.tWarehousesByUid = tWarehousesByUid;
     }
 }

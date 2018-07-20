@@ -2,15 +2,16 @@ package com.domeastudio.mappingo.servers.microservice.inventory.domain.postgresq
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 public class TAssetsEntity {
     private String aid;
     private String code;
-    private TDepartmentEntity tDepartmentByDid;
+    private TUserEntity tUserByUid;
     private TAssetstypeEntity tAssetstypeByAtid;
     private TAssetsinfoEntity tAssetsinfoByAiid;
-    private Collection<THistoricalrecordsEntity> tHistoricalrecordsByAid;
-    private Collection<TRealtimerecordsEntity> tRealtimerecordsByAid;
+    private Set<THistoricalrecordsEntity> tHistoricalrecordsByAid;
+    private Set<TRealtimerecordsEntity> tRealtimerecordsByAid;
 
     public String getAid() {
         return aid;
@@ -43,12 +44,12 @@ public class TAssetsEntity {
         return Objects.hash(aid, code);
     }
 
-    public TDepartmentEntity gettDepartmentByDid() {
-        return tDepartmentByDid;
+    public TUserEntity gettUserByUid() {
+        return tUserByUid;
     }
 
-    public void settDepartmentByDid(TDepartmentEntity tDepartmentByDid) {
-        this.tDepartmentByDid = tDepartmentByDid;
+    public void settUserByUid(TUserEntity tUserByUid) {
+        this.tUserByUid = tUserByUid;
     }
 
     public TAssetstypeEntity gettAssetstypeByAtid() {
@@ -71,7 +72,7 @@ public class TAssetsEntity {
         return tHistoricalrecordsByAid;
     }
 
-    public void settHistoricalrecordsByAid(Collection<THistoricalrecordsEntity> tHistoricalrecordsByAid) {
+    public void settHistoricalrecordsByAid(Set<THistoricalrecordsEntity> tHistoricalrecordsByAid) {
         this.tHistoricalrecordsByAid = tHistoricalrecordsByAid;
     }
 
@@ -79,7 +80,7 @@ public class TAssetsEntity {
         return tRealtimerecordsByAid;
     }
 
-    public void settRealtimerecordsByAid(Collection<TRealtimerecordsEntity> tRealtimerecordsByAid) {
+    public void settRealtimerecordsByAid(Set<TRealtimerecordsEntity> tRealtimerecordsByAid) {
         this.tRealtimerecordsByAid = tRealtimerecordsByAid;
     }
 }
